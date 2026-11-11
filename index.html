@@ -157,7 +157,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <div class="chain">
       <div>
         <h2>The Sleeping Bag Run</h2>
-        <p>Skip the cross-continent trek. We summon you down the whole chain: South Barrens, Stonetalon, Loch Modan, Thoradin's Wall.</p>
+        <p>Skip the cross-continent trek. We summon you down the whole chain: South Barrens, Stonetalon, Loch Modan Dam, Thoradin's Wall.</p>
         <ul>
           <li>About 11,000 XP and 1.5g in quest rewards</li>
           <li>Ends with a 12-slot Cozy Sleeping Bag</li>
@@ -175,7 +175,6 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
   <section class="faq" id="faq">
     <h2>Questions</h2>
     <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
-    <details><summary>Can I summon into a dungeon?</summary><p>You're summoned to the meeting point outside. SM, Blackfathom, Maraudon, Dire Maul and Blackrock Mountain stops all drop you right at the entrance.</p></details>
     <details><summary>Is this allowed?</summary><p>Yes. It's a player service paid in in-game gold only, like any summoning or portal seller in trade chat. We never take real money.</p></details>
     <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the SumVentureCo Discord. Guild runs, raid nights and bulk bookings welcome.</p></details>
   </section>
@@ -191,16 +190,14 @@ const DEFAULT_DESK = "Voidtaxi Booking";
 
 const LINES = [
   { id: "sb", name: "Sleeping Bag Line", c: "var(--void)", note: "the quest chain, in order",
-    stops: [["westfall", "Westfall Depot"], ["sbarrens", "South Barrens"], ["stonetalon", "Stonetalon"], ["loch", "Loch Modan"], ["thoradin", "Thoradin's Wall"]] },
+    stops: [["sbarrens", "South Barrens"], ["stonetalon", "Stonetalon"], ["loch", "Loch Modan Dam"], ["thoradin", "Thoradin's Wall"]] },
   { id: "ek", name: "Eastern Kingdoms", c: "var(--ek)", note: "north to south",
-    stops: [["dalaran", "Dalaran"], ["smrol", "SM / Ruins of Lordaeron"], ["lightshope", "Light's Hope Chapel"], ["brm", "Blackrock Mountain"], ["bootybay", "Booty Bay"]] },
+    stops: [["dalaran", "Dalaran"], ["bootybay", "Booty Bay"]] },
   { id: "kal", name: "Kalimdor", c: "var(--kal)", note: "north to south",
-    stops: [["everlook", "Everlook"], ["bfd", "Blackfathom Deeps"], ["nijel", "Nijel's Point"], ["maraudon", "Maraudon"], ["diremaul", "Dire Maul"], ["feathermoon", "Feathermoon Stronghold"], ["feralasfp", "Feralas FP"], ["needles", "Thousand Needles / Great Lift"], ["gadgetzan", "Gadgetzan"], ["shaper", "Shaper's Terrace"]] },
-  { id: "fv", name: "Forever Stops", c: "var(--fv)", note: "new on Forever",
-    stops: [["riverglades", "Riverglades"], ["drowned", "Drowned City"]] },
+    stops: [["nijel", "Nijel's Point"], ["feralasfp", "Feralas / 1K FP"], ["gadgetzan", "Gadgetzan"]] },
 ];
 const PRICE = { chain: "1.5g" };
-const ALIASES = { westfall: ["depot", "westfall depot", "depot (westfall)"], smrol: ["sm / rol", "sm", "ruins of lordaeron"], bfd: ["bfd"], needles: ["thousand needles / great lift", "great lift"], lightshope: ["light's hope chapel", "light's hope"], feathermoon: ["feathermoon stronghold"], shaper: ["shaper's terrace"] };
+const ALIASES = { loch: ["loch modan", "loch"], feralasfp: ["feralas fp", "feralas", "1k fp", "feralas/1k fp", "thousand needles", "thalanaar"], lightshope: ["light's hope chapel", "light's hope"] };
 
 const norm = s => String(s || "").toLowerCase().replace(/^\(sb\)\s*/, "").replace(/[^a-z0-9]/g, "");
 const byKey = {};
@@ -249,7 +246,7 @@ function pick(id) {
   document.getElementById("cmd").textContent = `/w ${desk} vt: ${cmdName}`;
   const what = document.getElementById("bookWhat");
   what.innerHTML = "";
-  const b = document.createElement("b"); b.textContent = name;
+  const b = document.createElement("b"); b.textContent = (typeof label === "function" && names[id] && id !== "chain") ? label(id) : name;
   const p = document.createElement("span"); p.className = "price"; p.textContent = price;
   what.append("Booking ", b, " · ", p);
   const open = status && status.has(id === "chain" ? "sbarrens" : id);
@@ -292,18 +289,19 @@ async function loadStatus() {
 // Pins: pixel spots on map.webp (3584 x 2240).
 const MAP_W = 3584, MAP_H = 2240;
 const POS = {
-  westfall: [2664, 1635], sbarrens: [930, 1260], stonetalon: [495, 900], loch: [3090, 1140], thoradin: [2925, 750],
-  dalaran: [2775, 636], smrol: [2685, 480], lightshope: [3225, 420], brm: [2775, 1365], bootybay: [2775, 1920],
-  everlook: [960, 450], bfd: [420, 750], nijel: [480, 1125], maraudon: [330, 1245], diremaul: [525, 1434],
-  feathermoon: [276, 1545], feralasfp: [615, 1485], needles: [696, 1500], gadgetzan: [900, 1815], shaper: [720, 1800],
-  riverglades: [3165, 1335], drowned: [2634, 1755],
+  sbarrens: [768, 1432], stonetalon: [429, 1005], loch: [3064, 1093], thoradin: [2919, 723],
+  dalaran: [2733, 674], bootybay: [2701, 2002],
+  nijel: [480, 1125],
+  feralasfp: [653, 1519], gadgetzan: [917, 1748],
 };
+const SB = new Set(["sbarrens", "stonetalon", "loch", "thoradin"]);
+const label = id => names[id] + (SB.has(id) ? " (Sleeping Bag)" : "");
 const markers = {};
 let map;
 function initMap() {
   if (!window.L) { document.getElementById("worldmap").style.display = "none"; return; }
   const bounds = [[0, 0], [MAP_H, MAP_W]];
-  map = L.map("worldmap", { crs: L.CRS.Simple, minZoom: -2.5, maxZoom: 1.5, zoomSnap: 0.25, zoomDelta: 0.5,
+  map = L.map("worldmap", { crs: L.CRS.Simple, minZoom: -2.5, maxZoom: 1, zoomSnap: 0.25, zoomDelta: 0.5,
     maxBounds: [[-300, -300], [MAP_H + 300, MAP_W + 300]], maxBoundsViscosity: 0.8, attributionControl: true });
   L.imageOverlay("map.webp", bounds).addTo(map);
   map.attributionControl.setPrefix("").addAttribution("Map art &copy; Blizzard Entertainment");
@@ -323,7 +321,7 @@ function renderPins() {
     const cls = "pin" + (status ? (open ? " open" : " closed") : "") + ((picked === id || (picked === "chain" && id === "sbarrens")) ? " picked" : "");
     const el = m.getElement() && m.getElement().firstChild;
     if (el) el.className = cls;
-    m.setTooltipContent(`${names[id]}<small>${PRICE[id] || "50s"} · ${status ? (open ? "on duty now" : "no warlock right now") : "tap to book"}</small>`);
+    m.setTooltipContent(`${label(id)}<small>${PRICE[id] || "50s"} · ${status ? (open ? "on duty now" : "no warlock right now") : "tap to book"}</small>`);
   }
 }
 const _render = render;
