@@ -1,11 +1,10 @@
 {
  "open": [
-  "gadgetzan",
-  "loch"
+  "gadgetzan"
  ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-11T19:25:09+00:00"
+ "updated": "2026-11-11T19:27:41+00:00"
 }
