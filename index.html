@@ -100,6 +100,16 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .card .copy { width: 100%; margin-top: 8px; padding: 9px 12px; font-size: .95rem; }
 .card .alt { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
 .card .alt .copy { background: var(--void-soft); color: var(--ink); border: 1px solid var(--void); }
+.bookf { display: grid; gap: 8px; margin-top: 10px; }
+.bookf label { display: grid; gap: 4px; font-size: .78rem; color: var(--muted); font-weight: 600; }
+.bookf input { font: 15px var(--body); color: var(--ink); background: #0d0915; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.bookf input:focus { outline: none; border-color: var(--void); }
+.bookf .copy { width: 100%; margin: 0; }
+.bookf .alt2 { background: var(--void-soft); color: var(--ink); border: 1px solid var(--void); font-size: .85rem; }
+.bookf button:disabled { opacity: .6; cursor: default; }
+.bookf .bmsg { margin: 0; }
+.bookf .bmsg.ok { color: var(--fel); }
+.bookf .bmsg.err { color: #ff8a8a; }
 .card small { display: block; margin-top: 6px; color: var(--muted); font-size: .78rem; }
 .mapwrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: stretch; }
 .stops { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 6px 4px; overflow-y: auto; max-height: min(64vh, 600px); }
@@ -186,7 +196,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
       <h1>VOIDTAXI</h1>
     </div>
     <p class="tag">Warlock summons across Azeroth. Pick a stop, paste one line in chat, step through the portal.</p>
-    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span><span class="chip">Summons from <b data-price-min>50s</b></span><span class="chip">Sleeping Bag chain <b data-price="chain">1.5g</b></span></div>
+    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span></div>
     <div class="live" id="live"><span class="pulse"></span><span id="liveText">Checking which stops are staffed…</span></div>
   </header>
 
@@ -254,6 +264,17 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
 // Read through GitHub's API so it is never minutes stale (the website itself is cached).
 const STATUS_URL = "https://api.github.com/repos/Voxikai/voidtaxi/contents/status.json?ref=status";
 const DEFAULT_DESK = "Voidtaxi Booking";
+// Voidtaxi Inbox (a small Google Apps Script web app, no spreadsheet). Bookings and stop requests
+// posted here reach the in-game addon through Voidtaxi Sync. Empty: the site falls back to
+// copy-a-whisper booking.
+const INBOX_URL = "https://script.google.com/macros/s/AKfycbxRJkWru85hFZicl2Cd13HLOAlv0iYojvFapSQPQybRqwFwWIyY6XAkB9R1adxNMxJVDQ/exec";
+const NAME_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ']{2,12}( [A-Za-zÀ-ÖØ-öø-ÿ']{2,12})?$/;
+const savedName = () => { try { return localStorage.getItem("vt_name") || ""; } catch { return ""; } };
+const saveName = n => { try { localStorage.setItem("vt_name", n); } catch {} };
+const cleanName = n => String(n || "").trim().replace(/\s+/g, " ").split(" ").map(w => w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w).join(" ");
+async function sendInbox(payload) {
+  await fetch(INBOX_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
+}
 
 const LINES = [
   { id: "sb", name: "Sleeping Bag Line", c: "var(--void)", note: "the quest chain, in order",
@@ -277,6 +298,7 @@ for (const l of LINES) for (const [id, name] of l.stops) {
 names.chain = "Sleeping Bag chain";
 
 let status = null;      // null = unknown, else Set of open stop ids
+let offline = false;
 let desk = DEFAULT_DESK;
 let picked = null;
 
@@ -296,6 +318,7 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const cmdFor = id => `/w ${desk} vt: ${id === "chain" ? "chain" : names[id]}`;
 
 function stateText(id) {
+  if (offline) return ["", "Voidtaxi is offline"];
   if (!status) return ["", ""];
   return status.has(id) ? ["on", "Warlock on duty now"] : ["", "No warlock right now"];
 }
@@ -305,6 +328,13 @@ function cardHtml(id) {
   let h = `<div class="card"><h4>${esc(names[id])}</h4>`;
   if (SB.has(id)) h += `<span class="tag">Sleeping Bag</span>`;
   h += `<div class="row"><span class="price">${PRICE[id] || "50s"}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
+  if (INBOX_URL) {
+    h += `<form class="bookf" data-stop="${id}" novalidate><label>Your character<input name="name" maxlength="25" placeholder="First Last" autocomplete="off" value="${esc(savedName())}"></label>`;
+    h += `<button class="copy" type="submit" value="${id}">Book ${esc(names[id])}</button>`;
+    if (id === "sbarrens") h += `<button class="copy alt2" type="submit" value="chain">Book the full Sleeping Bag chain · ${esc(PRICE.chain || "1.5g")}</button>`;
+    h += `<small class="bmsg" role="status">We whisper and invite you in game. Stay online.</small></form>`;
+    return h + `</div>`;
+  }
   h += `<div class="cmdline">${esc(cmdFor(id))}</div>`;
   h += `<button class="copy" type="button" data-copy="${esc(cmdFor(id))}">Copy</button>`;
   h += `<small>Paste in game chat: Enter, Ctrl+V, Enter.</small>`;
@@ -366,12 +396,12 @@ function renderTable() {
     h += `<tr class="grp" style="--c:${GROUP_COLOR[l.id] || "var(--muted)"}"><td colspan="3">${esc(l.name)}</td></tr>`;
     if (l.id === "sb") {
       h += `<tr class="srow chainrow" data-row="sbarrens"><td><span class="nm"><span class="sdot${status && status.has("sbarrens") ? " on" : ""}"></span>Full chain (all 4)</span></td>`
-        + `<td class="pr">${esc(PRICE.chain || "1.5g")}</td><td><button class="mini" type="button" data-copy="${esc(cmdFor("chain"))}">Copy</button></td></tr>`;
+        + `<td class="pr">${esc(PRICE.chain || "1.5g")}</td><td>${INBOX_URL ? `<button class="mini" type="button" data-pick="sbarrens">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor("chain"))}">Copy</button>`}</td></tr>`;
     }
     for (const [id, name] of l.stops) {
       const on = status && status.has(id);
       h += `<tr class="srow${picked === id ? " sel" : ""}" data-row="${id}"><td><span class="nm"><span class="sdot${on ? " on" : ""}" title="${on ? "Warlock on duty" : ""}"></span>${esc(name)}</span></td>`
-        + `<td class="pr">${esc(PRICE[id] || "50s")}</td><td><button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button></td></tr>`;
+        + `<td class="pr">${esc(PRICE[id] || "50s")}</td><td>${INBOX_URL ? `<button class="mini" type="button" data-pick="${id}" aria-label="Book ${esc(name)}">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button>`}</td></tr>`;
     }
   }
   tb.innerHTML = h;
@@ -401,6 +431,28 @@ document.addEventListener("click", async e => {
   catch { const line = btn.previousElementSibling; if (line) { const r = document.createRange(); r.selectNodeContents(line); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } flash("Press Ctrl+C"); }
 });
 
+document.addEventListener("submit", async e => {
+  const f = e.target.closest(".bookf");
+  if (!f) return;
+  e.preventDefault();
+  const msg = f.querySelector(".bmsg"), input = f.querySelector("[name=name]");
+  const name = cleanName(input.value);
+  const what = (e.submitter && e.submitter.value) || f.dataset.stop;
+  msg.classList.remove("ok", "err");
+  if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name exactly as in game, like Shiny Pants."; msg.classList.add("err"); input.focus(); return; }
+  if (offline) { msg.textContent = "Voidtaxi is offline right now. Check back soon!"; msg.classList.add("err"); return; }
+  f.querySelectorAll("button").forEach(b => b.disabled = true);
+  try {
+    await sendInbox({ kind: "book", name, stop: what === "chain" ? "chain" : names[what] });
+    saveName(name);
+    const rn = document.querySelector("#reqform [name=name]");
+    if (rn && !rn.value) rn.value = name;
+    msg.textContent = `Booked, ${name}! Stay online: you'll get a whisper and a group invite from Voidtaxi.`;
+    msg.classList.add("ok");
+  } catch { msg.textContent = "That didn't send. Try again in a moment."; msg.classList.add("err"); }
+  setTimeout(() => f.querySelectorAll("button").forEach(b => b.disabled = false), 4000);
+});
+
 async function loadStatus() {
   const live = document.getElementById("live"), txt = document.getElementById("liveText");
   if (!STATUS_URL) { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; return; }
@@ -408,13 +460,20 @@ async function loadStatus() {
     const r = await fetch(STATUS_URL, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
     if (!r.ok) throw new Error(r.status);
     const d = await r.json();
-    // A status the PC hasn't refreshed in 45 minutes says nothing about who is parked now.
-    const fresh = d.updated && (Date.now() - Date.parse(d.updated)) < 45 * 60000;
-    status = fresh ? new Set((d.open || []).map(n => byKey[norm(n)]).filter(Boolean)) : null;
+    // Online/offline is your switch in the addon: online shows every stop as open.
+    offline = d.service === "offline";
+    if (d.service === "online") status = new Set(Object.keys(names).filter(id => id !== "chain"));
+    else if (offline) status = new Set();
+    else {
+      const fresh = d.updated && (Date.now() - Date.parse(d.updated)) < 45 * 60000;
+      status = fresh ? new Set((d.open || []).map(n => byKey[norm(n)]).filter(Boolean)) : null;
+    }
     if (d.desk) desk = d.desk;
     if (d.prices) { Object.assign(PRICE, d.prices); showPrices(); }
     live.classList.toggle("on", !!status && status.size > 0);
-    txt.textContent = !status ? "Whisper Voidtaxi Booking “vt” in game for open stops"
+    txt.textContent = offline ? "Voidtaxi is offline right now. Check back soon!"
+      : d.service === "online" ? "Voidtaxi is online. Every stop is open"
+      : !status ? "Whisper Voidtaxi Booking “vt” in game for open stops"
       : status.size ? `${status.size} stop${status.size > 1 ? "s" : ""} staffed right now` : "No warlocks parked right now";
     renderPins();
   } catch { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; }
@@ -432,9 +491,26 @@ function showPrices() {
   document.querySelectorAll("[data-price-min]").forEach(el => { if (cheapest) el.textContent = cheapest; });
 }
 
+if (INBOX_URL) {
+  const f = document.getElementById("reqform");
+  f.querySelector(".reqhead p").textContent = "Tell us where. The most requested spots get a warlock first, and we'll whisper you when yours is live.";
+  document.getElementById("reqline").remove();
+  const lab = document.createElement("label");
+  lab.innerHTML = `<span>Your character</span><input name="name" maxlength="25" placeholder="First Last" autocomplete="off">`;
+  lab.querySelector("input").value = savedName();
+  f.querySelector("label.wide").classList.remove("wide");
+  f.insertBefore(lab, f.querySelector("button"));
+  f.querySelector("button").textContent = "Send request";
+  const step = document.querySelectorAll(".step");
+  step[0].querySelector("p").textContent = "Tap a pin or a row in the price list. Green means we're online.";
+  step[1].querySelector("h3").textContent = "Type your name, tap Book";
+  step[1].querySelector("p").textContent = "Your character name as it shows in game. That's the whole booking.";
+  step[2].querySelector("p").textContent = "We whisper you and send a group invite. Accept it, then the summon.";
+}
 const reqLine = () => `/w ${desk} vt: request ${(document.querySelector("#reqform [name=location]").value || "").trim().replace(/\s+/g, " ")}`;
 document.querySelector("#reqform [name=location]").addEventListener("input", () => {
-  document.getElementById("reqline").textContent = reqLine();
+  const line = document.getElementById("reqline");
+  if (line) line.textContent = reqLine();
 });
 document.getElementById("reqform").addEventListener("submit", async e => {
   e.preventDefault();
@@ -442,6 +518,16 @@ document.getElementById("reqform").addEventListener("submit", async e => {
   const loc = (f.location.value || "").trim();
   msg.className = "reqmsg";
   if (!loc) { msg.textContent = "Type the location you'd like first."; msg.classList.add("err"); f.location.focus(); return; }
+  if (INBOX_URL) {
+    const nameInput = f.querySelector("[name=name]");
+    const name = cleanName(nameInput.value);
+    if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name exactly as in game, like Shiny Pants."; msg.classList.add("err"); nameInput.focus(); return; }
+    btn.disabled = true;
+    try { await sendInbox({ kind: "request", name, stop: loc.slice(0, 50) }); saveName(name); msg.textContent = `Thanks, ${name}! ${loc} is on the list.`; f.location.value = ""; }
+    catch { msg.textContent = "That didn't send. Try again in a moment."; msg.classList.add("err"); }
+    btn.disabled = false;
+    return;
+  }
   const text = reqLine();
   document.getElementById("reqline").textContent = text;
   try { await navigator.clipboard.writeText(text); msg.textContent = "Copied! In game press Enter, Ctrl+V, Enter. Voidtaxi Booking gets your request."; }
