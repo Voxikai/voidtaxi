@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Voidtaxi · Warlock Summons on WoW Forever</title>
-<meta name="description" content="Warlock summons across Azeroth on WoW Forever. 50s per summon, full Sleeping Bag chain 1.5g. Pick a stop, paste one line in chat, accept the summon.">
+<meta name="description" content="Warlock summons across Azeroth on WoW Forever. Pick a stop on the map, paste one line in chat, accept the summon.">
 <meta property="og:title" content="Voidtaxi · Warlock Summons">
-<meta property="og:description" content="Pick a stop, paste one line in chat, get summoned. 50s per stop.">
+<meta property="og:description" content="Pick a stop on the map, paste one line in chat, get summoned.">
 <meta property="og:url" content="https://voidtaxi.com">
 <meta name="theme-color" content="#120d1c">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -29,26 +29,27 @@ body { margin: 0; background: radial-gradient(1200px 600px at 70% -10%, #2a1747 
 a { color: var(--void); }
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
-header.hero { padding: 56px 0 28px; text-align: center; position: relative; }
+header.hero { padding: 26px 0 8px; text-align: center; position: relative; }
 .mark { display: inline-flex; align-items: center; gap: 14px; }
-.mark svg { width: 54px; height: 54px; }
-h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-size: clamp(2.4rem, 7vw, 4rem); margin: 0; background: linear-gradient(180deg, #fff 10%, #c9a8ff 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.tag { color: var(--muted); margin: 10px auto 0; max-width: 46ch; font-size: 1.1rem; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+.mark svg { width: 42px; height: 42px; }
+h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-size: clamp(2rem, 5vw, 3rem); margin: 0; background: linear-gradient(180deg, #fff 10%, #c9a8ff 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tag { color: var(--muted); margin: 6px auto 0; max-width: 60ch; font-size: 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
 .chip { border: 1px solid var(--line); background: var(--bg2); padding: 4px 12px; border-radius: 99px; font-size: .9rem; color: var(--muted); }
 .chip b { color: var(--gold); }
-.live { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: .95rem; color: var(--muted); }
+.live { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: .95rem; color: var(--muted); }
 .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
 .live.on .pulse { background: var(--fel); box-shadow: 0 0 0 0 rgba(125,255,138,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(125,255,138,0); } 100% { box-shadow: 0 0 0 0 rgba(125,255,138,0); } }
 
-section { padding: 28px 0; }
-h2 { font-family: var(--display); font-weight: 600; letter-spacing: .06em; font-size: 1.5rem; margin: 0 0 14px; }
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; counter-reset: s; }
-.step { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
-.step::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--void-soft); color: var(--void); font-weight: 700; margin-bottom: 8px; }
-.step h3 { margin: 0 0 4px; font-size: 1.05rem; }
-.step p { margin: 0; color: var(--muted); font-size: .95rem; }
+section { padding: 14px 0; }
+h2 { font-family: var(--display); font-weight: 600; letter-spacing: .06em; font-size: 1.3rem; margin: 0 0 10px; }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+@media (max-width: 760px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; display: grid; grid-template-columns: auto 1fr; column-gap: 9px; align-items: start; }
+.step::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--void-soft); color: var(--void); font-weight: 700; font-size: .8rem; grid-row: span 2; }
+.step h3 { margin: 0; font-size: .92rem; }
+.step p { margin: 2px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.4; }
 kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; color: var(--ink); }
 
 /* Transit map */
@@ -73,7 +74,7 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .stop.open .state { color: var(--fel); }
 
 /* World map */
-#worldmap { height: min(72vh, 680px); min-height: 380px; border-radius: 14px; border: 1px solid var(--line); background: #1e3354; position: relative; z-index: 0; isolation: isolate; }
+#worldmap { height: min(64vh, 600px); min-height: 380px; border-radius: 14px; border: 1px solid var(--line); background: #1e3354; position: relative; z-index: 0; isolation: isolate; }
 .leaflet-container { font: inherit; }
 .pin { width: 22px; height: 22px; border-radius: 50%; background: #2a1d44; border: 3px solid var(--void); box-shadow: 0 0 0 2px rgba(0,0,0,.55), 0 0 12px rgba(157,107,255,.7); transition: transform .15s; }
 .pin.open { background: var(--fel); border-color: #eafff0; box-shadow: 0 0 0 2px rgba(0,0,0,.55), 0 0 16px var(--fel); animation: pinpulse 2s infinite; }
@@ -85,6 +86,51 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .leaflet-tooltip.vt-tip small { display: block; font-weight: 400; color: var(--muted); }
 .leaflet-control-attribution { background: rgba(18,13,28,.8) !important; color: var(--muted) !important; }
 .leaflet-control-attribution a { color: var(--void) !important; }
+.leaflet-popup.vt-pop .leaflet-popup-content-wrapper { background: linear-gradient(180deg, #2a1d44, #1f1633); color: var(--ink); border: 1px solid var(--void); border-radius: 14px; box-shadow: 0 14px 34px rgba(0,0,0,.55); }
+.leaflet-popup.vt-pop .leaflet-popup-tip { background: #1f1633; border: 1px solid var(--void); }
+.leaflet-popup.vt-pop .leaflet-popup-content { margin: 14px 16px; width: 250px !important; font: 15px/1.4 var(--body); }
+.leaflet-popup.vt-pop a.leaflet-popup-close-button { color: var(--muted); }
+.card h4 { margin: 0; font-family: var(--display); font-size: 1.1rem; letter-spacing: .03em; }
+.card .tag { display: inline-block; margin-top: 4px; font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--void); background: var(--void-soft); border-radius: 99px; padding: 1px 8px; }
+.card .row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.card .price { font-family: var(--display); font-size: 1.6rem; color: var(--gold); line-height: 1; }
+.card .st { font-size: .8rem; color: var(--muted); text-align: right; }
+.card .st.on { color: var(--fel); }
+.card .cmdline { margin-top: 10px; font: 500 .8rem var(--mono); background: #0d0915; border: 1px dashed var(--line); border-radius: 8px; padding: 7px 9px; white-space: nowrap; overflow-x: auto; user-select: all; }
+.card .copy { width: 100%; margin-top: 8px; padding: 9px 12px; font-size: .95rem; }
+.card .alt { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+.card .alt .copy { background: var(--void-soft); color: var(--ink); border: 1px solid var(--void); }
+.card small { display: block; margin-top: 6px; color: var(--muted); font-size: .78rem; }
+.mapwrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: stretch; }
+.stops { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 6px 4px; overflow-y: auto; max-height: min(64vh, 600px); }
+.stops table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.stops th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; padding: 6px 8px; }
+.stops td { padding: 5px 8px; border-top: 1px solid var(--line); vertical-align: middle; }
+.stops tr.grp td { border-top: 0; padding: 10px 8px 2px; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--c, var(--muted)); font-weight: 700; }
+.stops tr.srow { cursor: pointer; }
+.stops tr.srow:hover td, .stops tr.srow.sel td { background: var(--void-soft); }
+.stops .nm { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.stops .sdot { width: 9px; height: 9px; border-radius: 50%; flex: none; background: #4a3f63; }
+.stops .sdot.on { background: var(--fel); box-shadow: 0 0 8px var(--fel); }
+.stops .pr { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.stops .chainrow td { background: rgba(157,107,255,.12); }
+.stops button.mini { font: 700 .75rem var(--body); color: #12091f; background: var(--void); border: 0; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+.stops button.mini.done { background: var(--fel); }
+.stops button.mini:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (max-width: 900px) { .mapwrap { grid-template-columns: 1fr; } .stops { max-height: none; } }
+@media (max-width: 640px) { #worldmap { height: 300px; min-height: 0; } .leaflet-popup.vt-pop .leaflet-popup-content { width: 220px !important; } }
+.sbcard { display: grid; gap: 1px; margin: 12px 12px 0 0 !important; padding: 9px 13px; max-width: 210px; text-decoration: none;
+  background: linear-gradient(160deg, rgba(42,29,68,.95), rgba(31,22,51,.95)); border: 1px solid var(--void); border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.5); color: var(--ink) !important; line-height: 1.3; }
+.sbcard:hover { border-color: #c9a8ff; transform: translateY(-1px); }
+.sbcard:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.sbcard .sbk { font-size: .66rem; text-transform: uppercase; letter-spacing: .09em; color: var(--void); font-weight: 700; }
+.sbcard .sbt { font-family: var(--display); font-weight: 600; font-size: .95rem; }
+.sbcard .sbp { font-size: .8rem; color: var(--muted); }
+.sbcard .sbp b { color: var(--gold); font-size: .95rem; }
+@media (max-width: 640px) { .sbcard { max-width: 160px; padding: 7px 10px; } .sbcard .sbt { font-size: .82rem; } }
+@media (prefers-reduced-motion: no-preference) { .sbcard { transition: transform .15s, border-color .15s; } }
 .maphint { color: var(--muted); font-size: .9rem; margin: 8px 2px 0; }
 .allstops { margin-top: 26px; }
 .allstops > h3 { font-family: var(--display); letter-spacing: .05em; margin: 0 0 12px; }
@@ -110,6 +156,21 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .chain .cta { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
 @media (max-width: 720px) { .chain { grid-template-columns: 1fr; } }
 
+.req { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px 12px; align-items: end; background: var(--card); border: 1px solid var(--void); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+.req .reqhead { grid-column: 1 / -1; }
+.req h3 { margin: 0; font-size: 1.05rem; }
+.req .reqhead p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
+.req label { display: grid; gap: 4px; font-size: .82rem; color: var(--muted); font-weight: 600; }
+.req label small { font-weight: 400; }
+.req label.wide { grid-column: 1 / 3; }
+.req input { font: 15px var(--body); color: var(--ink); background: #0d0915; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.req input:focus { outline: none; border-color: var(--void); }
+.req .copy { grid-column: 3; grid-row: 2; align-self: end; padding: 9px 18px; }
+.req .reqline { grid-column: 1 / -1; font: 500 .85rem var(--mono); background: #0d0915; border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; white-space: nowrap; overflow-x: auto; color: var(--muted); }
+.req .trap { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.req .reqmsg { grid-column: 1 / -1; margin: 0; font-size: .9rem; color: var(--fel); min-height: 1.2em; }
+.req .reqmsg.err { color: #ff8a8a; }
+@media (max-width: 720px) { .req { grid-template-columns: 1fr; } .req label.wide, .req .copy { grid-column: 1; grid-row: auto; } }
 .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; }
 .faq summary { cursor: pointer; font-weight: 600; }
 .faq p { color: var(--muted); margin: 8px 0 0; }
@@ -125,32 +186,29 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
       <h1>VOIDTAXI</h1>
     </div>
     <p class="tag">Warlock summons across Azeroth. Pick a stop, paste one line in chat, step through the portal.</p>
-    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span><span class="chip"><b>50s</b> per summon</span><span class="chip">Sleeping Bag chain <b>1.5g</b></span></div>
+    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span><span class="chip">Summons from <b data-price-min>50s</b></span><span class="chip">Sleeping Bag chain <b data-price="chain">1.5g</b></span></div>
     <div class="live" id="live"><span class="pulse"></span><span id="liveText">Checking which stops are staffed…</span></div>
   </header>
 
   <section id="how">
     <h2>How to ride</h2>
     <div class="steps">
-      <div class="step"><h3>Pick your stop</h3><p>Tap a pin on the map below. Glowing green pins have a warlock parked there right now.</p></div>
-      <div class="step"><h3>Copy, then paste in game</h3><p>Press <kbd>Copy</kbd>. In game hit <kbd>Enter</kbd> <kbd>Ctrl</kbd>+<kbd>V</kbd> <kbd>Enter</kbd>. That's your booking.</p></div>
-      <div class="step"><h3>Accept the invite</h3><p>A Voidtaxi warlock invites you within seconds. Accept, then accept the summon when it pops.</p></div>
-      <div class="step"><h3>Pay on arrival</h3><p>50 silver once you land. Your summoner opens the trade.</p></div>
+      <div class="step"><h3>Pick your stop</h3><p>Tap a pin or a row in the price list. Green means a warlock is parked there now.</p></div>
+      <div class="step"><h3>Copy, then paste in game</h3><p>Press <kbd>Copy</kbd>, then in game <kbd>Enter</kbd> <kbd>Ctrl</kbd>+<kbd>V</kbd> <kbd>Enter</kbd>.</p></div>
+      <div class="step"><h3>Accept the invite</h3><p>You get a Voidtaxi invite in seconds. Accept it, then the summon.</p></div>
+      <div class="step"><h3>Pay on arrival</h3><p>Pay the listed price once you land. Your summoner opens the trade.</p></div>
     </div>
   </section>
 
   <section id="map">
     <h2>Summon map</h2>
-    <div id="worldmap" role="application" aria-label="Map of Azeroth with Voidtaxi summon stops"></div>
-    <p class="maphint">Drag to move, scroll or pinch to zoom. Tap a pin to book it. Glowing green pins have a warlock parked there now.</p>
-    <div class="allstops"><h3>All stops</h3><div class="lines" id="lines"></div></div>
-    <div class="book" id="book" aria-live="polite">
-      <div class="what" id="bookWhat">Pick a stop on the map to book it.</div>
-      <div></div>
-      <div class="cmd" id="cmd">/w Voidtaxi Booking vt: </div>
-      <button class="copy" id="copy" type="button">Copy</button>
-      <div class="note" id="bookNote">Paste it in game chat and press Enter.</div>
+    <div class="mapwrap">
+      <div id="worldmap" role="application" aria-label="Map of Azeroth with Voidtaxi summon stops"></div>
+      <aside class="stops" aria-label="Stops and prices">
+        <table><thead><tr><th>Stop</th><th>Price</th><th><span class="sr">Book</span></th></tr></thead><tbody id="stoprows"></tbody></table>
+      </aside>
     </div>
+    <p class="maphint">Drag to move, scroll or pinch to zoom. Tap a pin for its price and booking line. Glowing green pins have a warlock parked there now.</p>
   </section>
 
   <section id="chain">
@@ -165,15 +223,23 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
         </ul>
       </div>
       <div class="cta">
-        <div class="big">1.5g</div>
+        <div class="big" data-price="chain">1.5g</div>
         <div style="color:var(--muted)">for the full chain, one booking</div>
-        <button class="copy" type="button" data-pick="chain">Book the chain</button>
+        <button class="copy" type="button" data-pick="chain">Book the chain on the map</button>
       </div>
     </div>
   </section>
 
   <section class="faq" id="faq">
     <h2>Questions</h2>
+    <form class="req" id="reqform" novalidate>
+      <div class="reqhead"><h3>Want a stop we don't cover yet?</h3><p>Type the place, copy the line, paste it in game. The most requested spots get a warlock first, and we'll whisper you when yours is live.</p></div>
+      <label class="wide"><span>Location</span><input name="location" list="reqlist" maxlength="50" required placeholder="e.g. Blackrock Mountain" autocomplete="off"></label>
+      <datalist id="reqlist"><option value="Blackrock Mountain"><option value="Maraudon"><option value="Dire Maul"><option value="Everlook"><option value="Light's Hope Chapel"><option value="Feathermoon Stronghold"><option value="Shaper's Terrace"><option value="Scarlet Monastery"><option value="Blackfathom Deeps"><option value="Zul'Farrak"><option value="Uldaman"><option value="Hyjal"><option value="Shen'dralas"></datalist>
+      <button class="copy" type="submit">Copy request</button>
+      <div class="cmdline reqline" id="reqline">/w Voidtaxi Booking vt: request ...</div>
+      <p class="reqmsg" id="reqmsg" role="status"></p>
+    </form>
     <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
     <details><summary>Is this allowed?</summary><p>Yes. It's a player service paid in in-game gold only, like any summoning or portal seller in trade chat. We never take real money.</p></details>
     <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the SumVentureCo Discord. Guild runs, raid nights and bulk bookings welcome.</p></details>
@@ -183,9 +249,10 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
 </div>
 
 <script>
-// Live status: a Google Apps Script web app returning { updated, open: ["Stonetalon", ...], desk }.
-// Leave empty until it is deployed; the map then shows every stop as "whisper to check".
-const STATUS_URL = "";
+// Live status: status.json on the repo's "status" branch, written by Voidtaxi Sync on the PC
+// from what the in-game addon saved: { updated, open: [stop ids], prices: { stop: "75s" }, desk }.
+// Read through GitHub's API so it is never minutes stale (the website itself is cached).
+const STATUS_URL = "https://api.github.com/repos/Voxikai/voidtaxi/contents/status.json?ref=status";
 const DEFAULT_DESK = "Voidtaxi Booking";
 
 const LINES = [
@@ -213,124 +280,179 @@ let status = null;      // null = unknown, else Set of open stop ids
 let desk = DEFAULT_DESK;
 let picked = null;
 
-let render = function () {
-  const root = document.getElementById("lines");
-  root.innerHTML = "";
-  for (const l of LINES) {
-    const box = document.createElement("div");
-    box.className = "tline"; box.style.setProperty("--c", l.c);
-    box.innerHTML = `<div class="thead"><span class="badge"></span><h3></h3><small></small></div><div class="track"></div>`;
-    box.querySelector("h3").textContent = l.name;
-    box.querySelector("small").textContent = l.note;
-    const track = box.querySelector(".track");
-    for (const [id, name] of l.stops) {
-      const b = document.createElement("button");
-      b.type = "button"; b.dataset.pick = id;
-      const open = status && status.has(id);
-      b.className = "stop" + (status ? (open ? " open" : " closed") : "");
-      b.setAttribute("aria-pressed", picked === id ? "true" : "false");
-      b.innerHTML = `<span class="dot"></span><span class="name"></span><span class="state"></span>`;
-      b.querySelector(".name").textContent = name;
-      b.querySelector(".state").textContent = status ? (open ? "on duty" : "no warlock") : "50s";
-      track.appendChild(b);
-    }
-    root.appendChild(box);
+// Pins: pixel spots on map.webp (3584 x 2240).
+const MAP_W = 3584, MAP_H = 2240;
+const POS = {
+  sbarrens: [768, 1432], stonetalon: [429, 1005], loch: [3064, 1093], thoradin: [2919, 723],
+  dalaran: [2733, 674], bootybay: [2711, 1989],
+  nijel: [480, 1125],
+  feralasfp: [653, 1519], gadgetzan: [917, 1748],
+};
+const SB = new Set(["sbarrens", "stonetalon", "loch", "thoradin"]);
+const markers = {};
+let map;
+
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cmdFor = id => `/w ${desk} vt: ${id === "chain" ? "chain" : names[id]}`;
+
+function stateText(id) {
+  if (!status) return ["", ""];
+  return status.has(id) ? ["on", "Warlock on duty now"] : ["", "No warlock right now"];
+}
+
+function cardHtml(id) {
+  const [cls, st] = stateText(id);
+  let h = `<div class="card"><h4>${esc(names[id])}</h4>`;
+  if (SB.has(id)) h += `<span class="tag">Sleeping Bag</span>`;
+  h += `<div class="row"><span class="price">${PRICE[id] || "50s"}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
+  h += `<div class="cmdline">${esc(cmdFor(id))}</div>`;
+  h += `<button class="copy" type="button" data-copy="${esc(cmdFor(id))}">Copy</button>`;
+  h += `<small>Paste in game chat: Enter, Ctrl+V, Enter.</small>`;
+  if (id === "sbarrens") {
+    h += `<div class="alt">Doing the whole Sleeping Bag chain? <b style="color:var(--gold)">${esc(PRICE.chain || "1.5g")}</b> for all four stops.`;
+    h += `<button class="copy" type="button" data-copy="${esc(cmdFor("chain"))}">Copy chain booking</button></div>`;
+  }
+  return h + `</div>`;
+}
+
+function initMap() {
+  if (!window.L) { document.getElementById("worldmap").style.display = "none"; return; }
+  const bounds = [[0, 0], [MAP_H, MAP_W]];
+  map = L.map("worldmap", { crs: L.CRS.Simple, minZoom: -4, maxZoom: 1, zoomSnap: 0.25, zoomDelta: 0.5,
+    maxBounds: [[-900, -1400], [MAP_H + 900, MAP_W + 1400]], maxBoundsViscosity: 0.6, attributionControl: true });
+  L.imageOverlay("map.webp", bounds).addTo(map);
+  map.attributionControl.setPrefix("").addAttribution("Map art &copy; Blizzard Entertainment");
+  map.fitBounds(bounds);
+  const sbCard = L.control({ position: "topright" });
+  sbCard.onAdd = () => {
+    const a = L.DomUtil.create("a", "sbcard");
+    a.href = "#chain";
+    a.innerHTML = `<span class="sbk">Sleeping Bag</span><span class="sbt">Full Sleeping Bag run available</span>`
+      + `<span class="sbp"><b data-price="chain">${esc(PRICE.chain || "1.5g")}</b> all 4 stops <span aria-hidden="true">&rarr;</span></span>`;
+    L.DomEvent.disableClickPropagation(a);
+    L.DomEvent.disableScrollPropagation(a);
+    return a;
+  };
+  sbCard.addTo(map);
+  for (const l of LINES) for (const [id, name] of l.stops) {
+    const p = POS[id]; if (!p) continue;
+    const m = L.marker([MAP_H - p[1], p[0]], { icon: L.divIcon({ className: "", html: '<div class="pin"></div>', iconSize: [22, 22] }), keyboard: true, title: name, alt: name });
+    m.bindTooltip(esc(name), { direction: "top", offset: [0, -12], className: "vt-tip" });
+    m.bindPopup(() => cardHtml(id), { className: "vt-pop", offset: [0, -8], autoPanPadding: [16, 16], maxWidth: 290, keepInView: true });
+    m.on("popupopen", () => { picked = id; m.closeTooltip(); renderPins(); });
+    m.on("popupclose", () => { if (picked === id) picked = null; renderPins(); });
+    m.addTo(map);
+    markers[id] = m;
   }
 }
 
-function pick(id) {
-  picked = id;
-  const name = names[id];
-  const price = PRICE[id] || "50s";
-  const cmdName = id === "chain" ? "chain" : name;
-  document.getElementById("cmd").textContent = `/w ${desk} vt: ${cmdName}`;
-  const what = document.getElementById("bookWhat");
-  what.innerHTML = "";
-  const b = document.createElement("b"); b.textContent = (typeof label === "function" && names[id] && id !== "chain") ? label(id) : name;
-  const p = document.createElement("span"); p.className = "price"; p.textContent = price;
-  what.append("Booking ", b, " · ", p);
-  const open = status && status.has(id === "chain" ? "sbarrens" : id);
-  document.getElementById("bookNote").textContent = !status
-    ? "Paste it in game chat and press Enter. Booking replies if that stop is open."
-    : open ? "A warlock is parked there now. Paste it in game chat and press Enter."
-           : "Nobody is parked there right now. Booking will whisper you the stops that are open.";
-  render();
-  document.getElementById("book").scrollIntoView({ block: "nearest", behavior: "smooth" });
+function renderPins() {
+  for (const [id, m] of Object.entries(markers)) {
+    const open = status && status.has(id);
+    const cls = "pin" + (status ? (open ? " open" : " closed") : "") + (picked === id ? " picked" : "");
+    const el = m.getElement() && m.getElement().firstChild;
+    if (el) el.className = cls;
+    if (m.isPopupOpen()) m.setPopupContent(cardHtml(id));
+  }
+  renderTable();
 }
 
-document.addEventListener("click", e => {
-  const t = e.target.closest("[data-pick]");
-  if (t) pick(t.dataset.pick);
-});
+const GROUP_COLOR = { sb: "var(--void)", ek: "var(--ek)", kal: "var(--kal)" };
+function renderTable() {
+  const tb = document.getElementById("stoprows");
+  if (!tb) return;
+  let h = "";
+  for (const l of LINES) {
+    h += `<tr class="grp" style="--c:${GROUP_COLOR[l.id] || "var(--muted)"}"><td colspan="3">${esc(l.name)}</td></tr>`;
+    if (l.id === "sb") {
+      h += `<tr class="srow chainrow" data-row="sbarrens"><td><span class="nm"><span class="sdot${status && status.has("sbarrens") ? " on" : ""}"></span>Full chain (all 4)</span></td>`
+        + `<td class="pr">${esc(PRICE.chain || "1.5g")}</td><td><button class="mini" type="button" data-copy="${esc(cmdFor("chain"))}">Copy</button></td></tr>`;
+    }
+    for (const [id, name] of l.stops) {
+      const on = status && status.has(id);
+      h += `<tr class="srow${picked === id ? " sel" : ""}" data-row="${id}"><td><span class="nm"><span class="sdot${on ? " on" : ""}" title="${on ? "Warlock on duty" : ""}"></span>${esc(name)}</span></td>`
+        + `<td class="pr">${esc(PRICE[id] || "50s")}</td><td><button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button></td></tr>`;
+    }
+  }
+  tb.innerHTML = h;
+}
 
-document.getElementById("copy").addEventListener("click", async () => {
-  if (!picked) { document.getElementById("map").scrollIntoView({ behavior: "smooth" }); return; }
-  const text = document.getElementById("cmd").textContent;
-  const btn = document.getElementById("copy");
-  const flash = t => { btn.textContent = t; btn.classList.add("done"); setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800); };
-  try { await navigator.clipboard.writeText(text); flash("Copied! Paste in game"); }
-  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("cmd")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); flash("Press Ctrl+C"); }
+function openPin(id) {
+  const m = markers[id];
+  if (!m) return;
+  document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" });
+  map.setView(m.getLatLng(), Math.max(map.getZoom(), -1));
+  m.openPopup();
+}
+
+document.addEventListener("click", async e => {
+  const pickBtn = e.target.closest("[data-pick]");
+  if (pickBtn) { openPin(pickBtn.dataset.pick === "chain" ? "sbarrens" : pickBtn.dataset.pick); return; }
+  const btn = e.target.closest("[data-copy]");
+  if (!btn) {
+    const row = e.target.closest("[data-row]");
+    if (row && map) { const m = markers[row.dataset.row]; if (m) { map.setView(m.getLatLng(), Math.max(map.getZoom(), -1)); m.openPopup(); } }
+    return;
+  }
+  const text = btn.dataset.copy;
+  const label = btn.textContent;
+  const flash = t => { btn.textContent = t; btn.classList.add("done"); setTimeout(() => { btn.textContent = label; btn.classList.remove("done"); }, 1800); };
+  try { await navigator.clipboard.writeText(text); flash(btn.classList.contains("mini") ? "Copied" : "Copied! Paste in game"); }
+  catch { const line = btn.previousElementSibling; if (line) { const r = document.createRange(); r.selectNodeContents(line); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } flash("Press Ctrl+C"); }
 });
 
 async function loadStatus() {
   const live = document.getElementById("live"), txt = document.getElementById("liveText");
   if (!STATUS_URL) { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; return; }
   try {
-    const r = await fetch(STATUS_URL, { cache: "no-store" });
+    const r = await fetch(STATUS_URL, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
+    if (!r.ok) throw new Error(r.status);
     const d = await r.json();
-    status = new Set((d.open || []).map(n => byKey[norm(n)]).filter(Boolean));
+    // A status the PC hasn't refreshed in 45 minutes says nothing about who is parked now.
+    const fresh = d.updated && (Date.now() - Date.parse(d.updated)) < 45 * 60000;
+    status = fresh ? new Set((d.open || []).map(n => byKey[norm(n)]).filter(Boolean)) : null;
     if (d.desk) desk = d.desk;
-    live.classList.toggle("on", status.size > 0);
-    txt.textContent = status.size ? `${status.size} stop${status.size > 1 ? "s" : ""} staffed right now` : "No warlocks parked right now";
-    if (picked) pick(picked); else render();
-  } catch { txt.textContent = "Live status unavailable. Whisper Voidtaxi Booking “vt” in game"; }
+    if (d.prices) { Object.assign(PRICE, d.prices); showPrices(); }
+    live.classList.toggle("on", !!status && status.size > 0);
+    txt.textContent = !status ? "Whisper Voidtaxi Booking “vt” in game for open stops"
+      : status.size ? `${status.size} stop${status.size > 1 ? "s" : ""} staffed right now` : "No warlocks parked right now";
+    renderPins();
+  } catch { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; }
 }
 
-// Pins: pixel spots on map.webp (3584 x 2240).
-const MAP_W = 3584, MAP_H = 2240;
-const POS = {
-  sbarrens: [768, 1432], stonetalon: [429, 1005], loch: [3064, 1093], thoradin: [2919, 723],
-  dalaran: [2733, 674], bootybay: [2701, 2002],
-  nijel: [480, 1125],
-  feralasfp: [653, 1519], gadgetzan: [917, 1748],
-};
-const SB = new Set(["sbarrens", "stonetalon", "loch", "thoradin"]);
-const label = id => names[id] + (SB.has(id) ? " (Sleeping Bag)" : "");
-const markers = {};
-let map;
-function initMap() {
-  if (!window.L) { document.getElementById("worldmap").style.display = "none"; return; }
-  const bounds = [[0, 0], [MAP_H, MAP_W]];
-  map = L.map("worldmap", { crs: L.CRS.Simple, minZoom: -2.5, maxZoom: 1, zoomSnap: 0.25, zoomDelta: 0.5,
-    maxBounds: [[-300, -300], [MAP_H + 300, MAP_W + 300]], maxBoundsViscosity: 0.8, attributionControl: true });
-  L.imageOverlay("map.webp", bounds).addTo(map);
-  map.attributionControl.setPrefix("").addAttribution("Map art &copy; Blizzard Entertainment");
-  map.fitBounds(bounds);
-  for (const l of LINES) for (const [id, name] of l.stops) {
-    const p = POS[id]; if (!p) continue;
-    const m = L.marker([MAP_H - p[1], p[0]], { icon: L.divIcon({ className: "", html: '<div class="pin"></div>', iconSize: [22, 22] }), keyboard: true, title: name, alt: name });
-    m.bindTooltip("", { direction: "top", offset: [0, -12], className: "vt-tip" });
-    m.on("click", () => pick(id));
-    m.addTo(map);
-    markers[id] = m;
-  }
+// Prices shown outside the pin cards (header chip, chain section).
+function toCopper(p) {
+  const m = String(p).toLowerCase().match(/^(?:(\d+(?:\.\d+)?)g)?(?:(\d+)s)?(?:(\d+)c)?$/);
+  return m ? Math.round((parseFloat(m[1] || 0) * 10000) + (+m[2] || 0) * 100 + (+m[3] || 0)) : Infinity;
 }
-function renderPins() {
-  for (const [id, m] of Object.entries(markers)) {
-    const open = status && status.has(id);
-    const cls = "pin" + (status ? (open ? " open" : " closed") : "") + ((picked === id || (picked === "chain" && id === "sbarrens")) ? " picked" : "");
-    const el = m.getElement() && m.getElement().firstChild;
-    if (el) el.className = cls;
-    m.setTooltipContent(`${label(id)}<small>${PRICE[id] || "50s"} · ${status ? (open ? "on duty now" : "no warlock right now") : "tap to book"}</small>`);
-  }
+function showPrices() {
+  document.querySelectorAll("[data-price]").forEach(el => { el.textContent = PRICE[el.dataset.price] || el.textContent; });
+  const ids = Object.keys(markers);
+  const cheapest = ids.map(id => PRICE[id] || "50s").sort((a, b) => toCopper(a) - toCopper(b))[0];
+  document.querySelectorAll("[data-price-min]").forEach(el => { if (cheapest) el.textContent = cheapest; });
 }
-const _render = render;
-render = function () { _render(); renderPins(); };
+
+const reqLine = () => `/w ${desk} vt: request ${(document.querySelector("#reqform [name=location]").value || "").trim().replace(/\s+/g, " ")}`;
+document.querySelector("#reqform [name=location]").addEventListener("input", () => {
+  document.getElementById("reqline").textContent = reqLine();
+});
+document.getElementById("reqform").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, msg = document.getElementById("reqmsg"), btn = f.querySelector("button");
+  const loc = (f.location.value || "").trim();
+  msg.className = "reqmsg";
+  if (!loc) { msg.textContent = "Type the location you'd like first."; msg.classList.add("err"); f.location.focus(); return; }
+  const text = reqLine();
+  document.getElementById("reqline").textContent = text;
+  try { await navigator.clipboard.writeText(text); msg.textContent = "Copied! In game press Enter, Ctrl+V, Enter. Voidtaxi Booking gets your request."; }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("reqline")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); msg.textContent = "Press Ctrl+C to copy, then paste it in game."; }
+  btn.textContent = "Copied"; setTimeout(() => { btn.textContent = "Copy request"; }, 1800);
+});
 
 initMap();
-render();
+renderPins();
 loadStatus();
-setInterval(loadStatus, 60000);
+setInterval(loadStatus, 120000);
 </script>
 </body>
 </html>
