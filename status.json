@@ -4,11 +4,12 @@
   "gadgetzan",
   "loch",
   "sbarrens",
-  "stonetalon"
+  "stonetalon",
+  "thoradin"
  ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-11T20:31:22+00:00"
+ "updated": "2026-11-11T20:32:26+00:00"
 }
