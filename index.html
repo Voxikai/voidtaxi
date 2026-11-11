@@ -10,6 +10,8 @@
 <meta property="og:url" content="https://voidtaxi.com">
 <meta name="theme-color" content="#120d1c">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -70,8 +72,26 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .state { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 .stop.open .state { color: var(--fel); }
 
+/* World map */
+#worldmap { height: min(72vh, 680px); min-height: 380px; border-radius: 14px; border: 1px solid var(--line); background: #1e3354; position: relative; z-index: 0; isolation: isolate; }
+.leaflet-container { font: inherit; }
+.pin { width: 22px; height: 22px; border-radius: 50%; background: #2a1d44; border: 3px solid var(--void); box-shadow: 0 0 0 2px rgba(0,0,0,.55), 0 0 12px rgba(157,107,255,.7); transition: transform .15s; }
+.pin.open { background: var(--fel); border-color: #eafff0; box-shadow: 0 0 0 2px rgba(0,0,0,.55), 0 0 16px var(--fel); animation: pinpulse 2s infinite; }
+.pin.closed { opacity: .75; }
+.pin.picked { transform: scale(1.35); border-color: #fff; }
+@keyframes pinpulse { 50% { box-shadow: 0 0 0 2px rgba(0,0,0,.55), 0 0 28px var(--fel); } }
+.leaflet-tooltip.vt-tip { background: #1f1633; color: var(--ink); border: 1px solid var(--void); border-radius: 8px; font-weight: 600; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+.leaflet-tooltip.vt-tip::before { display: none; }
+.leaflet-tooltip.vt-tip small { display: block; font-weight: 400; color: var(--muted); }
+.leaflet-control-attribution { background: rgba(18,13,28,.8) !important; color: var(--muted) !important; }
+.leaflet-control-attribution a { color: var(--void) !important; }
+.maphint { color: var(--muted); font-size: .9rem; margin: 8px 2px 0; }
+.allstops { margin-top: 26px; }
+.allstops > h3 { font-family: var(--display); letter-spacing: .05em; margin: 0 0 12px; }
+@media (prefers-reduced-motion: reduce) { .pin.open { animation: none; } }
+
 /* Booking panel */
-.book { position: sticky; bottom: 14px; z-index: 5; margin-top: 22px; background: linear-gradient(180deg, #2a1d44, #1f1633); border: 1px solid var(--void); border-radius: 14px; padding: 16px 18px; box-shadow: 0 16px 40px rgba(0,0,0,.5); display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; }
+.book { position: sticky; bottom: 14px; z-index: 1000; margin-top: 22px; background: linear-gradient(180deg, #2a1d44, #1f1633); border: 1px solid var(--void); border-radius: 14px; padding: 16px 18px; box-shadow: 0 16px 40px rgba(0,0,0,.5); display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; }
 .book .what { font-size: 1.05rem; }
 .book .what b { font-family: var(--display); letter-spacing: .04em; }
 .book .price { color: var(--gold); font-weight: 700; }
@@ -112,7 +132,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
   <section id="how">
     <h2>How to ride</h2>
     <div class="steps">
-      <div class="step"><h3>Pick your stop</h3><p>Tap a stop on the map below. Green ones have a warlock parked there right now.</p></div>
+      <div class="step"><h3>Pick your stop</h3><p>Tap a pin on the map below. Glowing green pins have a warlock parked there right now.</p></div>
       <div class="step"><h3>Copy, then paste in game</h3><p>Press <kbd>Copy</kbd>. In game hit <kbd>Enter</kbd> <kbd>Ctrl</kbd>+<kbd>V</kbd> <kbd>Enter</kbd>. That's your booking.</p></div>
       <div class="step"><h3>Accept the invite</h3><p>A Voidtaxi warlock invites you within seconds. Accept, then accept the summon when it pops.</p></div>
       <div class="step"><h3>Pay on arrival</h3><p>50 silver once you land. Your summoner opens the trade.</p></div>
@@ -120,8 +140,10 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
   </section>
 
   <section id="map">
-    <h2>Route map</h2>
-    <div class="lines" id="lines"></div>
+    <h2>Summon map</h2>
+    <div id="worldmap" role="application" aria-label="Map of Azeroth with Voidtaxi summon stops"></div>
+    <p class="maphint">Drag to move, scroll or pinch to zoom. Tap a pin to book it. Glowing green pins have a warlock parked there now.</p>
+    <div class="allstops"><h3>All stops</h3><div class="lines" id="lines"></div></div>
     <div class="book" id="book" aria-live="polite">
       <div class="what" id="bookWhat">Pick a stop on the map to book it.</div>
       <div></div>
@@ -194,7 +216,7 @@ let status = null;      // null = unknown, else Set of open stop ids
 let desk = DEFAULT_DESK;
 let picked = null;
 
-function render() {
+let render = function () {
   const root = document.getElementById("lines");
   root.innerHTML = "";
   for (const l of LINES) {
@@ -267,6 +289,47 @@ async function loadStatus() {
   } catch { txt.textContent = "Live status unavailable. Whisper Voidtaxi Booking “vt” in game"; }
 }
 
+// Pins: pixel spots on map.webp (3584 x 2240).
+const MAP_W = 3584, MAP_H = 2240;
+const POS = {
+  westfall: [2664, 1635], sbarrens: [930, 1260], stonetalon: [495, 900], loch: [3090, 1140], thoradin: [2925, 750],
+  dalaran: [2775, 636], smrol: [2685, 480], lightshope: [3225, 420], brm: [2775, 1365], bootybay: [2775, 1920],
+  everlook: [960, 450], bfd: [420, 750], nijel: [480, 1125], maraudon: [330, 1245], diremaul: [525, 1434],
+  feathermoon: [276, 1545], feralasfp: [615, 1485], needles: [696, 1500], gadgetzan: [900, 1815], shaper: [720, 1800],
+  riverglades: [3165, 1335], drowned: [2634, 1755],
+};
+const markers = {};
+let map;
+function initMap() {
+  if (!window.L) { document.getElementById("worldmap").style.display = "none"; return; }
+  const bounds = [[0, 0], [MAP_H, MAP_W]];
+  map = L.map("worldmap", { crs: L.CRS.Simple, minZoom: -2.5, maxZoom: 1.5, zoomSnap: 0.25, zoomDelta: 0.5,
+    maxBounds: [[-300, -300], [MAP_H + 300, MAP_W + 300]], maxBoundsViscosity: 0.8, attributionControl: true });
+  L.imageOverlay("map.webp", bounds).addTo(map);
+  map.attributionControl.setPrefix("").addAttribution("Map art &copy; Blizzard Entertainment");
+  map.fitBounds(bounds);
+  for (const l of LINES) for (const [id, name] of l.stops) {
+    const p = POS[id]; if (!p) continue;
+    const m = L.marker([MAP_H - p[1], p[0]], { icon: L.divIcon({ className: "", html: '<div class="pin"></div>', iconSize: [22, 22] }), keyboard: true, title: name, alt: name });
+    m.bindTooltip("", { direction: "top", offset: [0, -12], className: "vt-tip" });
+    m.on("click", () => pick(id));
+    m.addTo(map);
+    markers[id] = m;
+  }
+}
+function renderPins() {
+  for (const [id, m] of Object.entries(markers)) {
+    const open = status && status.has(id);
+    const cls = "pin" + (status ? (open ? " open" : " closed") : "") + ((picked === id || (picked === "chain" && id === "sbarrens")) ? " picked" : "");
+    const el = m.getElement() && m.getElement().firstChild;
+    if (el) el.className = cls;
+    m.setTooltipContent(`${names[id]}<small>${PRICE[id] || "50s"} · ${status ? (open ? "on duty now" : "no warlock right now") : "tap to book"}</small>`);
+  }
+}
+const _render = render;
+render = function () { _render(); renderPins(); };
+
+initMap();
 render();
 loadStatus();
 setInterval(loadStatus, 60000);
