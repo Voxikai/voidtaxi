@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "gadgetzan",
+  "loch",
   "sbarrens",
   "stonetalon"
  ],
@@ -9,5 +10,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-11T20:29:46+00:00"
+ "updated": "2026-11-11T20:31:22+00:00"
 }
