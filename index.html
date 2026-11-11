@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voidtaxi · Warlock Summons on WoW Forever</title>
+<meta name="description" content="Warlock summons across Azeroth on WoW Forever. 50s per summon, full Sleeping Bag chain 1.5g. Pick a stop, paste one line in chat, accept the summon.">
+<meta property="og:title" content="Voidtaxi · Warlock Summons">
+<meta property="og:description" content="Pick a stop, paste one line in chat, get summoned. 50s per stop.">
+<meta property="og:url" content="https://voidtaxi.com">
+<meta name="theme-color" content="#120d1c">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #120d1c; --bg2: #1a1328; --card: #211833; --line: #33284a;
+  --ink: #eee8f7; --muted: #a99fbe; --void: #9d6bff; --void-soft: #2d1f4a;
+  --fel: #7dff8a; --fel-dim: #2c5a33; --gold: #f2c45a;
+  --ek: #4fc3d9; --kal: #f0a24a; --fv: #e46aa7;
+  --display: "Cinzel", Georgia, serif; --body: "Source Sans 3", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: radial-gradient(1200px 600px at 70% -10%, #2a1747 0%, transparent 60%), var(--bg); color: var(--ink); font: 17px/1.55 var(--body); }
+a { color: var(--void); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+header.hero { padding: 56px 0 28px; text-align: center; position: relative; }
+.mark { display: inline-flex; align-items: center; gap: 14px; }
+.mark svg { width: 54px; height: 54px; }
+h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-size: clamp(2.4rem, 7vw, 4rem); margin: 0; background: linear-gradient(180deg, #fff 10%, #c9a8ff 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tag { color: var(--muted); margin: 10px auto 0; max-width: 46ch; font-size: 1.1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+.chip { border: 1px solid var(--line); background: var(--bg2); padding: 4px 12px; border-radius: 99px; font-size: .9rem; color: var(--muted); }
+.chip b { color: var(--gold); }
+.live { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: .95rem; color: var(--muted); }
+.pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.live.on .pulse { background: var(--fel); box-shadow: 0 0 0 0 rgba(125,255,138,.6); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(125,255,138,0); } 100% { box-shadow: 0 0 0 0 rgba(125,255,138,0); } }
+
+section { padding: 28px 0; }
+h2 { font-family: var(--display); font-weight: 600; letter-spacing: .06em; font-size: 1.5rem; margin: 0 0 14px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; counter-reset: s; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.step::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--void-soft); color: var(--void); font-weight: 700; margin-bottom: 8px; }
+.step h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.step p { margin: 0; color: var(--muted); font-size: .95rem; }
+kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; color: var(--ink); }
+
+/* Transit map */
+.lines { display: flex; flex-direction: column; gap: 22px; }
+.tline { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px 10px; }
+.thead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.thead .badge { width: 14px; height: 14px; border-radius: 4px; background: var(--c); align-self: center; }
+.thead h3 { margin: 0; font-size: 1.1rem; }
+.thead small { color: var(--muted); }
+.track { display: flex; overflow-x: auto; padding: 12px 4px 10px; scrollbar-width: thin; }
+.stop { flex: 1 0 86px; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; background: none; border: 0; color: inherit; font: inherit; cursor: pointer; padding: 0 4px; }
+.stop::before { content: ""; position: absolute; top: 11px; left: 0; right: 0; height: 6px; background: var(--c); opacity: .85; }
+.stop:first-child::before { left: 50%; } .stop:last-child::before { right: 50%; }
+.dot { position: relative; z-index: 1; width: 28px; height: 28px; border-radius: 50%; background: var(--bg); border: 5px solid var(--c); transition: transform .15s; }
+.stop.open .dot { background: var(--fel); box-shadow: 0 0 14px var(--fel); }
+.stop.closed .dot { background: #3a3150; }
+.stop:hover .dot, .stop:focus-visible .dot, .stop[aria-pressed="true"] .dot { transform: scale(1.18); }
+.stop:focus-visible { outline: none; }
+.stop:focus-visible .name { text-decoration: underline; }
+.name { font-weight: 600; font-size: .92rem; line-height: 1.2; }
+.state { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.stop.open .state { color: var(--fel); }
+
+/* Booking panel */
+.book { position: sticky; bottom: 14px; z-index: 5; margin-top: 22px; background: linear-gradient(180deg, #2a1d44, #1f1633); border: 1px solid var(--void); border-radius: 14px; padding: 16px 18px; box-shadow: 0 16px 40px rgba(0,0,0,.5); display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; }
+.book .what { font-size: 1.05rem; }
+.book .what b { font-family: var(--display); letter-spacing: .04em; }
+.book .price { color: var(--gold); font-weight: 700; }
+.book .note { color: var(--muted); font-size: .9rem; grid-column: 1 / -1; }
+.cmd { grid-column: 1 / 2; font: 500 .95rem var(--mono); background: #0d0915; border: 1px dashed var(--line); border-radius: 8px; padding: 10px 12px; overflow-x: auto; white-space: nowrap; user-select: all; }
+.copy { font: 700 1rem var(--body); color: #12091f; background: var(--void); border: 0; border-radius: 10px; padding: 12px 22px; cursor: pointer; }
+.copy:hover { filter: brightness(1.12); }
+.copy:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.copy.done { background: var(--fel); }
+@media (max-width: 640px) { .book { grid-template-columns: 1fr; } .cmd { grid-column: 1; } }
+
+.chain { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; background: linear-gradient(135deg, #2a1747, #1b2a22); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.chain h2 { margin-bottom: 6px; }
+.chain ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+.chain .big { font-family: var(--display); font-size: 2.2rem; color: var(--gold); line-height: 1; }
+.chain .cta { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+@media (max-width: 720px) { .chain { grid-template-columns: 1fr; } }
+
+.faq details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; }
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq p { color: var(--muted); margin: 8px 0 0; }
+footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30px 0 90px; border-top: 1px solid var(--line); margin-top: 20px; }
+@media (prefers-reduced-motion: reduce) { .live.on .pulse { animation: none; } .dot { transition: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="mark">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#7dff8a"/><stop offset=".45" stop-color="#9d6bff"/><stop offset="1" stop-color="#120d1c"/></radialGradient></defs><circle cx="32" cy="32" r="29" fill="url(#g)"/><circle cx="32" cy="32" r="29" fill="none" stroke="#c9a8ff" stroke-width="2" stroke-dasharray="4 5"/><path d="M18 38h28l-4-10H22z" fill="#120d1c"/><circle cx="24" cy="40" r="3.5" fill="#120d1c"/><circle cx="40" cy="40" r="3.5" fill="#120d1c"/></svg>
+      <h1>VOIDTAXI</h1>
+    </div>
+    <p class="tag">Warlock summons across Azeroth. Pick a stop, paste one line in chat, step through the portal.</p>
+    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span><span class="chip"><b>50s</b> per summon</span><span class="chip">Sleeping Bag chain <b>1.5g</b></span></div>
+    <div class="live" id="live"><span class="pulse"></span><span id="liveText">Checking which stops are staffed…</span></div>
+  </header>
+
+  <section id="how">
+    <h2>How to ride</h2>
+    <div class="steps">
+      <div class="step"><h3>Pick your stop</h3><p>Tap a stop on the map below. Green ones have a warlock parked there right now.</p></div>
+      <div class="step"><h3>Copy, then paste in game</h3><p>Press <kbd>Copy</kbd>. In game hit <kbd>Enter</kbd> <kbd>Ctrl</kbd>+<kbd>V</kbd> <kbd>Enter</kbd>. That's your booking.</p></div>
+      <div class="step"><h3>Accept the invite</h3><p>A Voidtaxi warlock invites you within seconds. Accept, then accept the summon when it pops.</p></div>
+      <div class="step"><h3>Pay on arrival</h3><p>50 silver once you land. Your summoner opens the trade.</p></div>
+    </div>
+  </section>
+
+  <section id="map">
+    <h2>Route map</h2>
+    <div class="lines" id="lines"></div>
+    <div class="book" id="book" aria-live="polite">
+      <div class="what" id="bookWhat">Pick a stop on the map to book it.</div>
+      <div></div>
+      <div class="cmd" id="cmd">/w Voidtaxi Booking vt: </div>
+      <button class="copy" id="copy" type="button">Copy</button>
+      <div class="note" id="bookNote">Paste it in game chat and press Enter.</div>
+    </div>
+  </section>
+
+  <section id="chain">
+    <div class="chain">
+      <div>
+        <h2>The Sleeping Bag Run</h2>
+        <p>Skip the cross-continent trek. We summon you down the whole chain: South Barrens, Stonetalon, Loch Modan, Thoradin's Wall.</p>
+        <ul>
+          <li>About 11,000 XP and 1.5g in quest rewards</li>
+          <li>Ends with a 12-slot Cozy Sleeping Bag</li>
+          <li>Level 14+ with the Westfall quest <em>“...and that note you found”</em> in your log</li>
+        </ul>
+      </div>
+      <div class="cta">
+        <div class="big">1.5g</div>
+        <div style="color:var(--muted)">for the full chain, one booking</div>
+        <button class="copy" type="button" data-pick="chain">Book the chain</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Questions</h2>
+    <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
+    <details><summary>Can I summon into a dungeon?</summary><p>You're summoned to the meeting point outside. SM, Blackfathom, Maraudon, Dire Maul and Blackrock Mountain stops all drop you right at the entrance.</p></details>
+    <details><summary>Is this allowed?</summary><p>Yes. It's a player service paid in in-game gold only, like any summoning or portal seller in trade chat. We never take real money.</p></details>
+    <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the SumVentureCo Discord. Guild runs, raid nights and bulk bookings welcome.</p></details>
+  </section>
+
+  <footer>Voidtaxi is a player-run service on WoW Forever. Not affiliated with Blizzard Entertainment. Gold only, never real money.<br>Tell a friend: <b>voidtaxi.com</b></footer>
+</div>
+
+<script>
+// Live status: a Google Apps Script web app returning { updated, open: ["Stonetalon", ...], desk }.
+// Leave empty until it is deployed; the map then shows every stop as "whisper to check".
+const STATUS_URL = "";
+const DEFAULT_DESK = "Voidtaxi Booking";
+
+const LINES = [
+  { id: "sb", name: "Sleeping Bag Line", c: "var(--void)", note: "the quest chain, in order",
+    stops: [["westfall", "Westfall Depot"], ["sbarrens", "South Barrens"], ["stonetalon", "Stonetalon"], ["loch", "Loch Modan"], ["thoradin", "Thoradin's Wall"]] },
+  { id: "ek", name: "Eastern Kingdoms", c: "var(--ek)", note: "north to south",
+    stops: [["dalaran", "Dalaran"], ["smrol", "SM / Ruins of Lordaeron"], ["lightshope", "Light's Hope Chapel"], ["brm", "Blackrock Mountain"], ["bootybay", "Booty Bay"]] },
+  { id: "kal", name: "Kalimdor", c: "var(--kal)", note: "north to south",
+    stops: [["everlook", "Everlook"], ["bfd", "Blackfathom Deeps"], ["nijel", "Nijel's Point"], ["maraudon", "Maraudon"], ["diremaul", "Dire Maul"], ["feathermoon", "Feathermoon Stronghold"], ["feralasfp", "Feralas FP"], ["needles", "Thousand Needles / Great Lift"], ["gadgetzan", "Gadgetzan"], ["shaper", "Shaper's Terrace"]] },
+  { id: "fv", name: "Forever Stops", c: "var(--fv)", note: "new on Forever",
+    stops: [["riverglades", "Riverglades"], ["drowned", "Drowned City"]] },
+];
+const PRICE = { chain: "1.5g" };
+const ALIASES = { westfall: ["depot", "westfall depot", "depot (westfall)"], smrol: ["sm / rol", "sm", "ruins of lordaeron"], bfd: ["bfd"], needles: ["thousand needles / great lift", "great lift"], lightshope: ["light's hope chapel", "light's hope"], feathermoon: ["feathermoon stronghold"], shaper: ["shaper's terrace"] };
+
+const norm = s => String(s || "").toLowerCase().replace(/^\(sb\)\s*/, "").replace(/[^a-z0-9]/g, "");
+const byKey = {};
+const names = {};
+for (const l of LINES) for (const [id, name] of l.stops) {
+  names[id] = name;
+  byKey[norm(name)] = id; byKey[id] = id;
+  for (const a of ALIASES[id] || []) byKey[norm(a)] = id;
+}
+names.chain = "Sleeping Bag chain";
+
+let status = null;      // null = unknown, else Set of open stop ids
+let desk = DEFAULT_DESK;
+let picked = null;
+
+function render() {
+  const root = document.getElementById("lines");
+  root.innerHTML = "";
+  for (const l of LINES) {
+    const box = document.createElement("div");
+    box.className = "tline"; box.style.setProperty("--c", l.c);
+    box.innerHTML = `<div class="thead"><span class="badge"></span><h3></h3><small></small></div><div class="track"></div>`;
+    box.querySelector("h3").textContent = l.name;
+    box.querySelector("small").textContent = l.note;
+    const track = box.querySelector(".track");
+    for (const [id, name] of l.stops) {
+      const b = document.createElement("button");
+      b.type = "button"; b.dataset.pick = id;
+      const open = status && status.has(id);
+      b.className = "stop" + (status ? (open ? " open" : " closed") : "");
+      b.setAttribute("aria-pressed", picked === id ? "true" : "false");
+      b.innerHTML = `<span class="dot"></span><span class="name"></span><span class="state"></span>`;
+      b.querySelector(".name").textContent = name;
+      b.querySelector(".state").textContent = status ? (open ? "on duty" : "no warlock") : "50s";
+      track.appendChild(b);
+    }
+    root.appendChild(box);
+  }
+}
+
+function pick(id) {
+  picked = id;
+  const name = names[id];
+  const price = PRICE[id] || "50s";
+  const cmdName = id === "chain" ? "chain" : name;
+  document.getElementById("cmd").textContent = `/w ${desk} vt: ${cmdName}`;
+  const what = document.getElementById("bookWhat");
+  what.innerHTML = "";
+  const b = document.createElement("b"); b.textContent = name;
+  const p = document.createElement("span"); p.className = "price"; p.textContent = price;
+  what.append("Booking ", b, " · ", p);
+  const open = status && status.has(id === "chain" ? "sbarrens" : id);
+  document.getElementById("bookNote").textContent = !status
+    ? "Paste it in game chat and press Enter. Booking replies if that stop is open."
+    : open ? "A warlock is parked there now. Paste it in game chat and press Enter."
+           : "Nobody is parked there right now. Booking will whisper you the stops that are open.";
+  render();
+  document.getElementById("book").scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-pick]");
+  if (t) pick(t.dataset.pick);
+});
+
+document.getElementById("copy").addEventListener("click", async () => {
+  if (!picked) { document.getElementById("map").scrollIntoView({ behavior: "smooth" }); return; }
+  const text = document.getElementById("cmd").textContent;
+  const btn = document.getElementById("copy");
+  const flash = t => { btn.textContent = t; btn.classList.add("done"); setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800); };
+  try { await navigator.clipboard.writeText(text); flash("Copied! Paste in game"); }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("cmd")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); flash("Press Ctrl+C"); }
+});
+
+async function loadStatus() {
+  const live = document.getElementById("live"), txt = document.getElementById("liveText");
+  if (!STATUS_URL) { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; return; }
+  try {
+    const r = await fetch(STATUS_URL, { cache: "no-store" });
+    const d = await r.json();
+    status = new Set((d.open || []).map(n => byKey[norm(n)]).filter(Boolean));
+    if (d.desk) desk = d.desk;
+    live.classList.toggle("on", status.size > 0);
+    txt.textContent = status.size ? `${status.size} stop${status.size > 1 ? "s" : ""} staffed right now` : "No warlocks parked right now";
+    if (picked) pick(picked); else render();
+  } catch { txt.textContent = "Live status unavailable. Whisper Voidtaxi Booking “vt” in game"; }
+}
+
+render();
+loadStatus();
+setInterval(loadStatus, 60000);
+</script>
+</body>
+</html>
