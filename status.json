@@ -1,12 +1,11 @@
 {
  "service": "online",
  "open": [
-  "dalaran",
   "gadgetzan"
  ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-12T00:16:44+00:00"
+ "updated": "2026-11-12T00:33:38+00:00"
 }
