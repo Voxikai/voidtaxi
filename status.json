@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "dalaran",
   "feralasfp",
   "thoradin"
  ],
@@ -9,5 +8,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-12T19:45:21+00:00"
+ "updated": "2026-11-12T19:52:44+00:00"
 }
