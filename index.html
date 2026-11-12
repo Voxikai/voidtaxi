@@ -37,6 +37,9 @@ h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-
 .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
 .chip { border: 1px solid var(--line); background: var(--bg2); padding: 4px 12px; border-radius: 99px; font-size: .9rem; color: var(--muted); }
 .chip b { color: var(--gold); }
+.addonbtn { display: table; margin: 12px auto 0; padding: 7px 16px; border-radius: 99px; background: var(--void); color: #120d1c; font-weight: 700; font-size: .95rem; text-decoration: none; }
+.addonbtn span { font-weight: 500; opacity: .75; }
+.addonbtn:hover { filter: brightness(1.12); }
 .live { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: .95rem; color: var(--muted); }
 .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
 .live.on .pulse { background: var(--fel); box-shadow: 0 0 0 0 rgba(125,255,138,.6); animation: pulse 2s infinite; }
@@ -197,6 +200,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     </div>
     <p class="tag">Warlock summons across Azeroth. Pick a stop, paste one line in chat, step through the portal.</p>
     <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span></div>
+    <a class="addonbtn" href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Get the in-game addon <span>on CurseForge</span></a>
     <div class="live" id="live"><span class="pulse"></span><span id="liveText">Checking which stops are staffed…</span></div>
   </header>
 
@@ -251,6 +255,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
       <p class="reqmsg" id="reqmsg" role="status"></p>
     </form>
     <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
+    <details><summary>Is there an addon?</summary><p>Yes. Install <a href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Voidtaxi on CurseForge</a>, then type <code>/voidtaxi</code> or click the minimap button. Pick a stop, press <b>Summon me</b>, and accept the invite.</p></details>
     <details><summary>Is this allowed?</summary><p>Yes. It's a player service paid in in-game gold only, like any summoning or portal seller in trade chat. We never take real money.</p></details>
     <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the SumVentureCo Discord. Guild runs, raid nights and bulk bookings welcome.</p></details>
   </section>
