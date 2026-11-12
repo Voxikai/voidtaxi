@@ -2,11 +2,12 @@
  "service": "online",
  "open": [
   "bootybay",
-  "dalaran"
+  "dalaran",
+  "feralasfp"
  ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-12T01:01:35+00:00"
+ "updated": "2026-11-12T01:13:27+00:00"
 }
