@@ -1,9 +1,11 @@
 {
  "service": "online",
- "open": [],
+ "open": [
+  "feralasfp"
+ ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-12T13:20:16+00:00"
+ "updated": "2026-11-12T15:35:27+00:00"
 }
