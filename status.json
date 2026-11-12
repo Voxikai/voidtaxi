@@ -3,11 +3,12 @@
  "open": [
   "bootybay",
   "dalaran",
-  "gadgetzan"
+  "gadgetzan",
+  "sbarrens"
  ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-12T16:36:45+00:00"
+ "updated": "2026-11-12T16:57:59+00:00"
 }
