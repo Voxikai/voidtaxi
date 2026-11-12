@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "bootybay",
-  "dalaran",
   "feralasfp",
   "gadgetzan",
   "nijel"
@@ -11,5 +10,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-12T12:41:14+00:00"
+ "updated": "2026-11-12T12:43:00+00:00"
 }
