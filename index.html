@@ -115,6 +115,12 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .bookf .bmsg { margin: 0; }
 .bookf .bmsg.ok { color: var(--fel); }
 .bookf .bmsg.err { color: #ff8a8a; }
+.mybook { position: fixed; left: 0; right: 0; bottom: 16px; margin: 0 auto; width: max-content; z-index: 1200; display: flex; align-items: center; gap: 12px; max-width: calc(100% - 32px); background: var(--card); border: 1px solid var(--void); border-radius: 12px; padding: 10px 12px 10px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.5); font-size: .92rem; }
+.mybook[hidden] { display: none; }
+.mybook b { color: var(--fel); }
+.mybook button { flex: none; font: 600 .85rem var(--body); color: #ffb3b3; background: transparent; border: 1px solid #a04848; border-radius: 99px; padding: 5px 12px; cursor: pointer; }
+.mybook button.sure { background: #a04848; color: #fff; }
+.mybook button:disabled { opacity: .6; cursor: default; }
 .card small { display: block; margin-top: 6px; color: var(--muted); font-size: .78rem; }
 .mapwrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: stretch; }
 .stops { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 6px 4px; overflow-y: auto; max-height: min(64vh, 600px); }
@@ -273,6 +279,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <details><summary>I run a summoning service. Can I join?</summary><p>Yes, Voidtaxi is growing beyond NA Alliance PvE. Send the <a href="#join">Join the crew</a> form above and we'll get back to you.</p></details>
   </section>
 
+  <div class="mybook" id="mybook" role="status" hidden><span id="mybookText"></span><button type="button" id="mybookCancel">Cancel booking</button></div>
   <footer>Voidtaxi is a player-run service on WoW Forever. Not affiliated with Blizzard Entertainment. Gold only, never real money.<br>Tell a friend: <b>voidtaxi.com</b> · <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Discord</a></footer>
 </div>
 
@@ -290,6 +297,11 @@ const NAME_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ']{2,12}( [A-Za-zÀ-ÖØ-öø-ÿ']{2,12}
 const savedName = () => { try { return localStorage.getItem("vt_name") || ""; } catch { return ""; } };
 const saveName = n => { try { localStorage.setItem("vt_name", n); } catch {} };
 const cleanName = n => String(n || "").trim().replace(/\s+/g, " ").split(" ").map(w => w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w).join(" ");
+// Your booking on this device: a secret code goes with it, and only that code can cancel it.
+const BOOK_KEY = "vt_booking", BOOK_TTL = 60 * 60 * 1000;
+const newToken = () => { const a = new Uint8Array(12); crypto.getRandomValues(a); return [...a].map(x => x.toString(16).padStart(2, "0")).join(""); };
+const loadBooking = () => { try { const b = JSON.parse(localStorage.getItem(BOOK_KEY) || "null"); return b && Date.now() - b.t < BOOK_TTL ? b : null; } catch { return null; } };
+const saveBooking = b => { try { b ? localStorage.setItem(BOOK_KEY, JSON.stringify(b)) : localStorage.removeItem(BOOK_KEY); } catch {} };
 async function sendInbox(payload) {
   await fetch(INBOX_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
 }
@@ -461,8 +473,11 @@ document.addEventListener("submit", async e => {
   if (offline) { msg.textContent = "Voidtaxi is offline right now. Check back soon!"; msg.classList.add("err"); return; }
   f.querySelectorAll("button").forEach(b => b.disabled = true);
   try {
-    await sendInbox({ kind: "book", name, stop: what === "chain" ? "chain" : names[what] });
+    const stop = what === "chain" ? "chain" : names[what], token = newToken();
+    await sendInbox({ kind: "book", name, stop, token });
     saveName(name);
+    saveBooking({ name, stop, label: what === "chain" ? "the Sleeping Bag chain" : names[what], token, t: Date.now() });
+    showMyBooking();
     const rn = document.querySelector("#reqform [name=name]");
     if (rn && !rn.value) rn.value = name;
     msg.textContent = `Booked, ${name}! Stay online: you'll get a whisper and a group invite from Voidtaxi.`;
@@ -470,6 +485,32 @@ document.addEventListener("submit", async e => {
   } catch { msg.textContent = "That didn't send. Try again in a moment."; msg.classList.add("err"); }
   setTimeout(() => f.querySelectorAll("button").forEach(b => b.disabled = false), 4000);
 });
+
+function showMyBooking(note) {
+  const bar = document.getElementById("mybook"), txt = document.getElementById("mybookText"), btn = document.getElementById("mybookCancel");
+  const b = loadBooking();
+  if (note) { txt.innerHTML = note; btn.hidden = true; bar.hidden = false; setTimeout(() => { bar.hidden = true; }, 7000); return; }
+  if (!b) { bar.hidden = true; return; }
+  txt.innerHTML = `Booked: <b>${esc(b.label)}</b> for ${esc(b.name)}`;
+  btn.hidden = false; btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Cancel booking";
+  bar.hidden = false;
+}
+document.getElementById("mybookCancel").addEventListener("click", async e => {
+  const btn = e.currentTarget, b = loadBooking();
+  if (!b) { showMyBooking(); return; }
+  if (!btn.classList.contains("sure")) {
+    btn.classList.add("sure"); btn.textContent = "Tap again to cancel";
+    setTimeout(() => { if (btn.classList.contains("sure")) { btn.classList.remove("sure"); btn.textContent = "Cancel booking"; } }, 4000);
+    return;
+  }
+  btn.disabled = true;
+  try {
+    await sendInbox({ kind: "cancel", name: b.name, stop: b.stop, token: b.token });
+    saveBooking(null);
+    showMyBooking("Booking cancelled. No charge.");
+  } catch { btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Didn't send. Try again"; }
+});
+showMyBooking();
 
 async function loadStatus() {
   const live = document.getElementById("live"), txt = document.getElementById("liveText");
