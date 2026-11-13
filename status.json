@@ -4,8 +4,9 @@
   "dalaran"
  ],
  "prices": {
+  "gadgetzan": "60s",
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-13T03:45:10+00:00"
+ "updated": "2026-11-13T03:46:15+00:00"
 }
