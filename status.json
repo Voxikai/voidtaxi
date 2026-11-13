@@ -1,12 +1,10 @@
 {
  "service": "online",
- "open": [
-  "bootybay"
- ],
+ "open": [],
  "prices": {
   "gadgetzan": "60s",
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-13T23:05:56+00:00"
+ "updated": "2026-11-13T23:35:55+00:00"
 }
