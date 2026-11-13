@@ -516,9 +516,19 @@ async function loadStatus() {
   const live = document.getElementById("live"), txt = document.getElementById("liveText");
   if (!STATUS_URL) { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; return; }
   try {
-    const r = await fetch(STATUS_URL, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
-    if (!r.ok) throw new Error(r.status);
-    const d = await r.json();
+    // Fast path: the inbox has what Voidtaxi Sync sent seconds ago. GitHub is the backup.
+    let d = null;
+    if (INBOX_URL) {
+      try {
+        const q = await fetch(INBOX_URL + "?status=1&t=" + Date.now(), { cache: "no-store" });
+        if (q.ok) { const j = await q.json(); if (j && j.service) d = j; }
+      } catch {}
+    }
+    if (!d) {
+      const r = await fetch(STATUS_URL, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
+      if (!r.ok) throw new Error(r.status);
+      d = await r.json();
+    }
     // Online/offline is your switch in the addon: online shows every stop as open.
     offline = d.service === "offline";
     if (d.service === "online") status = new Set(Object.keys(names).filter(id => id !== "chain"));
@@ -618,8 +628,10 @@ document.getElementById("joinform").addEventListener("submit", async e => {
 
 initMap();
 renderPins();
+// Live: every 30 seconds while the page is open, and right away when you come back to the tab.
 loadStatus();
-setInterval(loadStatus, 120000);
+setInterval(() => { if (!document.hidden) loadStatus(); }, 30000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) loadStatus(); });
 </script>
 </body>
 </html>
