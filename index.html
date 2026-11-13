@@ -40,6 +40,8 @@ h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-
 .addonbtn { display: table; margin: 12px auto 0; padding: 7px 16px; border-radius: 99px; background: var(--void); color: #120d1c; font-weight: 700; font-size: .95rem; text-decoration: none; }
 .addonbtn span { font-weight: 500; opacity: .75; }
 .addonbtn:hover { filter: brightness(1.12); }
+.discordbtn { display: table; margin: 8px auto 0; padding: 6px 15px; border-radius: 99px; border: 1px solid #5865f2; color: #c9cdfb; font-weight: 600; font-size: .9rem; text-decoration: none; }
+.discordbtn:hover { background: rgba(88,101,242,.18); }
 .live { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: .95rem; color: var(--muted); }
 .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
 .live.on .pulse { background: var(--fel); box-shadow: 0 0 0 0 rgba(125,255,138,.6); animation: pulse 2s infinite; }
@@ -199,8 +201,9 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
       <h1>VOIDTAXI</h1>
     </div>
     <p class="tag">Warlock summons across Azeroth. Pick a stop, paste one line in chat, step through the portal.</p>
-    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">Alliance · PvE</span></div>
+    <div class="chips"><span class="chip">WoW Forever</span><span class="chip">NA · Alliance · PvE</span></div>
     <a class="addonbtn" href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Get the in-game addon <span>on CurseForge</span></a>
+    <a class="discordbtn" href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Join the Void Taxi Discord</a>
     <div class="live" id="live"><span class="pulse"></span><span id="liveText">Checking which stops are staffed…</span></div>
   </header>
 
@@ -254,13 +257,23 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
       <div class="cmdline reqline" id="reqline">/w Voidtaxi Booking vt: request ...</div>
       <p class="reqmsg" id="reqmsg" role="status"></p>
     </form>
+    <form class="req" id="joinform" novalidate>
+      <div class="reqhead" id="join"><h3>Run a summoning service? Join the Voidtaxi crew</h3><p>Our summoners serve NA Alliance PvE today. If you summon on another realm or faction, or want to run Voidtaxi stops with us, tell us about you and how to reach you.</p></div>
+      <label><span>Your character</span><input name="name" maxlength="25" placeholder="First Last" autocomplete="off"></label>
+      <label><span>Region, faction, realm type</span><input name="where" maxlength="40" placeholder="e.g. NA Horde PvP" autocomplete="off"></label>
+      <label class="wide"><span>About you, and how to reach you <small>(Discord name, in-game, etc.)</small></span><input name="about" maxlength="220" placeholder="e.g. 3 warlocks, evenings EST. Discord: name" autocomplete="off"></label>
+      <input class="trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="copy" type="submit">Send</button>
+      <p class="reqmsg" id="joinmsg" role="status"></p>
+    </form>
     <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
-    <details><summary>Is there an addon?</summary><p>Yes. Install <a href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Voidtaxi on CurseForge</a>, then type <code>/voidtaxi</code> or click the minimap button. Pick a stop, press <b>Summon me</b>, and accept the invite.</p></details>
+    <details><summary>Is there an addon?</summary><p>Yes, and it's the fastest way to ride. Install <a href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Voidtaxi on CurseForge</a>, open your world map and click a stop pin to book in one click. Or click the Voidtaxi button (minimap or the floating one), pick a stop and press <b>Summon me</b>. Then accept the invite and the summon.</p></details>
     <details><summary>Is this allowed?</summary><p>Yes. It's a player service paid in in-game gold only, like any summoning or portal seller in trade chat. We never take real money.</p></details>
-    <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the SumVentureCo Discord. Guild runs, raid nights and bulk bookings welcome.</p></details>
+    <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Void Taxi Discord</a>. Guild runs, raid nights and bulk bookings welcome.</p></details>
+    <details><summary>I run a summoning service. Can I join?</summary><p>Yes, Voidtaxi is growing beyond NA Alliance PvE. Send the <a href="#join">Join the crew</a> form above and we'll get back to you.</p></details>
   </section>
 
-  <footer>Voidtaxi is a player-run service on WoW Forever. Not affiliated with Blizzard Entertainment. Gold only, never real money.<br>Tell a friend: <b>voidtaxi.com</b></footer>
+  <footer>Voidtaxi is a player-run service on WoW Forever. Not affiliated with Blizzard Entertainment. Gold only, never real money.<br>Tell a friend: <b>voidtaxi.com</b> · <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Discord</a></footer>
 </div>
 
 <script>
@@ -538,6 +551,28 @@ document.getElementById("reqform").addEventListener("submit", async e => {
   try { await navigator.clipboard.writeText(text); msg.textContent = "Copied! In game press Enter, Ctrl+V, Enter. Voidtaxi Booking gets your request."; }
   catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("reqline")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); msg.textContent = "Press Ctrl+C to copy, then paste it in game."; }
   btn.textContent = "Copied"; setTimeout(() => { btn.textContent = "Copy request"; }, 1800);
+});
+
+// Join the crew: goes to the same private inbox as bookings (needs the inbox to accept kind "join").
+document.getElementById("joinform").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, msg = document.getElementById("joinmsg"), btn = f.querySelector("button");
+  msg.className = "reqmsg";
+  if (!INBOX_URL) { msg.textContent = "Whisper Voidtaxi Booking in game for now."; return; }
+  const nameInput = f.querySelector("[name=name]");
+  const name = cleanName(nameInput.value);
+  const where = (f.where.value || "").trim().replace(/\s+/g, " ").slice(0, 40);
+  const about = (f.about.value || "").trim().replace(/\s+/g, " ").slice(0, 220);
+  if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name, like Shiny Pants."; msg.classList.add("err"); nameInput.focus(); return; }
+  if (!about) { msg.textContent = "Tell us a little about you and how to reach you."; msg.classList.add("err"); f.about.focus(); return; }
+  btn.disabled = true;
+  try {
+    await sendInbox({ kind: "join", name, stop: where || "crew", note: about, website: f.website.value });
+    saveName(name);
+    msg.textContent = `Thanks, ${name}! We'll be in touch.`;
+    f.about.value = "";
+  } catch { msg.textContent = "That didn't send. Try again in a moment."; msg.classList.add("err"); }
+  btn.disabled = false;
 });
 
 initMap();
