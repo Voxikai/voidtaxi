@@ -3,11 +3,12 @@
  "open": [
   "dalaran",
   "loch",
-  "stonetalon"
+  "stonetalon",
+  "thoradin"
  ],
  "prices": {
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-13T01:38:08+00:00"
+ "updated": "2026-11-13T01:39:23+00:00"
 }
