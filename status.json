@@ -3,12 +3,13 @@
  "open": [
   "loch",
   "sbarrens",
-  "stonetalon"
+  "stonetalon",
+  "thoradin"
  ],
  "prices": {
   "gadgetzan": "60s",
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T04:19:12+00:00"
+ "updated": "2026-11-14T04:22:20+00:00"
 }
