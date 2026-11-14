@@ -3,6 +3,7 @@
  "open": [
   "bootybay",
   "dalaran",
+  "nijel",
   "thoradin"
  ],
  "prices": {
@@ -10,5 +11,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T03:38:32+00:00"
+ "updated": "2026-11-14T03:44:30+00:00"
 }
