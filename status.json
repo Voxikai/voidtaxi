@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "bootybay",
   "feralasfp"
  ],
  "prices": {
@@ -8,5 +9,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T00:40:42+00:00"
+ "updated": "2026-11-14T00:46:28+00:00"
 }
