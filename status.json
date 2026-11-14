@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "dalaran",
-  "gadgetzan",
   "loch",
   "nijel",
   "sbarrens",
@@ -14,5 +13,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T00:10:46+00:00"
+ "updated": "2026-11-14T00:22:01+00:00"
 }
