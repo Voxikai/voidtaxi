@@ -1,7 +1,6 @@
 {
  "service": "offline",
  "open": [
-  "dalaran",
   "thoradin"
  ],
  "prices": {
@@ -9,5 +8,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T06:22:56+00:00"
+ "updated": "2026-11-14T06:42:08+00:00"
 }
