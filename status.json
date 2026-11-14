@@ -1,10 +1,12 @@
 {
  "service": "offline",
- "open": [],
+ "open": [
+  "stonetalon"
+ ],
  "prices": {
   "gadgetzan": "60s",
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T08:27:39+00:00"
+ "updated": "2026-11-14T16:25:08+00:00"
 }
