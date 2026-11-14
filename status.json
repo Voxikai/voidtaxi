@@ -1,6 +1,7 @@
 {
  "service": "offline",
  "open": [
+  "feralasfp",
   "gadgetzan",
   "sbarrens",
   "stonetalon"
@@ -10,5 +11,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T20:16:13+00:00"
+ "updated": "2026-11-14T20:17:54+00:00"
 }
