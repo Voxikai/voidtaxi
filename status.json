@@ -1,5 +1,5 @@
 {
- "service": "online",
+ "service": "offline",
  "open": [
   "bootybay",
   "dalaran",
@@ -11,5 +11,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-14T03:44:30+00:00"
+ "updated": "2026-11-14T03:50:29+00:00"
 }
