@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "lightshope",
   "thoradin"
  ],
  "prices": {
@@ -21,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T16:33:46+00:00"
+ "updated": "2026-11-15T16:42:27+00:00"
 }
