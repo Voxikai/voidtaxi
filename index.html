@@ -115,6 +115,15 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .bookf .bmsg { margin: 0; }
 .bookf .bmsg.ok { color: var(--fel); }
 .bookf .bmsg.err { color: #ff8a8a; }
+.auth { display: grid; gap: 6px; }
+.auth .lead { margin: 0; font-size: .8rem; color: var(--muted); }
+.auth .sso { width: 100%; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; font: 700 .9rem var(--body); border: 0; border-radius: 8px; padding: 9px 12px; cursor: pointer; color: #fff; }
+.auth .sso.discord { background: #5865f2; }
+.auth .sso.bnet { background: #148eff; }
+.auth .sso:hover { filter: brightness(1.1); }
+.authed { margin: 0; font-size: .78rem; color: var(--muted); }
+.authed b { color: var(--fel); font-weight: 600; }
+.authed button { font: inherit; color: var(--void); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
 .mybook { position: fixed; left: 0; right: 0; bottom: 16px; margin: 0 auto; width: max-content; z-index: 1200; display: flex; align-items: center; gap: 12px; max-width: calc(100% - 32px); background: var(--card); border: 1px solid var(--void); border-radius: 12px; padding: 10px 12px 10px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.5); font-size: .92rem; }
 .mybook[hidden] { display: none; }
 .mybook b { color: var(--fel); }
@@ -306,6 +315,45 @@ const saveBooking = b => { try { b ? localStorage.setItem(BOOK_KEY, JSON.stringi
 async function sendInbox(payload) {
   await fetch(INBOX_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
 }
+// Sign-in guard: booking and stop requests need a Discord or Battle.net sign-in, so nobody can book under
+// someone else's name anonymously. The inbox says which sign-ins are set up; with none, booking works as before.
+const AUTH_KEY = "vt_auth", SITE_URL = "https://voidtaxi.com/";
+let authCfg = { discord: "", bnet: "" };
+const guardOn = () => !!(authCfg.discord || authCfg.bnet);
+const loadAuth = () => { try { const a = JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); return a && a.x > Date.now() ? a : null; } catch { return null; } };
+const saveAuth = a => { try { a ? localStorage.setItem(AUTH_KEY, JSON.stringify(a)) : localStorage.removeItem(AUTH_KEY); } catch {} };
+const signedIn = () => !guardOn() || !!loadAuth();
+async function postInbox(payload) {   // same as sendInbox, but reads the inbox's answer
+  const r = await fetch(INBOX_URL, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
+  return (await r.text()).trim();
+}
+function startSignIn(prov) {
+  const a = new Uint8Array(12); crypto.getRandomValues(a);
+  const nonce = [...a].map(x => x.toString(16).padStart(2, "0")).join(""), state = prov + "." + nonce;
+  try { sessionStorage.setItem("vt_oauth", state); sessionStorage.setItem("vt_oauth_back", location.hash || ""); } catch {}
+  const u = prov === "discord"
+    ? "https://discord.com/oauth2/authorize?" + new URLSearchParams({ client_id: authCfg.discord, response_type: "code", redirect_uri: SITE_URL, scope: "identify", state, prompt: "none" })
+    : "https://oauth.battle.net/authorize?" + new URLSearchParams({ client_id: authCfg.bnet, response_type: "code", redirect_uri: SITE_URL, scope: "openid", state });
+  location.href = u;
+}
+function authHtml() {
+  if (!guardOn()) return "";
+  const a = loadAuth();
+  if (a) return `<p class="authed">Signed in as <b>${esc(a.name)}</b> (${esc(a.via)}) · <button type="button" data-signout>sign out</button></p>`;
+  let h = `<div class="auth"><p class="lead">Sign in once so nobody can book under your name.</p>`;
+  if (authCfg.discord) h += `<button class="sso discord" type="button" data-signin="discord">Sign in with Discord</button>`;
+  if (authCfg.bnet) h += `<button class="sso bnet" type="button" data-signin="bnet">Sign in with Battle.net</button>`;
+  return h + `</div>`;
+}
+function refreshAuth() {
+  document.querySelectorAll("[data-authbox]").forEach(el => { el.innerHTML = authHtml(); });
+  document.querySelectorAll(".bookf button[type=submit], #reqform button[type=submit]").forEach(b => { b.hidden = INBOX_URL && !signedIn(); });
+}
+document.addEventListener("click", e => {
+  const s = e.target.closest("[data-signin]");
+  if (s) { startSignIn(s.dataset.signin); return; }
+  if (e.target.closest("[data-signout]")) { saveAuth(null); refreshAuth(); }
+});
 
 const LINES = [
   { id: "sb", name: "Sleeping Bag Line", c: "var(--void)", note: "the quest chain, in order",
@@ -343,8 +391,8 @@ const POS = {
   dalaran: [2733, 674], bootybay: [2711, 1989],
   nijel: [480, 1125],
   feralasfp: [653, 1519], gadgetzan: [917, 1748],
-  everlook: [1020, 460], hyjal: [820, 660], diremaul: [510, 1450],
-  lightshope: [3250, 440], thorium: [2770, 1310], stormwind: [2690, 1470],
+  everlook: [963, 492], hyjal: [808, 700], diremaul: [471, 1446],
+  lightshope: [3240, 485], thorium: [2857, 1289], stormwind: [2690, 1470],
 };
 const SB = new Set(["sbarrens", "stonetalon", "loch", "thoradin"]);
 const markers = {};
@@ -366,8 +414,9 @@ function cardHtml(id) {
   h += `<div class="row"><span class="price">${PRICE[id] || BASE_PRICE}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
   if (INBOX_URL) {
     h += `<form class="bookf" data-stop="${id}" novalidate><label>Your character<input name="name" maxlength="25" placeholder="First Last" autocomplete="off" value="${esc(savedName())}"></label>`;
-    h += `<button class="copy" type="submit" value="${id}">Book ${esc(names[id])}</button>`;
-    if (id === "sbarrens") h += `<button class="copy alt2" type="submit" value="chain">Book the full Sleeping Bag chain · ${esc(PRICE.chain || "1.5g")}</button>`;
+    h += `<div data-authbox>${authHtml()}</div>`;
+    h += `<button class="copy" type="submit" value="${id}"${signedIn() ? "" : " hidden"}>Book ${esc(names[id])}</button>`;
+    if (id === "sbarrens") h += `<button class="copy alt2" type="submit" value="chain"${signedIn() ? "" : " hidden"}>Book the full Sleeping Bag chain · ${esc(PRICE.chain || "1.5g")}</button>`;
     h += `<small class="bmsg" role="status">We whisper and invite you in game. Stay online.</small></form>`;
     return h + `</div>`;
   }
@@ -477,10 +526,16 @@ document.addEventListener("submit", async e => {
   msg.classList.remove("ok", "err");
   if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name exactly as in game, like Shiny Pants."; msg.classList.add("err"); input.focus(); return; }
   if (offline) { msg.textContent = "Voidtaxi is offline right now. Check back soon!"; msg.classList.add("err"); return; }
+  if (!signedIn()) { msg.textContent = "Sign in first, then tap Book."; msg.classList.add("err"); refreshAuth(); return; }
   f.querySelectorAll("button").forEach(b => b.disabled = true);
   try {
-    const stop = what === "chain" ? "chain" : names[what], token = newToken();
-    await sendInbox({ kind: "book", name, stop, token });
+    const stop = what === "chain" ? "chain" : names[what], token = newToken(), au = loadAuth();
+    if (guardOn()) {
+      const ans = await postInbox({ kind: "book", name, stop, token, auth: au && au.token });
+      if (ans === "sign in") { saveAuth(null); refreshAuth(); throw new Error("Your sign-in ran out. Sign in again, then tap Book."); }
+      if (ans === "slow down") throw new Error("That's a lot of bookings at once. Try again in a few minutes.");
+      if (ans === "busy") throw new Error("We're swamped this minute. Try again shortly.");
+    } else await sendInbox({ kind: "book", name, stop, token });
     saveName(name);
     saveBooking({ name, stop, label: what === "chain" ? "the Sleeping Bag chain" : names[what], token, t: Date.now() });
     showMyBooking();
@@ -488,7 +543,7 @@ document.addEventListener("submit", async e => {
     if (rn && !rn.value) rn.value = name;
     msg.textContent = `Booked, ${name}! Stay online: you'll get a whisper and a group invite from Voidtaxi.`;
     msg.classList.add("ok");
-  } catch { msg.textContent = "That didn't send. Try again in a moment."; msg.classList.add("err"); }
+  } catch (err) { msg.textContent = (err && err.message && !/fetch|network/i.test(err.message)) ? err.message : "That didn't send. Try again in a moment."; msg.classList.add("err"); }
   setTimeout(() => f.querySelectorAll("button").forEach(b => b.disabled = false), 4000);
 });
 
@@ -575,6 +630,8 @@ if (INBOX_URL) {
   lab.querySelector("input").value = savedName();
   f.querySelector("label.wide").classList.remove("wide");
   f.insertBefore(lab, f.querySelector("button"));
+  const ab = document.createElement("div"); ab.className = "wide"; ab.setAttribute("data-authbox", "");
+  f.insertBefore(ab, f.querySelector("button"));
   f.querySelector("button").textContent = "Send request";
   const step = document.querySelectorAll(".step");
   step[0].querySelector("p").textContent = "Tap a pin or a row in the price list. Green means we're online.";
@@ -597,9 +654,17 @@ document.getElementById("reqform").addEventListener("submit", async e => {
     const nameInput = f.querySelector("[name=name]");
     const name = cleanName(nameInput.value);
     if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name exactly as in game, like Shiny Pants."; msg.classList.add("err"); nameInput.focus(); return; }
+    if (!signedIn()) { msg.textContent = "Sign in first, then send."; msg.classList.add("err"); refreshAuth(); return; }
     btn.disabled = true;
-    try { await sendInbox({ kind: "request", name, stop: loc.slice(0, 50) }); saveName(name); msg.textContent = `Thanks, ${name}! ${loc} is on the list.`; f.location.value = ""; }
-    catch { msg.textContent = "That didn't send. Try again in a moment."; msg.classList.add("err"); }
+    try {
+      if (guardOn()) {
+        const au = loadAuth(), ans = await postInbox({ kind: "request", name, stop: loc.slice(0, 50), auth: au && au.token });
+        if (ans === "sign in") { saveAuth(null); refreshAuth(); throw new Error("Your sign-in ran out. Sign in again, then send."); }
+        if (ans === "slow down" || ans === "busy") throw new Error("Lots of requests at once. Try again in a few minutes.");
+      } else await sendInbox({ kind: "request", name, stop: loc.slice(0, 50) });
+      saveName(name); msg.textContent = `Thanks, ${name}! ${loc} is on the list.`; f.location.value = "";
+    }
+    catch (err) { msg.textContent = (err && err.message && !/fetch|network/i.test(err.message)) ? err.message : "That didn't send. Try again in a moment."; msg.classList.add("err"); }
     btn.disabled = false;
     return;
   }
@@ -638,6 +703,28 @@ renderPins();
 loadStatus();
 setInterval(() => { if (!document.hidden) loadStatus(); }, 30000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) loadStatus(); });
+
+// Sign-in: learn which sign-ins are set up, and finish one if Discord / Battle.net just sent us back here.
+(async () => {
+  if (!INBOX_URL) return;
+  const qs = new URLSearchParams(location.search), code = qs.get("code"), state = qs.get("state"), back = qs.has("state") || qs.has("error");
+  let want = "", hash = "";
+  try { want = sessionStorage.getItem("vt_oauth") || ""; hash = sessionStorage.getItem("vt_oauth_back") || ""; sessionStorage.removeItem("vt_oauth"); } catch {}
+  if (back) history.replaceState(null, "", location.pathname + hash);
+  try { const r = await fetch(INBOX_URL + "?authcfg=1&t=" + Date.now(), { cache: "no-store" }); authCfg = Object.assign(authCfg, await r.json()); } catch {}
+  refreshAuth();
+  if (!back) return;
+  const note = t => { showMyBooking(t); };
+  if (!code || !state || state !== want) { note("Sign-in didn't finish. Tap a sign-in button to try again."); return; }
+  try {
+    const ans = JSON.parse(await postInbox({ kind: "auth", provider: state.split(".")[0], code }));
+    if (!ans.ok) { note(ans.error === "blocked" ? "This account can't book with Voidtaxi." : "Sign-in didn't work. Try again in a moment."); return; }
+    saveAuth({ token: ans.token, name: ans.name, via: ans.via, x: Date.now() + 29 * 864e5 });
+    refreshAuth();
+    note(`Signed in as <b>${esc(ans.name)}</b>. Pick a stop and tap Book.`);
+    if (hash) { const el = document.querySelector(hash); if (el) el.scrollIntoView(); }
+  } catch { note("Sign-in didn't work. Try again in a moment."); }
+})();
 </script>
 </body>
 </html>
