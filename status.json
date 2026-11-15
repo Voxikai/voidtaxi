@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "thoradin"
  ],
  "prices": {
@@ -9,5 +8,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T02:45:19+00:00"
+ "updated": "2026-11-15T02:54:44+00:00"
 }
