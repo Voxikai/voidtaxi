@@ -2,12 +2,27 @@
  "service": "online",
  "open": [
   "bootybay",
+  "diremaul",
   "everlook",
   "gadgetzan",
   "hyjal",
   "stormwind"
  ],
- "prices": {},
+ "prices": {
+  "bootybay": "75s",
+  "chain": "3g",
+  "dalaran": "75s",
+  "everlook": "1.5g",
+  "feralasfp": "75s",
+  "gadgetzan": "75s",
+  "hyjal": "2g",
+  "loch": "75s",
+  "nijel": "75s",
+  "sbarrens": "75s",
+  "stonetalon": "75s",
+  "stormwind": "75s",
+  "thoradin": "75s"
+ },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T05:02:18+00:00"
+ "updated": "2026-11-15T05:03:49+00:00"
 }
