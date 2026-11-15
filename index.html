@@ -115,6 +115,9 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .bookf .bmsg { margin: 0; }
 .bookf .bmsg.ok { color: var(--fel); }
 .bookf .bmsg.err { color: #ff8a8a; }
+.notice { margin: 14px auto 0; max-width: 760px; display: flex; gap: 10px; align-items: flex-start; background: #2a2010; border: 1px solid #b8862f; border-radius: 10px; padding: 10px 14px; font-size: .9rem; line-height: 1.45; color: var(--ink); }
+.notice b { color: #f2c45a; }
+.notice .ico { flex: none; color: #f2c45a; font-weight: 700; }
 .auth { display: grid; gap: 6px; }
 .auth .lead { margin: 0; font-size: .8rem; color: var(--muted); }
 .auth .sso { width: 100%; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; font: 700 .9rem var(--body); border: 0; border-radius: 8px; padding: 9px 12px; cursor: pointer; color: #fff; }
@@ -216,6 +219,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
 </head>
 <body>
 <div class="wrap">
+  <div class="notice" role="note"><span class="ico" aria-hidden="true">!</span><span><b>Battle.net sign-in now required.</b> Because of trolls and malicious bookings, booking on voidtaxi.com needs a quick Battle.net sign-in, so you can only book for your own characters. Whispering us in game and the Voidtaxi addon work as before.</span></div>
   <header class="hero">
     <div class="mark">
       <svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#7dff8a"/><stop offset=".45" stop-color="#9d6bff"/><stop offset="1" stop-color="#120d1c"/></radialGradient></defs><circle cx="32" cy="32" r="29" fill="url(#g)"/><circle cx="32" cy="32" r="29" fill="none" stroke="#c9a8ff" stroke-width="2" stroke-dasharray="4 5"/><path d="M18 38h28l-4-10H22z" fill="#120d1c"/><circle cx="24" cy="40" r="3.5" fill="#120d1c"/><circle cx="40" cy="40" r="3.5" fill="#120d1c"/></svg>
