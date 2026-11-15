@@ -333,14 +333,14 @@ function startSignIn(prov) {
   try { sessionStorage.setItem("vt_oauth", state); sessionStorage.setItem("vt_oauth_back", location.hash || ""); } catch {}
   const u = prov === "discord"
     ? "https://discord.com/oauth2/authorize?" + new URLSearchParams({ client_id: authCfg.discord, response_type: "code", redirect_uri: SITE_URL, scope: "identify", state, prompt: "none" })
-    : "https://oauth.battle.net/authorize?" + new URLSearchParams({ client_id: authCfg.bnet, response_type: "code", redirect_uri: SITE_URL, scope: "openid", state });
+    : "https://oauth.battle.net/authorize?" + new URLSearchParams({ client_id: authCfg.bnet, response_type: "code", redirect_uri: SITE_URL, scope: "openid wow.profile", state });
   location.href = u;
 }
 function authHtml() {
   if (!guardOn()) return "";
   const a = loadAuth();
   if (a) return `<p class="authed">Signed in as <b>${esc(a.name)}</b> (${esc(a.via)}) · <button type="button" data-signout>sign out</button></p>`;
-  let h = `<div class="auth"><p class="lead">Sign in once so nobody can book under your name.</p>`;
+  let h = `<div class="auth"><p class="lead">Sign in once so nobody can book under your character's name.</p>`;
   if (authCfg.discord) h += `<button class="sso discord" type="button" data-signin="discord">Sign in with Discord</button>`;
   if (authCfg.bnet) h += `<button class="sso bnet" type="button" data-signin="bnet">Sign in with Battle.net</button>`;
   return h + `</div>`;
@@ -535,6 +535,7 @@ document.addEventListener("submit", async e => {
       if (ans === "sign in") { saveAuth(null); refreshAuth(); throw new Error("Your sign-in ran out. Sign in again, then tap Book."); }
       if (ans === "slow down") throw new Error("That's a lot of bookings at once. Try again in a few minutes.");
       if (ans === "busy") throw new Error("We're swamped this minute. Try again shortly.");
+      if (ans === "not yours") throw new Error("That character isn't on your Battle.net account. Book with your own character's name.");
     } else await sendInbox({ kind: "book", name, stop, token });
     saveName(name);
     saveBooking({ name, stop, label: what === "chain" ? "the Sleeping Bag chain" : names[what], token, t: Date.now() });
