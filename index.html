@@ -129,6 +129,12 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .mybook b { color: var(--fel); }
 .mybook button { flex: none; font: 600 .85rem var(--body); color: #ffb3b3; background: transparent; border: 1px solid #a04848; border-radius: 99px; padding: 5px 12px; cursor: pointer; }
 .mybook button.sure { background: #a04848; color: #fff; }
+.mybook .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.mybook .acts[hidden] { display: none; }
+.mybook button.done { color: #fff; background: #2f9e5b; border-color: #2f9e5b; }
+.mybook button.again { color: #fff; background: #1f7ae0; border-color: #1f7ae0; }
+.mybook button.done:hover, .mybook button.again:hover { filter: brightness(1.12); }
+@media (max-width: 560px) { .mybook { flex-wrap: wrap; justify-content: center; text-align: center; } .mybook .acts { justify-content: center; } }
 .mybook button:disabled { opacity: .6; cursor: default; }
 .card small { display: block; margin-top: 6px; color: var(--muted); font-size: .78rem; }
 .mapwrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: stretch; }
@@ -289,7 +295,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <details><summary>I run a summoning service. Can I join?</summary><p>Yes, Voidtaxi is growing beyond NA Alliance PvE. Send the <a href="#join">Join the crew</a> form above and we'll get back to you.</p></details>
   </section>
 
-  <div class="mybook" id="mybook" role="status" hidden><span id="mybookText"></span><button type="button" id="mybookCancel">Cancel booking</button></div>
+  <div class="mybook" id="mybook" role="status" hidden><span id="mybookText"></span><span class="acts" id="mybookActs"><button type="button" class="done" id="mybookDone">Complete</button><button type="button" class="again" id="mybookAgain">Book another</button><button type="button" id="mybookCancel">Cancel booking</button></span></div>
   <footer>Voidtaxi is a player-run service on WoW Forever. Not affiliated with Blizzard Entertainment. Gold only, never real money.<br>Tell a friend: <b>voidtaxi.com</b> · <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Discord</a></footer>
 </div>
 
@@ -550,11 +556,12 @@ document.addEventListener("submit", async e => {
 
 function showMyBooking(note) {
   const bar = document.getElementById("mybook"), txt = document.getElementById("mybookText"), btn = document.getElementById("mybookCancel");
+  const acts = document.getElementById("mybookActs");
   const b = loadBooking();
-  if (note) { txt.innerHTML = note; btn.hidden = true; bar.hidden = false; setTimeout(() => { bar.hidden = true; }, 7000); return; }
+  if (note) { txt.innerHTML = note; acts.hidden = true; bar.hidden = false; setTimeout(() => { bar.hidden = true; }, 7000); return; }
   if (!b) { bar.hidden = true; return; }
   txt.innerHTML = `Booked: <b>${esc(b.label)}</b> for ${esc(b.name)}`;
-  btn.hidden = false; btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Cancel booking";
+  acts.hidden = false; btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Cancel booking";
   bar.hidden = false;
 }
 document.getElementById("mybookCancel").addEventListener("click", async e => {
@@ -571,6 +578,17 @@ document.getElementById("mybookCancel").addEventListener("click", async e => {
     saveBooking(null);
     showMyBooking("Booking cancelled. No charge.");
   } catch { btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Didn't send. Try again"; }
+});
+// Complete: they've been summoned, so the bar goes away (nothing is sent). Book another: back to the map;
+// this booking stays as it is.
+document.getElementById("mybookDone").addEventListener("click", () => {
+  saveBooking(null);
+  showMyBooking("Enjoy the trip! Book again any time.");
+});
+document.getElementById("mybookAgain").addEventListener("click", () => {
+  document.getElementById("mybook").hidden = true;
+  const m = document.getElementById("map");
+  if (m) m.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 showMyBooking();
 
