@@ -2,8 +2,7 @@
  "service": "online",
  "open": [
   "bootybay",
-  "dalaran",
-  "stonetalon"
+  "dalaran"
  ],
  "prices": {
   "bootybay": "75s",
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T08:26:44+00:00"
+ "updated": "2026-11-15T08:30:12+00:00"
 }
