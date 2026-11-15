@@ -5,8 +5,7 @@
   "dalaran",
   "everlook",
   "hyjal",
-  "stormwind",
-  "thoradin"
+  "stormwind"
  ],
  "prices": {
   "bootybay": "75s",
@@ -26,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T07:05:47+00:00"
+ "updated": "2026-11-15T07:07:20+00:00"
 }
