@@ -1,8 +1,7 @@
 {
  "service": "online",
  "open": [
-  "lightshope",
-  "thoradin"
+  "lightshope"
  ],
  "prices": {
   "bootybay": "75s",
@@ -22,5 +21,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T16:42:27+00:00"
+ "updated": "2026-11-15T17:09:32+00:00"
 }
