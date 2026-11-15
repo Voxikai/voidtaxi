@@ -258,7 +258,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <form class="req" id="reqform" novalidate>
       <div class="reqhead"><h3>Want a stop we don't cover yet?</h3><p>Type the place, copy the line, paste it in game. The most requested spots get a warlock first, and we'll whisper you when yours is live.</p></div>
       <label class="wide"><span>Location</span><input name="location" list="reqlist" maxlength="50" required placeholder="e.g. Blackrock Mountain" autocomplete="off"></label>
-      <datalist id="reqlist"><option value="Blackrock Mountain"><option value="Maraudon"><option value="Dire Maul"><option value="Everlook"><option value="Light's Hope Chapel"><option value="Feathermoon Stronghold"><option value="Shaper's Terrace"><option value="Scarlet Monastery"><option value="Blackfathom Deeps"><option value="Zul'Farrak"><option value="Uldaman"><option value="Hyjal"><option value="Shen'dralas"></datalist>
+      <datalist id="reqlist"><option value="Blackrock Mountain"><option value="Maraudon"><option value="Feathermoon Stronghold"><option value="Shaper's Terrace"><option value="Scarlet Monastery"><option value="Blackfathom Deeps"><option value="Zul'Farrak"><option value="Uldaman"><option value="Shen'dralas"></datalist>
       <button class="copy" type="submit">Copy request</button>
       <div class="cmdline reqline" id="reqline">/w Voidtaxi Booking vt: request ...</div>
       <p class="reqmsg" id="reqmsg" role="status"></p>
@@ -274,6 +274,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     </form>
     <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
     <details><summary>Is there an addon?</summary><p>Yes, and it's the fastest way to ride. Install <a href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Voidtaxi on CurseForge</a>, open your world map and click a stop pin to book in one click. Or click the Voidtaxi button (minimap or the floating one), pick a stop and press <b>Summon me</b>. Then accept the invite and the summon.</p></details>
+    <details><summary>Voidtaxi ranks and discounts</summary><p>Our most frequent riders earn a rank, and a discount on every summon. After 5 completed summons you qualify; among qualifying riders the top 1% are <b>Dreadlord</b> (25% off), top 5% <b>Felguard</b> (15% off), top 10% <b>Succubus</b> (10% off) and top 20% <b>Imp</b> (5% off). Your rank shows in the Voidtaxi addon window, and the prices you see there already include it. <b>When it's busy, higher ranks are summoned first.</b></p></details>
     <details><summary>Is this allowed?</summary><p>Yes. It's a player service paid in in-game gold only, like any summoning or portal seller in trade chat. We never take real money.</p></details>
     <details><summary>Can my guild partner with Voidtaxi?</summary><p>Whisper Voidtaxi Booking in game or ask in the <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Void Taxi Discord</a>. Guild runs, raid nights and bulk bookings welcome.</p></details>
     <details><summary>I run a summoning service. Can I join?</summary><p>Yes, Voidtaxi is growing beyond NA Alliance PvE. Send the <a href="#join">Join the crew</a> form above and we'll get back to you.</p></details>
@@ -310,12 +311,15 @@ const LINES = [
   { id: "sb", name: "Sleeping Bag Line", c: "var(--void)", note: "the quest chain, in order",
     stops: [["sbarrens", "South Barrens"], ["stonetalon", "Stonetalon"], ["loch", "Loch Modan Dam"], ["thoradin", "Thoradin's Wall"]] },
   { id: "ek", name: "Eastern Kingdoms", c: "var(--ek)", note: "north to south",
-    stops: [["dalaran", "Dalaran"], ["bootybay", "Booty Bay"]] },
+    stops: [["lightshope", "Light's Hope Chapel"], ["dalaran", "Dalaran"], ["thorium", "Thorium Point"], ["stormwind", "Stormwind"], ["bootybay", "Booty Bay"]] },
   { id: "kal", name: "Kalimdor", c: "var(--kal)", note: "north to south",
-    stops: [["nijel", "Nijel's Point"], ["feralasfp", "Feralas / 1K FP"], ["gadgetzan", "Gadgetzan"]] },
+    stops: [["everlook", "Everlook"], ["hyjal", "Hyjal (South FP)"], ["nijel", "Nijel's Point"], ["diremaul", "Dire Maul North"], ["feralasfp", "Feralas / 1K FP"], ["gadgetzan", "Gadgetzan"]] },
 ];
-const PRICE = { chain: "1.5g" };
-const ALIASES = { loch: ["loch modan", "loch"], feralasfp: ["feralas fp", "feralas", "1k fp", "feralas/1k fp", "thousand needles", "thalanaar"], lightshope: ["light's hope chapel", "light's hope"] };
+// Standard prices (Voidtaxi Sync only publishes prices changed in game; those replace these).
+const PRICE = { chain: "3g", everlook: "1.5g", hyjal: "2g", lightshope: "1.5g", thorium: "1.5g", diremaul: "1.5g" };
+const BASE_PRICE = "75s";
+const ALIASES = { loch: ["loch modan", "loch"], feralasfp: ["feralas fp", "feralas", "1k fp", "feralas/1k fp", "thousand needles", "thalanaar"], lightshope: ["light's hope chapel", "light's hope", "lhc"],
+  hyjal: ["hyjal", "hyjal south", "mount hyjal"], diremaul: ["dire maul", "dm"], thorium: ["thorium point", "searing gorge"], stormwind: ["stormwind", "sw"] };
 
 const norm = s => String(s || "").toLowerCase().replace(/^\(sb\)\s*/, "").replace(/[^a-z0-9]/g, "");
 const byKey = {};
@@ -339,6 +343,8 @@ const POS = {
   dalaran: [2733, 674], bootybay: [2711, 1989],
   nijel: [480, 1125],
   feralasfp: [653, 1519], gadgetzan: [917, 1748],
+  everlook: [1020, 460], hyjal: [820, 660], diremaul: [510, 1450],
+  lightshope: [3250, 440], thorium: [2770, 1310], stormwind: [2690, 1470],
 };
 const SB = new Set(["sbarrens", "stonetalon", "loch", "thoradin"]);
 const markers = {};
@@ -357,7 +363,7 @@ function cardHtml(id) {
   const [cls, st] = stateText(id);
   let h = `<div class="card"><h4>${esc(names[id])}</h4>`;
   if (SB.has(id)) h += `<span class="tag">Sleeping Bag</span>`;
-  h += `<div class="row"><span class="price">${PRICE[id] || "50s"}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
+  h += `<div class="row"><span class="price">${PRICE[id] || BASE_PRICE}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
   if (INBOX_URL) {
     h += `<form class="bookf" data-stop="${id}" novalidate><label>Your character<input name="name" maxlength="25" placeholder="First Last" autocomplete="off" value="${esc(savedName())}"></label>`;
     h += `<button class="copy" type="submit" value="${id}">Book ${esc(names[id])}</button>`;
@@ -431,7 +437,7 @@ function renderTable() {
     for (const [id, name] of l.stops) {
       const on = status && status.has(id);
       h += `<tr class="srow${picked === id ? " sel" : ""}" data-row="${id}"><td><span class="nm"><span class="sdot${on ? " on" : ""}" title="${on ? "Warlock on duty" : ""}"></span>${esc(name)}</span></td>`
-        + `<td class="pr">${esc(PRICE[id] || "50s")}</td><td>${INBOX_URL ? `<button class="mini" type="button" data-pick="${id}" aria-label="Book ${esc(name)}">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button>`}</td></tr>`;
+        + `<td class="pr">${esc(PRICE[id] || BASE_PRICE)}</td><td>${INBOX_URL ? `<button class="mini" type="button" data-pick="${id}" aria-label="Book ${esc(name)}">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button>`}</td></tr>`;
     }
   }
   tb.innerHTML = h;
@@ -556,7 +562,7 @@ function toCopper(p) {
 function showPrices() {
   document.querySelectorAll("[data-price]").forEach(el => { el.textContent = PRICE[el.dataset.price] || el.textContent; });
   const ids = Object.keys(markers);
-  const cheapest = ids.map(id => PRICE[id] || "50s").sort((a, b) => toCopper(a) - toCopper(b))[0];
+  const cheapest = ids.map(id => PRICE[id] || BASE_PRICE).sort((a, b) => toCopper(a) - toCopper(b))[0];
   document.querySelectorAll("[data-price-min]").forEach(el => { if (cheapest) el.textContent = cheapest; });
 }
 
