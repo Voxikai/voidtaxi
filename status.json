@@ -4,7 +4,6 @@
   "bootybay",
   "gadgetzan",
   "loch",
-  "stonetalon",
   "thoradin"
  ],
  "prices": {
@@ -12,5 +11,5 @@
   "stonetalon": "50s"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T04:09:04+00:00"
+ "updated": "2026-11-15T04:11:30+00:00"
 }
