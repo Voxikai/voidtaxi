@@ -3,7 +3,6 @@
  "open": [
   "bootybay",
   "dalaran",
-  "hyjal",
   "thoradin"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-15T07:20:42+00:00"
+ "updated": "2026-11-15T07:24:18+00:00"
 }
