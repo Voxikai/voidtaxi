@@ -1,5 +1,5 @@
 {
- "service": "online",
+ "service": "offline",
  "open": [
   "dalaran",
   "diremaul",
@@ -25,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T21:33:15+00:00"
+ "updated": "2026-11-16T21:36:40+00:00"
 }
