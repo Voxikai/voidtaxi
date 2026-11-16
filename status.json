@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "dalaran",
+  "loch",
   "sbarrens",
   "stonetalon",
   "stormwind"
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T17:01:40+00:00"
+ "updated": "2026-11-16T17:02:53+00:00"
 }
