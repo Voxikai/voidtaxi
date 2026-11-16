@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "bootybay",
-  "dalaran",
   "nijel",
   "stormwind"
  ],
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T23:43:10+00:00"
+ "updated": "2026-11-16T23:45:32+00:00"
 }
