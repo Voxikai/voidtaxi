@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "dalaran",
-  "everlook",
   "stormwind"
  ],
  "prices": {
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T23:20:39+00:00"
+ "updated": "2026-11-16T23:27:12+00:00"
 }
