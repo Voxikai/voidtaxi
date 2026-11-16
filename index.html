@@ -132,12 +132,20 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .mybook b { color: var(--fel); }
 .mybook button { flex: none; font: 600 .85rem var(--body); color: #ffb3b3; background: transparent; border: 1px solid #a04848; border-radius: 99px; padding: 5px 12px; cursor: pointer; }
 .mybook button.sure { background: #a04848; color: #fff; }
-.mybook .acts { display: flex; gap: 8px; flex-wrap: wrap; }
-.mybook .acts[hidden] { display: none; }
-.mybook button.done { color: #fff; background: #2f9e5b; border-color: #2f9e5b; }
-.mybook button.again { color: #fff; background: #1f7ae0; border-color: #1f7ae0; }
-.mybook button.done:hover, .mybook button.again:hover { filter: brightness(1.12); }
-@media (max-width: 560px) { .mybook { flex-wrap: wrap; justify-content: center; text-align: center; } .mybook .acts { justify-content: center; } }
+@media (max-width: 560px) { .mybook { text-align: center; } }
+.booked { display: grid; gap: 8px; margin-top: 10px; }
+#worldmap.card-open .leaflet-control-container { visibility: hidden; } /* a stop card hides the zoom buttons and the Sleeping Bag box */
+.booked p { margin: 0; font-size: .86rem; line-height: 1.4; }
+.booked .bk1 { font-weight: 700; color: var(--fel); }
+.booked .bk2 { color: var(--muted); }
+.booked .bkacts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.booked .bkacts button { font: 700 .92rem var(--body); color: #fff; border: 0; border-radius: 8px; padding: 10px 8px; cursor: pointer; }
+.booked .bkacts .done { background: #2f9e5b; }
+.booked .bkacts .again { background: #1f7ae0; }
+.booked .bkacts button:hover { filter: brightness(1.12); }
+.booked .bkcxl { justify-self: center; font: 600 .78rem var(--body); color: #ff9a9a; background: none; border: 0; padding: 4px; cursor: pointer; text-decoration: underline; }
+.booked .bkcxl.sure { color: #fff; background: #a04848; border-radius: 6px; text-decoration: none; padding: 5px 10px; }
+.booked button:disabled { opacity: .6; cursor: default; }
 .mybook button:disabled { opacity: .6; cursor: default; }
 .card small { display: block; margin-top: 6px; color: var(--muted); font-size: .78rem; }
 .mapwrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: stretch; }
@@ -158,7 +166,7 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .stops button.mini:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 @media (max-width: 900px) { .mapwrap { grid-template-columns: 1fr; } .stops { max-height: none; } }
-@media (max-width: 640px) { #worldmap { height: 300px; min-height: 0; } .leaflet-popup.vt-pop .leaflet-popup-content { width: 220px !important; } }
+@media (max-width: 640px) { #worldmap { height: 420px; min-height: 0; } .leaflet-popup.vt-pop .leaflet-popup-content { width: 220px !important; } }
 .sbcard { display: grid; gap: 1px; margin: 12px 12px 0 0 !important; padding: 9px 13px; max-width: 210px; text-decoration: none;
   background: linear-gradient(160deg, rgba(42,29,68,.95), rgba(31,22,51,.95)); border: 1px solid var(--void); border-radius: 12px;
   box-shadow: 0 8px 22px rgba(0,0,0,.5); color: var(--ink) !important; line-height: 1.3; }
@@ -299,7 +307,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <details><summary>I run a summoning service. Can I join?</summary><p>Yes, Voidtaxi is growing beyond NA Alliance PvE. Send the <a href="#join">Join the crew</a> form above and we'll get back to you.</p></details>
   </section>
 
-  <div class="mybook" id="mybook" role="status" hidden><span id="mybookText"></span><span class="acts" id="mybookActs"><button type="button" class="done" id="mybookDone">Complete</button><button type="button" class="again" id="mybookAgain">Book another</button><button type="button" id="mybookCancel">Cancel booking</button></span></div>
+  <div class="mybook" id="mybook" role="status" hidden><span id="mybookText"></span></div>
   <footer>Voidtaxi is a player-run service on WoW Forever. Not affiliated with Blizzard Entertainment. Gold only, never real money.<br>Tell a friend: <b>voidtaxi.com</b> · <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Discord</a></footer>
 </div>
 
@@ -417,11 +425,26 @@ function stateText(id) {
   return status.has(id) ? ["on", "Warlock on duty now"] : ["", "No warlock right now"];
 }
 
+// The booking this card's stop holds (only one booking is tracked at a time).
+function bookingFor(id) {
+  const b = loadBooking();
+  if (!b) return null;
+  const sid = b.stopId || (b.stop === "chain" ? "chain" : Object.keys(names).find(k => names[k] === b.label));
+  return (sid === id || (sid === "chain" && id === "sbarrens")) ? b : null;
+}
+function bookedHtml(b) {
+  return `<div class="booked"><p class="bk1">Booked for ${esc(b.name)}${b.stop === "chain" ? " (full chain)" : ""}</p>`
+    + `<p class="bk2">Stay online for our whisper and invite. Summoned? Tap Complete.</p>`
+    + `<div class="bkacts"><button type="button" class="done" data-bk="done">Complete</button><button type="button" class="again" data-bk="again">Book another</button></div>`
+    + `<button type="button" class="bkcxl" data-bk="cancel">Cancel, I no longer need a summon</button></div>`;
+}
+function refreshCards() { for (const [id, m] of Object.entries(markers)) if (m.isPopupOpen()) m.setPopupContent(cardHtml(id)); }
 function cardHtml(id) {
   const [cls, st] = stateText(id);
   let h = `<div class="card"><h4>${esc(names[id])}</h4>`;
   if (SB.has(id)) h += `<span class="tag">Sleeping Bag</span>`;
   h += `<div class="row"><span class="price">${PRICE[id] || BASE_PRICE}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
+  if (INBOX_URL && bookingFor(id)) return h + bookedHtml(bookingFor(id)) + `</div>`;
   if (INBOX_URL) {
     h += `<form class="bookf" data-stop="${id}" novalidate><label>Your character<input name="name" maxlength="25" placeholder="First Last" autocomplete="off" value="${esc(savedName())}"></label>`;
     h += `<div data-authbox>${authHtml()}</div>`;
@@ -459,11 +482,13 @@ function initMap() {
     return a;
   };
   sbCard.addTo(map);
+  map.on("popupopen", () => map.getContainer().classList.add("card-open"));
+  map.on("popupclose", () => map.getContainer().classList.remove("card-open"));
   for (const l of LINES) for (const [id, name] of l.stops) {
     const p = POS[id]; if (!p) continue;
     const m = L.marker([MAP_H - p[1], p[0]], { icon: L.divIcon({ className: "", html: '<div class="pin"></div>', iconSize: [22, 22] }), keyboard: true, title: name, alt: name });
     m.bindTooltip(esc(name), { direction: "top", offset: [0, -12], className: "vt-tip" });
-    m.bindPopup(() => cardHtml(id), { className: "vt-pop", offset: [0, -8], autoPanPadding: [16, 16], maxWidth: 290, keepInView: true });
+    m.bindPopup(() => cardHtml(id), { className: "vt-pop", offset: [0, -8], autoPanPadding: [16, 16], autoPanPaddingBottomRight: [16, 40], maxWidth: 290, keepInView: true });
     m.on("popupopen", () => { picked = id; m.closeTooltip(); renderPins(); });
     m.on("popupclose", () => { if (picked === id) picked = null; renderPins(); });
     m.addTo(map);
@@ -548,53 +573,68 @@ document.addEventListener("submit", async e => {
       if (ans === "not yours") throw new Error("That character isn't on your Battle.net account. Book with your own character's name.");
     } else await sendInbox({ kind: "book", name, stop, token });
     saveName(name);
-    saveBooking({ name, stop, label: what === "chain" ? "the Sleeping Bag chain" : names[what], token, t: Date.now() });
-    showMyBooking();
+    saveBooking({ name, stop, stopId: what, label: what === "chain" ? "the Sleeping Bag chain" : names[what], token, t: Date.now() });
     const rn = document.querySelector("#reqform [name=name]");
     if (rn && !rn.value) rn.value = name;
-    msg.textContent = `Booked, ${name}! Stay online: you'll get a whisper and a group invite from Voidtaxi.`;
-    msg.classList.add("ok");
+    refreshCards();
+    showMyBooking(`Booked, ${esc(name)}! Stay online for the whisper and invite.`);
   } catch (err) { msg.textContent = (err && err.message && !/fetch|network/i.test(err.message)) ? err.message : "That didn't send. Try again in a moment."; msg.classList.add("err"); }
   setTimeout(() => f.querySelectorAll("button").forEach(b => b.disabled = false), 4000);
 });
 
+// Short notes at the bottom of the screen (the booking itself lives on its stop's card).
+let noteTimer = 0;
 function showMyBooking(note) {
-  const bar = document.getElementById("mybook"), txt = document.getElementById("mybookText"), btn = document.getElementById("mybookCancel");
-  const acts = document.getElementById("mybookActs");
-  const b = loadBooking();
-  if (note) { txt.innerHTML = note; acts.hidden = true; bar.hidden = false; setTimeout(() => { bar.hidden = true; }, 7000); return; }
-  if (!b) { bar.hidden = true; return; }
-  txt.innerHTML = `Booked: <b>${esc(b.label)}</b> for ${esc(b.name)}`;
-  acts.hidden = false; btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Cancel booking";
-  bar.hidden = false;
+  const bar = document.getElementById("mybook"), txt = document.getElementById("mybookText");
+  if (!note) { bar.hidden = true; return; }
+  txt.innerHTML = note; bar.hidden = false;
+  clearTimeout(noteTimer); noteTimer = setTimeout(() => { bar.hidden = true; }, 7000);
 }
-document.getElementById("mybookCancel").addEventListener("click", async e => {
-  const btn = e.currentTarget, b = loadBooking();
-  if (!b) { showMyBooking(); return; }
-  if (!btn.classList.contains("sure")) {
-    btn.classList.add("sure"); btn.textContent = "Tap again to cancel";
-    setTimeout(() => { if (btn.classList.contains("sure")) { btn.classList.remove("sure"); btn.textContent = "Cancel booking"; } }, 4000);
-    return;
-  }
-  btn.disabled = true;
-  try {
-    await sendInbox({ kind: "cancel", name: b.name, stop: b.stop, token: b.token });
+// Card buttons: Complete (they've been summoned; nothing is sent), Book another (back to the map, the
+// booking stays), Cancel (tap twice; tells the crew).
+document.addEventListener("click", async e => {
+  const btn = e.target.closest("[data-bk]");
+  if (!btn) return;
+  const b = loadBooking();
+  if (!b) { refreshCards(); return; }
+  if (btn.dataset.bk === "done") {
+    if (map) map.closePopup();
     saveBooking(null);
-    showMyBooking("Booking cancelled. No charge.");
-  } catch { btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Didn't send. Try again"; }
+    showMyBooking("Enjoy the trip! Book again any time.");
+  } else if (btn.dataset.bk === "again") {
+    if (map) map.closePopup();
+    const m = document.getElementById("map");
+    if (m) m.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if (btn.dataset.bk === "cancel") {
+    if (!btn.classList.contains("sure")) {
+      btn.classList.add("sure"); btn.textContent = "Tap again to cancel";
+      setTimeout(() => { if (btn.isConnected && btn.classList.contains("sure")) { btn.classList.remove("sure"); btn.textContent = "Cancel, I no longer need a summon"; } }, 4000);
+      return;
+    }
+    btn.disabled = true;
+    try {
+      await sendInbox({ kind: "cancel", name: b.name, stop: b.stop, token: b.token });
+      if (map) map.closePopup();
+      saveBooking(null);
+      showMyBooking("Booking cancelled. No charge.");
+    } catch { btn.disabled = false; btn.classList.remove("sure"); btn.textContent = "Didn't send. Try again"; }
+  }
 });
-// Complete: they've been summoned, so the bar goes away (nothing is sent). Book another: back to the map;
-// this booking stays as it is.
-document.getElementById("mybookDone").addEventListener("click", () => {
-  saveBooking(null);
-  showMyBooking("Enjoy the trip! Book again any time.");
-});
-document.getElementById("mybookAgain").addEventListener("click", () => {
-  document.getElementById("mybook").hidden = true;
-  const m = document.getElementById("map");
-  if (m) m.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-showMyBooking();
+// Summoned already? Voidtaxi Sync lists recent summons in the status as short codes (no names), so the
+// booking completes itself once the crew has logged the summon.
+async function nameCode(name) {
+  const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("vt|" + String(name).toLowerCase().replace(/\s+/g, " ").trim()));
+  return [...new Uint8Array(d)].slice(0, 6).map(x => x.toString(16).padStart(2, "0")).join("");
+}
+async function checkSummoned(done) {
+  const b = loadBooking();
+  if (!b || !Array.isArray(done) || !done.length || !(crypto && crypto.subtle)) return;
+  const code = await nameCode(b.name);
+  const hit = done.some(x => { const [c, t] = String(x).split(":"); return c === code && Number(t) * 1000 >= b.t - 5 * 60000; });
+  if (!hit || loadBooking() !== null && loadBooking().token !== b.token) return;
+  saveBooking(null); refreshCards();
+  showMyBooking(`You've been summoned, ${esc(b.name)}. Enjoy the trip!`);
+}
 
 async function loadStatus() {
   const live = document.getElementById("live"), txt = document.getElementById("liveText");
@@ -622,6 +662,7 @@ async function loadStatus() {
       status = fresh ? new Set((d.open || []).map(n => byKey[norm(n)]).filter(Boolean)) : null;
     }
     if (d.desk) desk = d.desk;
+    checkSummoned(d.done).catch(() => {});
     if (d.prices) { Object.assign(PRICE, d.prices); showPrices(); }
     live.classList.toggle("on", !!status && status.size > 0);
     txt.textContent = offline ? "Voidtaxi is offline right now. Check back soon!"
