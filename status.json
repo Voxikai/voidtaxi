@@ -4,6 +4,7 @@
   "gadgetzan",
   "sbarrens",
   "stonetalon",
+  "stormwind",
   "thorium"
  ],
  "prices": {
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T19:03:06+00:00"
+ "updated": "2026-11-16T19:04:43+00:00"
 }
