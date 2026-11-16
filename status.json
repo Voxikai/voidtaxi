@@ -4,7 +4,8 @@
   "bootybay",
   "everlook",
   "feralasfp",
-  "sbarrens"
+  "sbarrens",
+  "thoradin"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T20:16:35+00:00"
+ "updated": "2026-11-16T20:21:04+00:00"
 }
