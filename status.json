@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "gadgetzan",
   "hyjal"
  ],
  "prices": {
@@ -21,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T14:53:53+00:00"
+ "updated": "2026-11-16T14:55:29+00:00"
 }
