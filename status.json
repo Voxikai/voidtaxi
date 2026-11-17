@@ -5,8 +5,7 @@
   "diremaul",
   "everlook",
   "hyjal",
-  "stormwind",
-  "thoradin"
+  "stormwind"
  ],
  "prices": {
   "bootybay": "75s",
@@ -26,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T23:17:09+00:00"
+ "updated": "2026-11-17T23:20:34+00:00"
 }
