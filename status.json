@@ -6,7 +6,8 @@
   "feralasfp",
   "lightshope",
   "nijel",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -26,5 +27,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T21:43:14+00:00"
+ "updated": "2026-11-17T21:44:18+00:00"
 }
