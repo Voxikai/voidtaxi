@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "hyjal",
-  "loch",
   "stormwind",
   "thoradin"
  ],
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T20:48:59+00:00"
+ "updated": "2026-11-17T20:50:26+00:00"
 }
