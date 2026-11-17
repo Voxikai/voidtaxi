@@ -3,7 +3,8 @@
  "open": [
   "bootybay",
   "dalaran",
-  "gadgetzan"
+  "gadgetzan",
+  "stormwind"
  ],
  "prices": {
   "bootybay": "75s",
@@ -23,5 +24,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T02:03:26+00:00"
+ "updated": "2026-11-17T02:14:08+00:00"
 }
