@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "everlook",
-  "hyjal",
   "thorium"
  ],
  "prices": {
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T23:50:21+00:00"
+ "updated": "2026-11-17T23:57:38+00:00"
 }
