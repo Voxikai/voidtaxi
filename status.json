@@ -3,7 +3,6 @@
  "open": [
   "bootybay",
   "dalaran",
-  "everlook",
   "gadgetzan"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T02:02:22+00:00"
+ "updated": "2026-11-17T02:03:26+00:00"
 }
