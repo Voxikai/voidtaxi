@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "dalaran",
-  "diremaul",
   "everlook",
   "hyjal",
   "thorium"
@@ -25,5 +24,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T23:39:18+00:00"
+ "updated": "2026-11-17T23:45:07+00:00"
 }
