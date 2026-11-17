@@ -138,6 +138,7 @@ kbd { font: 500 .85em var(--mono); background: #0d0915; border: 1px solid var(--
 .booked p { margin: 0; font-size: .86rem; line-height: 1.4; }
 .booked .bk1 { font-weight: 700; color: var(--fel); }
 .booked .bk2 { color: var(--muted); }
+.booked .bkq { color: var(--ink); background: rgba(242, 196, 90, .1); border-left: 3px solid var(--gold); padding: 6px 8px; border-radius: 4px; }
 .booked .bkacts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .booked .bkacts button { font: 700 .92rem var(--body); color: #fff; border: 0; border-radius: 8px; padding: 10px 8px; cursor: pointer; }
 .booked .bkacts .done { background: #2f9e5b; }
@@ -434,6 +435,7 @@ function bookingFor(id) {
 }
 function bookedHtml(b) {
   return `<div class="booked"><p class="bk1">Booked for ${esc(b.name)}${b.stop === "chain" ? " (full chain)" : ""}</p>`
+    + `<p class="bkq">Busy times can have 10+ players in line ahead of you. Each summon takes about 30 seconds, and we invite in the order bookings come in.</p>`
     + `<p class="bk2">Stay online for our whisper and invite. Summoned? Tap Complete.</p>`
     + `<div class="bkacts"><button type="button" class="done" data-bk="done">Complete</button><button type="button" class="again" data-bk="again">Book another</button></div>`
     + `<button type="button" class="bkcxl" data-bk="cancel">Cancel, I no longer need a summon</button></div>`;
