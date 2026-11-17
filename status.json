@@ -1,11 +1,11 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "feralasfp",
   "hyjal",
   "nijel",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -25,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-16T23:58:09+00:00"
+ "updated": "2026-11-17T00:00:09+00:00"
 }
