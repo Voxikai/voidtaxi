@@ -1,7 +1,8 @@
 {
  "service": "online",
  "open": [
-  "lightshope"
+  "lightshope",
+  "stormwind"
  ],
  "prices": {
   "bootybay": "75s",
@@ -21,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T21:19:56+00:00"
+ "updated": "2026-11-17T21:22:54+00:00"
 }
