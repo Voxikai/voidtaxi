@@ -4,7 +4,8 @@
   "dalaran",
   "diremaul",
   "everlook",
-  "hyjal"
+  "hyjal",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-17T23:29:10+00:00"
+ "updated": "2026-11-17T23:39:18+00:00"
 }
