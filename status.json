@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "gadgetzan",
+  "lightshope",
   "stormwind"
  ],
  "prices": {
@@ -22,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T23:16:46+00:00"
+ "updated": "2026-11-18T23:17:58+00:00"
 }
