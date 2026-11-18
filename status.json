@@ -2,8 +2,7 @@
  "service": "online",
  "open": [
   "dalaran",
-  "feralasfp",
-  "stormwind"
+  "feralasfp"
  ],
  "prices": {
   "bootybay": "75s",
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T05:45:39+00:00"
+ "updated": "2026-11-18T05:51:33+00:00"
 }
