@@ -3,6 +3,7 @@
  "open": [
   "everlook",
   "gadgetzan",
+  "sbarrens",
   "thoradin",
   "thorium"
  ],
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T18:54:27+00:00"
+ "updated": "2026-11-18T18:58:44+00:00"
 }
