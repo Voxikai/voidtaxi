@@ -2,7 +2,8 @@
  "service": "online",
  "open": [
   "everlook",
-  "stormwind"
+  "stormwind",
+  "thoradin"
  ],
  "prices": {
   "bootybay": "75s",
@@ -22,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T04:49:33+00:00"
+ "updated": "2026-11-18T04:51:41+00:00"
 }
