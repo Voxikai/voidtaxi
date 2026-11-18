@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "everlook",
   "gadgetzan",
   "nijel"
  ],
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T22:59:39+00:00"
+ "updated": "2026-11-18T23:03:17+00:00"
 }
