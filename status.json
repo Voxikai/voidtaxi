@@ -3,8 +3,7 @@
  "open": [
   "everlook",
   "hyjal",
-  "nijel",
-  "thoradin"
+  "nijel"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T05:18:53+00:00"
+ "updated": "2026-11-18T05:21:26+00:00"
 }
