@@ -3,8 +3,7 @@
  "open": [
   "bootybay",
   "hyjal",
-  "lightshope",
-  "stormwind"
+  "lightshope"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T02:20:27+00:00"
+ "updated": "2026-11-18T02:22:44+00:00"
 }
