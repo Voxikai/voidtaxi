@@ -1,8 +1,7 @@
 {
  "service": "online",
  "open": [
-  "gadgetzan",
-  "nijel"
+  "gadgetzan"
  ],
  "prices": {
   "bootybay": "75s",
@@ -22,5 +21,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T23:03:17+00:00"
+ "updated": "2026-11-18T23:15:36+00:00"
 }
