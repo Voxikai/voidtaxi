@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "dalaran",
   "feralasfp",
   "gadgetzan",
   "sbarrens",
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T01:49:32+00:00"
+ "updated": "2026-11-18T01:50:49+00:00"
 }
