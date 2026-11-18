@@ -3,8 +3,7 @@
  "open": [
   "everlook",
   "gadgetzan",
-  "lightshope",
-  "thorium"
+  "lightshope"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T20:00:57+00:00"
+ "updated": "2026-11-18T20:02:51+00:00"
 }
