@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "feralasfp",
   "gadgetzan",
   "stormwind",
   "thoradin"
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T06:09:57+00:00"
+ "updated": "2026-11-18T06:12:01+00:00"
 }
