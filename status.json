@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "dalaran",
-  "gadgetzan",
   "nijel"
  ],
  "prices": {
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T20:53:04+00:00"
+ "updated": "2026-11-18T20:54:10+00:00"
 }
