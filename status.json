@@ -3,7 +3,6 @@
  "open": [
   "gadgetzan",
   "lightshope",
-  "nijel",
   "thoradin"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T18:41:57+00:00"
+ "updated": "2026-11-18T18:43:32+00:00"
 }
