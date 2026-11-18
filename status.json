@@ -5,6 +5,7 @@
   "dalaran",
   "feralasfp",
   "hyjal",
+  "lightshope",
   "stormwind"
  ],
  "prices": {
@@ -25,5 +26,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T02:09:29+00:00"
+ "updated": "2026-11-18T02:17:04+00:00"
 }
