@@ -4,7 +4,8 @@
   "everlook",
   "lightshope",
   "sbarrens",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T19:31:37+00:00"
+ "updated": "2026-11-18T19:32:46+00:00"
 }
