@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "dalaran",
   "lightshope"
  ],
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T02:26:31+00:00"
+ "updated": "2026-11-18T02:27:36+00:00"
 }
