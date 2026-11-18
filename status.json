@@ -4,7 +4,6 @@
   "dalaran",
   "gadgetzan",
   "loch",
-  "sbarrens",
   "stonetalon",
   "stormwind",
   "thoradin"
@@ -27,5 +26,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T02:58:26+00:00"
+ "updated": "2026-11-18T03:03:59+00:00"
 }
