@@ -3,6 +3,7 @@
  "open": [
   "everlook",
   "gadgetzan",
+  "stormwind",
   "thorium"
  ],
  "prices": {
@@ -23,5 +24,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-18T22:10:09+00:00"
+ "updated": "2026-11-18T22:16:39+00:00"
 }
