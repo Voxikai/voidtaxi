@@ -1,10 +1,10 @@
 {
  "service": "offline",
  "open": [
-  "dalaran",
   "feralasfp",
   "gadgetzan",
   "nijel",
+  "stonetalon",
   "stormwind"
  ],
  "prices": {
@@ -25,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T20:57:49+00:00"
+ "updated": "2026-11-19T21:01:59+00:00"
 }
