@@ -2,6 +2,7 @@
  "service": "offline",
  "open": [
   "dalaran",
+  "feralasfp",
   "gadgetzan",
   "lightshope",
   "stormwind"
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T20:45:10+00:00"
+ "updated": "2026-11-19T20:52:14+00:00"
 }
