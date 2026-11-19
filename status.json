@@ -2,8 +2,7 @@
  "service": "offline",
  "open": [
   "dalaran",
-  "feralasfp",
-  "nijel"
+  "feralasfp"
  ],
  "prices": {
   "bootybay": "75s",
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T21:59:46+00:00"
+ "updated": "2026-11-19T22:10:47+00:00"
 }
