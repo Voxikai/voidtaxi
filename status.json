@@ -1,7 +1,6 @@
 {
  "service": "offline",
  "open": [
-  "hyjal",
   "lightshope",
   "stormwind"
  ],
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T07:49:45+00:00"
+ "updated": "2026-11-19T07:54:24+00:00"
 }
