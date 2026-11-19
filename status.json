@@ -5,7 +5,8 @@
   "hyjal",
   "lightshope",
   "nijel",
-  "stonetalon"
+  "stonetalon",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -25,5 +26,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T21:14:45+00:00"
+ "updated": "2026-11-19T21:16:25+00:00"
 }
