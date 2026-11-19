@@ -436,8 +436,8 @@ function bookingFor(id) {
 function bookedHtml(b) {
   return `<div class="booked"><p class="bk1">Booked for ${esc(b.name)}${b.stop === "chain" ? " (full chain)" : ""}</p>`
     + `<p class="bkq">Busy times can have 10+ players in line ahead of you. Each summon takes about 30 seconds, and we invite in the order bookings come in.</p>`
-    + `<p class="bk2">Stay online for our whisper and invite. Summoned? Tap Complete.</p>`
-    + `<div class="bkacts"><button type="button" class="done" data-bk="done">Complete</button><button type="button" class="again" data-bk="again">Book another</button></div>`
+    + `<p class="bk2">Stay online for our whisper and invite. This clears on its own once you're summoned.</p>`
+    + `<div class="bkacts"><button type="button" class="again" data-bk="again">Book another</button></div>`
     + `<button type="button" class="bkcxl" data-bk="cancel">Cancel, I no longer need a summon</button></div>`;
 }
 function refreshCards() { for (const [id, m] of Object.entries(markers)) if (m.isPopupOpen()) m.setPopupContent(cardHtml(id)); }
@@ -592,8 +592,8 @@ function showMyBooking(note) {
   txt.innerHTML = note; bar.hidden = false;
   clearTimeout(noteTimer); noteTimer = setTimeout(() => { bar.hidden = true; }, 7000);
 }
-// Card buttons: Complete (they've been summoned; nothing is sent), Book another (back to the map, the
-// booking stays), Cancel (tap twice; tells the crew).
+// Card buttons: Book another (back to the map, the booking stays), Cancel (tap twice; tells the crew).
+// There's no Complete: the booking clears itself once the crew has logged the summon (below).
 document.addEventListener("click", async e => {
   const btn = e.target.closest("[data-bk]");
   if (!btn) return;
