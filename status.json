@@ -2,8 +2,8 @@
  "service": "online",
  "open": [
   "lightshope",
-  "stormwind",
-  "thoradin"
+  "sbarrens",
+  "stormwind"
  ],
  "prices": {
   "bootybay": "75s",
@@ -23,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T00:31:05+00:00"
+ "updated": "2026-11-19T00:32:15+00:00"
 }
