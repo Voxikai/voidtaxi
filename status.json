@@ -1,6 +1,7 @@
 {
  "service": "offline",
  "open": [
+  "dalaran",
   "lightshope"
  ],
  "prices": {
@@ -21,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T14:35:30+00:00"
+ "updated": "2026-11-19T14:40:09+00:00"
 }
