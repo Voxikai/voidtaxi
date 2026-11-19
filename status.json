@@ -3,7 +3,6 @@
  "open": [
   "bootybay",
   "gadgetzan",
-  "hyjal",
   "stormwind"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T16:29:32+00:00"
+ "updated": "2026-11-19T16:30:46+00:00"
 }
