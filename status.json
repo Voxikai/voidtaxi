@@ -3,7 +3,6 @@
  "open": [
   "dalaran",
   "everlook",
-  "lightshope",
   "sbarrens",
   "stonetalon",
   "thoradin"
@@ -26,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T15:04:07+00:00"
+ "updated": "2026-11-19T15:05:18+00:00"
 }
