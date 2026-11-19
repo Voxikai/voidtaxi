@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "dalaran",
-  "gadgetzan",
   "lightshope",
   "stonetalon"
  ],
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T01:28:14+00:00"
+ "updated": "2026-11-19T01:34:43+00:00"
 }
