@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "gadgetzan",
-  "lightshope",
   "stonetalon"
  ],
  "prices": {
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T01:41:58+00:00"
+ "updated": "2026-11-19T01:43:31+00:00"
 }
