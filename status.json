@@ -5,7 +5,6 @@
   "dalaran",
   "gadgetzan",
   "sbarrens",
-  "stonetalon",
   "thoradin"
  ],
  "prices": {
@@ -26,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T02:49:11+00:00"
+ "updated": "2026-11-19T02:53:40+00:00"
 }
