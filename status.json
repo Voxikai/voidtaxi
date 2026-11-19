@@ -7,6 +7,7 @@
   "hyjal",
   "loch",
   "sbarrens",
+  "stonetalon",
   "thoradin"
  ],
  "prices": {
@@ -27,5 +28,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-19T02:22:41+00:00"
+ "updated": "2026-11-19T02:24:28+00:00"
 }
