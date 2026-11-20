@@ -6,7 +6,8 @@
   "hyjal",
   "lightshope",
   "loch",
-  "stonetalon"
+  "stonetalon",
+  "thoradin"
  ],
  "prices": {
   "bootybay": "75s",
@@ -26,5 +27,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T00:44:16+00:00"
+ "updated": "2026-11-20T00:46:12+00:00"
 }
