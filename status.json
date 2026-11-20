@@ -5,9 +5,9 @@
   "gadgetzan",
   "hyjal",
   "lightshope",
+  "nijel",
   "stormwind",
-  "thoradin",
-  "thorium"
+  "thoradin"
  ],
  "prices": {
   "bootybay": "75s",
@@ -27,5 +27,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T02:21:27+00:00"
+ "updated": "2026-11-20T02:22:43+00:00"
 }
