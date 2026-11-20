@@ -3,8 +3,7 @@
  "open": [
   "dalaran",
   "hyjal",
-  "lightshope",
-  "nijel"
+  "lightshope"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T18:28:20+00:00"
+ "updated": "2026-11-20T18:32:55+00:00"
 }
