@@ -8,7 +8,8 @@
   "loch",
   "sbarrens",
   "stonetalon",
-  "thoradin"
+  "thoradin",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -28,5 +29,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T00:51:21+00:00"
+ "updated": "2026-11-20T00:54:21+00:00"
 }
