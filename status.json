@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "everlook",
   "hyjal",
   "stormwind",
   "thorium"
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T16:26:30+00:00"
+ "updated": "2026-11-20T16:34:05+00:00"
 }
