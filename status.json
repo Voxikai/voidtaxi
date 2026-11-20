@@ -3,7 +3,6 @@
  "open": [
   "hyjal",
   "lightshope",
-  "nijel",
   "stormwind"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T17:12:18+00:00"
+ "updated": "2026-11-20T17:27:44+00:00"
 }
