@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "dalaran",
-  "everlook",
   "gadgetzan",
   "lightshope",
   "sbarrens",
@@ -26,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T00:16:19+00:00"
+ "updated": "2026-11-20T00:22:06+00:00"
 }
