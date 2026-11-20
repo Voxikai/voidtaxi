@@ -1,7 +1,8 @@
 {
  "service": "online",
  "open": [
-  "dalaran"
+  "dalaran",
+  "nijel"
  ],
  "prices": {
   "bootybay": "75s",
@@ -21,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T15:15:36+00:00"
+ "updated": "2026-11-20T15:19:19+00:00"
 }
