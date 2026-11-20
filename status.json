@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "dalaran",
+  "everlook",
   "lightshope"
  ],
  "prices": {
@@ -22,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T18:34:08+00:00"
+ "updated": "2026-11-20T18:55:08+00:00"
 }
