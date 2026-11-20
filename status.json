@@ -5,22 +5,23 @@
   "stonetalon"
  ],
  "prices": {
-  "bootybay": "75s",
+  "bootybay": "1g",
   "chain": "3g",
-  "dalaran": "75s",
-  "diremaul": "1.5g",
-  "everlook": "1.5g",
-  "feralasfp": "75s",
-  "gadgetzan": "75s",
-  "hyjal": "2g",
-  "loch": "75s",
-  "nijel": "75s",
-  "sbarrens": "75s",
-  "stonetalon": "75s",
-  "stormwind": "75s",
+  "dalaran": "1g",
+  "diremaul": "2g",
+  "everlook": "2g",
+  "feralasfp": "1g",
+  "gadgetzan": "1g",
+  "hyjal": "3g",
+  "lightshope": "2g",
+  "loch": "1g",
+  "nijel": "1g",
+  "sbarrens": "1g",
+  "stonetalon": "1g",
+  "stormwind": "1g",
   "thoradin": "75s",
-  "thorium": "1.5g"
+  "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T23:14:00+00:00"
+ "updated": "2026-11-20T23:17:02+00:00"
 }
