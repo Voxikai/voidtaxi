@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "everlook",
-  "feralasfp",
   "gadgetzan",
   "stormwind"
  ],
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T03:58:45+00:00"
+ "updated": "2026-11-20T04:01:14+00:00"
 }
