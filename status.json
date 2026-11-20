@@ -3,6 +3,7 @@
  "open": [
   "dalaran",
   "everlook",
+  "gadgetzan",
   "hyjal",
   "loch",
   "nijel",
@@ -29,5 +30,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T03:06:30+00:00"
+ "updated": "2026-11-20T03:08:46+00:00"
 }
