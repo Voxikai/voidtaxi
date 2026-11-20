@@ -3,7 +3,6 @@
  "open": [
   "dalaran",
   "feralasfp",
-  "lightshope",
   "thorium"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T01:17:42+00:00"
+ "updated": "2026-11-20T01:22:13+00:00"
 }
