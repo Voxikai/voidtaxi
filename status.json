@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "bootybay",
+  "dalaran",
   "diremaul",
   "everlook",
   "feralasfp",
@@ -28,5 +29,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T19:48:11+00:00"
+ "updated": "2026-11-20T19:49:27+00:00"
 }
