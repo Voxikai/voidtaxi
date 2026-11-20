@@ -6,7 +6,8 @@
   "feralasfp",
   "gadgetzan",
   "hyjal",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -26,5 +27,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T01:49:10+00:00"
+ "updated": "2026-11-20T01:52:26+00:00"
 }
