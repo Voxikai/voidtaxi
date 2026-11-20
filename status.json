@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "gadgetzan",
+  "sbarrens",
   "stormwind"
  ],
  "prices": {
@@ -22,5 +23,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T14:22:11+00:00"
+ "updated": "2026-11-20T14:32:32+00:00"
 }
