@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "dalaran",
   "hyjal",
   "lightshope",
   "nijel"
@@ -23,5 +24,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T18:22:14+00:00"
+ "updated": "2026-11-20T18:28:20+00:00"
 }
