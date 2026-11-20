@@ -4,7 +4,8 @@
   "everlook",
   "hyjal",
   "nijel",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "75s",
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T16:10:52+00:00"
+ "updated": "2026-11-20T16:12:05+00:00"
 }
