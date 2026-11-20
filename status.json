@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "nijel",
   "stonetalon",
   "stormwind"
  ],
@@ -23,5 +22,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T15:40:04+00:00"
+ "updated": "2026-11-20T15:49:04+00:00"
 }
