@@ -4,6 +4,7 @@
   "dalaran",
   "everlook",
   "gadgetzan",
+  "hyjal",
   "nijel"
  ],
  "prices": {
@@ -24,5 +25,5 @@
   "thorium": "1.5g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-20T17:46:45+00:00"
+ "updated": "2026-11-20T17:56:48+00:00"
 }
