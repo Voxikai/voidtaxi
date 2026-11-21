@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "everlook",
-  "stonetalon",
   "stormwind"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T00:10:07+00:00"
+ "updated": "2026-11-21T00:11:15+00:00"
 }
