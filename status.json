@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "dalaran",
+  "everlook",
   "hyjal",
   "loch",
   "sbarrens",
@@ -26,5 +27,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T04:27:28+00:00"
+ "updated": "2026-11-21T04:30:07+00:00"
 }
