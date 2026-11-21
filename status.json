@@ -4,7 +4,8 @@
   "dalaran",
   "diremaul",
   "hyjal",
-  "lightshope"
+  "lightshope",
+  "nijel"
  ],
  "prices": {
   "bootybay": "1g",
@@ -25,5 +26,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T19:55:01+00:00"
+ "updated": "2026-11-21T19:58:41+00:00"
 }
