@@ -3,7 +3,8 @@
  "open": [
   "dalaran",
   "nijel",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "1g",
@@ -24,5 +25,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T00:50:57+00:00"
+ "updated": "2026-11-21T00:52:42+00:00"
 }
