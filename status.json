@@ -1,8 +1,7 @@
 {
  "service": "offline",
  "open": [
-  "diremaul",
-  "loch"
+  "diremaul"
  ],
  "prices": {
   "bootybay": "1g",
@@ -23,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T08:32:21+00:00"
+ "updated": "2026-11-21T08:44:42+00:00"
 }
