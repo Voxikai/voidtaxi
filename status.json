@@ -2,7 +2,6 @@
  "service": "offline",
  "open": [
   "loch",
-  "stormwind",
   "thoradin"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T08:24:32+00:00"
+ "updated": "2026-11-21T08:26:01+00:00"
 }
