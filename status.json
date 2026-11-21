@@ -3,7 +3,6 @@
  "open": [
   "dalaran",
   "diremaul",
-  "gadgetzan",
   "lightshope",
   "stormwind"
  ],
@@ -26,5 +25,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T19:40:13+00:00"
+ "updated": "2026-11-21T19:44:05+00:00"
 }
