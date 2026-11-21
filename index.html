@@ -42,6 +42,9 @@ h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-
 .addonbtn:hover { filter: brightness(1.12); }
 .discordbtn { display: table; margin: 8px auto 0; padding: 6px 15px; border-radius: 99px; border: 1px solid #5865f2; color: #c9cdfb; font-weight: 600; font-size: .9rem; text-decoration: none; }
 .discordbtn:hover { background: rgba(88,101,242,.18); }
+.discordsub { text-align: center; margin: 6px auto 0; color: var(--muted); font-size: .85rem; }
+.discordsub b { color: #c9cdfb; }
+.req .reqhead a { color: #c9cdfb; }
 .live { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: .95rem; color: var(--muted); }
 .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
 .live.on .pulse { background: var(--fel); box-shadow: 0 0 0 0 rgba(125,255,138,.6); animation: pulse 2s infinite; }
@@ -254,6 +257,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <div class="chips"><span class="chip">WoW Forever</span><span class="chip">NA · Alliance · PvE</span></div>
     <a class="addonbtn" href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Get the in-game addon <span>on CurseForge</span></a>
     <a class="discordbtn" href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">Join the Void Taxi Discord</a>
+    <p class="discordsub">Got a warlock and two friends (or two alts)? <b>We want you.</b> Learn to run a summoning team in <b style="white-space:nowrap">#join-the-crew</b>.</p>
     <div class="live" id="live"><span class="pulse"></span><span id="liveText">Checking which stops are staffed…</span></div>
   </header>
 
@@ -308,7 +312,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
       <p class="reqmsg" id="reqmsg" role="status"></p>
     </form>
     <form class="req" id="joinform" novalidate>
-      <div class="reqhead" id="join"><h3>Run a summoning service? Join the Voidtaxi crew</h3><p>Our summoners serve NA Alliance PvE today. If you summon on another realm or faction, or want to run Voidtaxi stops with us, tell us about you and how to reach you.</p></div>
+      <div class="reqhead" id="join"><h3>Run a summoning service? Join the Voidtaxi crew</h3><p>Our summoners serve NA Alliance PvE today. If you summon on another realm or faction, or want to run Voidtaxi stops with us, tell us about you and how to reach you.</p><p><b>We want you!</b> New to summoning teams? Our Discord has a <a href="https://discord.gg/RH8f8y8MFb" target="_blank" rel="noopener">#join-the-crew</a> channel that walks you through it: one warlock, two clickers, a stack of soul shards, and a stop to park at.</p></div>
       <label><span>Your character</span><input name="name" maxlength="25" placeholder="First Last" autocomplete="off"></label>
       <label><span>Region, faction, realm type</span><input name="where" maxlength="40" placeholder="e.g. NA Horde PvP" autocomplete="off"></label>
       <label class="wide"><span>About you, and how to reach you <small>(Discord name, in-game, etc.)</small></span><input name="about" maxlength="220" placeholder="e.g. 3 warlocks, evenings EST. Discord: name" autocomplete="off"></label>
