@@ -2,7 +2,6 @@
  "service": "offline",
  "open": [
   "loch",
-  "sbarrens",
   "stonetalon",
   "stormwind",
   "thoradin"
@@ -26,5 +25,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T08:16:07+00:00"
+ "updated": "2026-11-21T08:23:24+00:00"
 }
