@@ -2,8 +2,7 @@
  "service": "online",
  "open": [
   "everlook",
-  "nijel",
-  "stormwind"
+  "nijel"
  ],
  "prices": {
   "bootybay": "1g",
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T00:41:35+00:00"
+ "updated": "2026-11-21T00:42:40+00:00"
 }
