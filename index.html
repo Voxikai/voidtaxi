@@ -46,6 +46,21 @@ h1 { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-
 .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
 .live.on .pulse { background: var(--fel); box-shadow: 0 0 0 0 rgba(125,255,138,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(125,255,138,0); } 100% { box-shadow: 0 0 0 0 rgba(125,255,138,0); } }
+/* Online / offline badge, top right: green and lively when we're open, a rotating excuse when we're not */
+.svc { display: flex; align-items: center; gap: 12px; width: fit-content; max-width: min(440px, 100%); margin: 12px 0 12px auto; text-align: left;
+  padding: 10px 18px 10px 14px; border-radius: 16px; background: rgba(20,14,32,.92); border: 2px solid #4a3a66; box-shadow: 0 8px 28px rgba(0,0,0,.45); backdrop-filter: blur(6px); }
+.svc .orb { flex: none; width: 18px; height: 18px; border-radius: 50%; background: #8a8299; }
+.svc .lbl { font-family: var(--display); font-size: 1.45rem; font-weight: 700; letter-spacing: .06em; line-height: 1; color: #c9c2d6; }
+.svc .quip { font-size: .9rem; color: var(--muted); line-height: 1.25; margin-top: 3px; transition: opacity .35s; }
+.svc.on { border-color: #3fd46b; }
+.svc.on .orb { background: #45ff7a; box-shadow: 0 0 0 0 rgba(69,255,122,.7); animation: pulse 2s infinite; }
+.svc.on .lbl { color: #5dff8c; }
+.svc.off { border-color: #7a3a4a; }
+.svc.off .lbl { color: #ff8a9a; }
+.svc.off .orb { background: #ff5c74; }
+.svc.wait { display: none; }
+@media (max-width: 720px) { .svc { margin: 10px auto; } .svc .lbl { font-size: 1.2rem; } }
+@media (prefers-reduced-motion: reduce) { .svc.on .orb { animation: none; } .svc .quip { transition: none; } }
 
 section { padding: 14px 0; }
 h2 { font-family: var(--display); font-weight: 600; letter-spacing: .06em; font-size: 1.3rem; margin: 0 0 10px; }
@@ -228,6 +243,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
 </head>
 <body>
 <div class="wrap">
+  <div class="svc wait" id="svc" role="status" aria-live="polite"><span class="orb"></span><div><div class="lbl" id="svcLbl"></div><div class="quip" id="svcQuip"></div></div></div>
   <div class="notice" role="note"><span class="ico" aria-hidden="true">!</span><span><b>Battle.net sign-in now required.</b> Because of trolls and malicious bookings, booking on voidtaxi.com needs a quick Battle.net sign-in, so you can only book for your own characters. Whispering us in game and the Voidtaxi addon work as before.</span></div>
   <header class="hero">
     <div class="mark">
@@ -667,12 +683,38 @@ async function loadStatus() {
     checkSummoned(d.done).catch(() => {});
     if (d.prices) { Object.assign(PRICE, d.prices); showPrices(); }
     live.classList.toggle("on", !!status && status.size > 0);
+    setSvc(offline ? "off" : (d.service === "online" || (status && status.size > 0)) ? "on" : null);
     txt.textContent = offline ? "Voidtaxi is offline right now. Check back soon!"
       : d.service === "online" ? "Voidtaxi is online. Every stop is open"
       : !status ? "Whisper Voidtaxi Booking “vt” in game for open stops"
       : status.size ? `${status.size} stop${status.size > 1 ? "s" : ""} staffed right now` : "No warlocks parked right now";
     renderPins();
   } catch { txt.textContent = "Whisper Voidtaxi Booking “vt” in game for open stops"; }
+}
+
+// The badge: ONLINE (green) or OFFLINE with a rotating excuse (the same list as the in-game addon).
+const QUIPS_OFF = ["Feeding the scarabs.", "Napping in our Cozy Sleeping Bag.", "Out of soul shards. Farming murlocs.",
+  "Our imp unionized. Negotiating now.", "Hearthed to Goldshire. Regretting it.", "Corpse-running out of the Deadmines.",
+  "Waiting on Leeroy to click the portal.", "The felhunter ate the summoning stone.", "Rolling Need on everything in Stratholme.",
+  "Stuck in the Ironforge bank line.", "Arguing with a flight master in Booty Bay.", "Teaching the voidwalker to fetch."];
+const QUIPS_ON = ["Portals open. Shards stocked.", "Warlocks parked and ready.", "Imps fed, circles drawn.",
+  "Faster than a flight path.", "Step into the purple. We've got you."];
+let svcMode = null, svcI = 0, svcTimer = null;
+function svcQuip() {
+  const list = svcMode === "off" ? QUIPS_OFF : QUIPS_ON, q = document.getElementById("svcQuip");
+  q.style.opacity = 0;
+  setTimeout(() => { q.textContent = list[svcI++ % list.length] + (svcMode === "off" ? " Back soon!" : ""); q.style.opacity = 1; }, 350);
+}
+function setSvc(mode) {
+  const el = document.getElementById("svc");
+  if (!el) return;
+  if (!mode) { el.className = "svc wait"; return; }
+  if (mode === svcMode) return;
+  svcMode = mode; svcI = Math.floor(Math.random() * 20);
+  el.className = "svc " + mode;
+  document.getElementById("svcLbl").textContent = mode === "on" ? "ONLINE" : "OFFLINE";
+  svcQuip();
+  clearInterval(svcTimer); svcTimer = setInterval(svcQuip, 7000);
 }
 
 // Prices shown outside the pin cards (header chip, chain section).
