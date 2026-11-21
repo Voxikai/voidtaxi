@@ -4,6 +4,7 @@
   "dalaran",
   "diremaul",
   "gadgetzan",
+  "lightshope",
   "stormwind"
  ],
  "prices": {
@@ -25,5 +26,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T19:36:55+00:00"
+ "updated": "2026-11-21T19:39:00+00:00"
 }
