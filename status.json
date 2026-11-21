@@ -6,8 +6,7 @@
   "gadgetzan",
   "nijel",
   "stonetalon",
-  "stormwind",
-  "thoradin"
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -28,5 +27,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T01:36:43+00:00"
+ "updated": "2026-11-21T01:39:28+00:00"
 }
