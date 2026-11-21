@@ -3,6 +3,7 @@
  "open": [
   "everlook",
   "gadgetzan",
+  "hyjal",
   "stormwind"
  ],
  "prices": {
@@ -24,5 +25,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T06:08:37+00:00"
+ "updated": "2026-11-21T06:13:09+00:00"
 }
