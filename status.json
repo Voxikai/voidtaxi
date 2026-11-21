@@ -1,7 +1,6 @@
 {
  "service": "offline",
  "open": [
-  "bootybay",
   "gadgetzan"
  ],
  "prices": {
@@ -23,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-21T02:39:02+00:00"
+ "updated": "2026-11-21T02:49:45+00:00"
 }
