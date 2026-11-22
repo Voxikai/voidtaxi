@@ -7,7 +7,8 @@
   "feralasfp",
   "gadgetzan",
   "hyjal",
-  "stonetalon"
+  "stonetalon",
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -28,5 +29,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T00:57:53+00:00"
+ "updated": "2026-11-22T01:06:26+00:00"
 }
