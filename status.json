@@ -2,8 +2,7 @@
  "service": "offline",
  "open": [
   "feralasfp",
-  "gadgetzan",
-  "stormwind"
+  "gadgetzan"
  ],
  "prices": {
   "bootybay": "1g",
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T17:03:59+00:00"
+ "updated": "2026-11-22T17:05:28+00:00"
 }
