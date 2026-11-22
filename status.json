@@ -6,7 +6,8 @@
   "feralasfp",
   "loch",
   "sbarrens",
-  "stonetalon"
+  "stonetalon",
+  "thoradin"
  ],
  "prices": {
   "bootybay": "1g",
@@ -27,5 +28,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T20:58:57+00:00"
+ "updated": "2026-11-22T21:00:12+00:00"
 }
