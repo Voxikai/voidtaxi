@@ -6,8 +6,8 @@
   "everlook",
   "gadgetzan",
   "hyjal",
+  "lightshope",
   "loch",
-  "stonetalon",
   "stormwind"
  ],
  "prices": {
@@ -29,5 +29,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T06:28:41+00:00"
+ "updated": "2026-11-22T06:29:53+00:00"
 }
