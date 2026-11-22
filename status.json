@@ -7,7 +7,8 @@
   "loch",
   "sbarrens",
   "stonetalon",
-  "stormwind"
+  "stormwind",
+  "thoradin"
  ],
  "prices": {
   "bootybay": "1g",
@@ -28,5 +29,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T23:58:05+00:00"
+ "updated": "2026-11-22T23:59:22+00:00"
 }
