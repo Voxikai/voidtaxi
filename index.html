@@ -593,6 +593,7 @@ document.addEventListener("submit", async e => {
       if (ans === "slow down") throw new Error("That's a lot of bookings at once. Try again in a few minutes.");
       if (ans === "busy") throw new Error("We're swamped this minute. Try again shortly.");
       if (ans === "not yours") throw new Error("That character isn't on your Battle.net account. Book with your own character's name.");
+      if (ans === "blocked") throw new Error("Voidtaxi can't take bookings from this account.");
     } else await sendInbox({ kind: "book", name, stop, token });
     saveName(name);
     saveBooking({ name, stop, stopId: what, label: what === "chain" ? "the Sleeping Bag chain" : names[what], token, t: Date.now() });
@@ -773,6 +774,7 @@ document.getElementById("reqform").addEventListener("submit", async e => {
         const au = loadAuth(), ans = await postInbox({ kind: "request", name, stop: loc.slice(0, 50), auth: au && au.token });
         if (ans === "sign in") { saveAuth(null); refreshAuth(); throw new Error("Your sign-in ran out. Sign in again, then send."); }
         if (ans === "slow down" || ans === "busy") throw new Error("Lots of requests at once. Try again in a few minutes.");
+        if (ans === "blocked") throw new Error("Voidtaxi can't take requests from this account.");
       } else await sendInbox({ kind: "request", name, stop: loc.slice(0, 50) });
       saveName(name); msg.textContent = `Thanks, ${name}! ${loc} is on the list.`; f.location.value = "";
     }
