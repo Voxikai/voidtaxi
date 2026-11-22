@@ -1,12 +1,12 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "gadgetzan",
   "lightshope",
   "loch",
   "sbarrens",
   "stonetalon",
+  "stormwind",
   "thoradin",
   "thorium"
  ],
@@ -29,5 +29,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T22:21:47+00:00"
+ "updated": "2026-11-22T22:24:20+00:00"
 }
