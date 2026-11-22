@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "everlook",
   "gadgetzan",
   "lightshope",
@@ -28,5 +27,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T18:42:39+00:00"
+ "updated": "2026-11-22T18:56:40+00:00"
 }
