@@ -6,6 +6,7 @@
   "everlook",
   "gadgetzan",
   "hyjal",
+  "sbarrens",
   "stormwind"
  ],
  "prices": {
@@ -27,5 +28,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T05:57:52+00:00"
+ "updated": "2026-11-22T05:59:01+00:00"
 }
