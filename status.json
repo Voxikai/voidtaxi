@@ -3,7 +3,6 @@
  "open": [
   "dalaran",
   "loch",
-  "stonetalon",
   "stormwind",
   "thoradin"
  ],
@@ -26,5 +25,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T05:18:06+00:00"
+ "updated": "2026-11-22T05:20:56+00:00"
 }
