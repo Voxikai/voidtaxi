@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "diremaul",
-  "feralasfp",
   "gadgetzan",
   "loch",
   "sbarrens",
@@ -28,5 +27,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T21:06:24+00:00"
+ "updated": "2026-11-22T21:07:37+00:00"
 }
