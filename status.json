@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "dalaran",
+  "diremaul",
   "everlook",
   "feralasfp",
   "nijel",
@@ -26,5 +27,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T05:44:45+00:00"
+ "updated": "2026-11-22T05:48:00+00:00"
 }
