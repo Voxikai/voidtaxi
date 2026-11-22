@@ -1,6 +1,8 @@
 {
  "service": "offline",
- "open": [],
+ "open": [
+  "stormwind"
+ ],
  "prices": {
   "bootybay": "1g",
   "chain": "4g",
@@ -20,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-22T09:02:03+00:00"
+ "updated": "2026-11-22T16:21:49+00:00"
 }
