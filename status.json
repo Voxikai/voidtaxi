@@ -1,6 +1,7 @@
 {
  "service": "offline",
  "open": [
+  "feralasfp",
   "hyjal",
   "lightshope",
   "stormwind"
@@ -24,5 +25,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T02:56:36+00:00"
+ "updated": "2026-11-23T02:58:31+00:00"
 }
