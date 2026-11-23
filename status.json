@@ -1,5 +1,5 @@
 {
- "service": "standby",
+ "service": "offline",
  "open": [
   "bootybay"
  ],
@@ -22,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T22:08:55+00:00"
+ "updated": "2026-11-23T22:23:00+00:00"
 }
