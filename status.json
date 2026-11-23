@@ -2,8 +2,7 @@
  "service": "offline",
  "open": [
   "diremaul",
-  "gadgetzan",
-  "stonetalon"
+  "gadgetzan"
  ],
  "prices": {
   "bootybay": "1g",
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T04:21:10+00:00"
+ "updated": "2026-11-23T04:24:57+00:00"
 }
