@@ -1,7 +1,7 @@
 {
- "service": "online",
+ "service": "offline",
  "open": [
-  "loch",
+  "hyjal",
   "thoradin"
  ],
  "prices": {
@@ -23,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T02:51:34+00:00"
+ "updated": "2026-11-23T02:52:51+00:00"
 }
