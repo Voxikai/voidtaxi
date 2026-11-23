@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "loch",
-  "stonetalon",
   "thoradin"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T02:49:58+00:00"
+ "updated": "2026-11-23T02:51:34+00:00"
 }
