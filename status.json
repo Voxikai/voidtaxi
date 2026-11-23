@@ -1,8 +1,7 @@
 {
  "service": "offline",
  "open": [
-  "hyjal",
-  "thoradin"
+  "hyjal"
  ],
  "prices": {
   "bootybay": "1g",
@@ -23,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T02:52:51+00:00"
+ "updated": "2026-11-23T02:54:05+00:00"
 }
