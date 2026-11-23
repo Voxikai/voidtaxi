@@ -1,10 +1,10 @@
 {
  "service": "online",
  "open": [
+  "diremaul",
   "feralasfp",
   "lightshope",
   "loch",
-  "sbarrens",
   "stonetalon",
   "stormwind",
   "thoradin"
@@ -28,5 +28,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T00:22:00+00:00"
+ "updated": "2026-11-23T00:24:33+00:00"
 }
