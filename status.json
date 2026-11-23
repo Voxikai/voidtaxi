@@ -1,8 +1,7 @@
 {
  "service": "offline",
  "open": [
-  "bootybay",
-  "everlook"
+  "bootybay"
  ],
  "prices": {
   "bootybay": "1g",
@@ -23,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T06:33:11+00:00"
+ "updated": "2026-11-23T06:39:49+00:00"
 }
