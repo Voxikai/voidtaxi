@@ -1,7 +1,6 @@
 {
  "service": "offline",
  "open": [
-  "diremaul",
   "gadgetzan"
  ],
  "prices": {
@@ -23,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T04:24:57+00:00"
+ "updated": "2026-11-23T04:39:09+00:00"
 }
