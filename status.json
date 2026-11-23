@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "dalaran",
   "diremaul",
   "feralasfp",
   "lightshope",
@@ -25,5 +26,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T00:29:13+00:00"
+ "updated": "2026-11-23T00:30:32+00:00"
 }
