@@ -2,6 +2,7 @@
  "service": "offline",
  "open": [
   "dalaran",
+  "everlook",
   "gadgetzan",
   "loch",
   "stormwind"
@@ -25,5 +26,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T06:10:35+00:00"
+ "updated": "2026-11-23T06:11:39+00:00"
 }
