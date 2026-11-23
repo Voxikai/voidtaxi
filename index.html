@@ -420,6 +420,7 @@ names.chain = "Sleeping Bag chain";
 
 let status = null;      // null = unknown, else Set of open stop ids
 let offline = false;
+let standby = false; // outside peak hours: only Honored+ riders, booking in the addon
 let desk = DEFAULT_DESK;
 let picked = null;
 
@@ -441,7 +442,7 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const cmdFor = id => `/w ${desk} vt: ${id === "chain" ? "chain" : names[id]}`;
 
 function stateText(id) {
-  if (offline) return ["", "Voidtaxi is offline"];
+  if (offline) return ["", standby ? "Standby: Honored+ in the addon" : "Voidtaxi is offline"];
   if (!status) return ["", ""];
   return status.has(id) ? ["on", "Warlock on duty now"] : ["", "No warlock right now"];
 }
@@ -582,7 +583,7 @@ document.addEventListener("submit", async e => {
   const what = (e.submitter && e.submitter.value) || f.dataset.stop;
   msg.classList.remove("ok", "err");
   if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name exactly as in game, like Shiny Pants."; msg.classList.add("err"); input.focus(); return; }
-  if (offline) { msg.textContent = "Voidtaxi is offline right now. Check back soon!"; msg.classList.add("err"); return; }
+  if (offline) { msg.textContent = standby ? "Voidtaxi is on standby: Honored+ riders can book in the Voidtaxi addon. Fully open at peak hours." : "Voidtaxi is offline right now. Check back soon!"; msg.classList.add("err"); return; }
   if (!signedIn()) { msg.textContent = "Sign in first, then tap Book."; msg.classList.add("err"); refreshAuth(); return; }
   f.querySelectorAll("button").forEach(b => b.disabled = true);
   try {
@@ -677,7 +678,8 @@ async function loadStatus() {
       d = await r.json();
     }
     // Online/offline is your switch in the addon: online shows every stop as open.
-    offline = d.service === "offline";
+    offline = d.service === "offline" || d.service === "standby";
+    standby = d.service === "standby";
     if (d.service === "online") status = new Set(Object.keys(names).filter(id => id !== "chain"));
     else if (offline) status = new Set();
     else {
@@ -689,7 +691,8 @@ async function loadStatus() {
     if (d.prices) { Object.assign(PRICE, d.prices); showPrices(); }
     live.classList.toggle("on", !!status && status.size > 0);
     setSvc(offline ? "off" : (d.service === "online" || (status && status.size > 0)) ? "on" : null);
-    txt.textContent = offline ? "Voidtaxi is offline right now. Check back soon!"
+    txt.textContent = standby ? "Voidtaxi is on standby: Honored+ riders can book in the addon. Fully open at peak hours."
+      : offline ? "Voidtaxi is offline right now. Check back soon!"
       : d.service === "online" ? "Voidtaxi is online. Every stop is open"
       : !status ? "Whisper Voidtaxi Booking “vt” in game for open stops"
       : status.size ? `${status.size} stop${status.size > 1 ? "s" : ""} staffed right now` : "No warlocks parked right now";
