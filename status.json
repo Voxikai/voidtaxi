@@ -5,9 +5,9 @@
   "feralasfp",
   "gadgetzan",
   "hyjal",
-  "loch",
   "nijel",
-  "sbarrens"
+  "sbarrens",
+  "stonetalon"
  ],
  "prices": {
   "bootybay": "1g",
@@ -28,5 +28,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T01:05:02+00:00"
+ "updated": "2026-11-23T01:06:10+00:00"
 }
