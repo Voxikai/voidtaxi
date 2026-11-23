@@ -429,7 +429,7 @@ names.chain = "Sleeping Bag chain";
 
 let status = null;      // null = unknown, else Set of open stop ids
 let offline = false;
-let standby = false; // outside peak hours: only Honored+ riders, booking in the addon
+let standby = false, online = false; // outside peak hours: only Honored+ riders, booking in the addon
 let desk = DEFAULT_DESK;
 let picked = null;
 
@@ -449,9 +449,11 @@ const BAG_MIN = 10;
 const bagSec = () => Math.floor(Date.now() / 1000) % 3600;
 const bagOpen = () => bagSec() < BAG_MIN * 60;
 const bagText = () => bagOpen() ? `Open now: ${Math.ceil((BAG_MIN * 60 - bagSec()) / 60)} min left.` : `Next window in ${Math.ceil((3600 - bagSec()) / 60)} min.`;
+const bagShut = id => online && (SB.has(id) || id === "chain") && !bagOpen(); // (Sleeping Bag stop outside its window)
+const isOn = id => !!status && status.has(id) && !bagShut(id);
 function paintBag() { const el = document.getElementById("bagwin"); if (el) { el.textContent = bagText(); el.style.color = bagOpen() ? "#5dff8c" : "var(--muted)"; } }
 paintBag();
-setInterval(() => { paintBag(); if (typeof refreshCards === "function") refreshCards(); }, 20000);
+setInterval(() => { paintBag(); if (typeof renderPins === "function" && typeof map !== "undefined") renderPins(); }, 20000);
 const markers = {};
 let map;
 
@@ -460,6 +462,7 @@ const cmdFor = id => `/w ${desk} vt: ${id === "chain" ? "chain" : names[id]}`;
 
 function stateText(id) {
   if (offline) return ["", standby ? "Standby: Honored+ in the addon" : "Voidtaxi is offline"];
+  if (bagShut(id)) return ["", `Offline: opens in ${Math.ceil((3600 - bagSec()) / 60)} min`];
   if (!status) return ["", ""];
   return status.has(id) ? ["on", "Warlock on duty now"] : ["", "No warlock right now"];
 }
@@ -538,7 +541,7 @@ function initMap() {
 
 function renderPins() {
   for (const [id, m] of Object.entries(markers)) {
-    const open = status && status.has(id);
+    const open = isOn(id);
     const cls = "pin" + (status ? (open ? " open" : " closed") : "") + (picked === id ? " picked" : "");
     const el = m.getElement() && m.getElement().firstChild;
     if (el) el.className = cls;
@@ -555,13 +558,13 @@ function renderTable() {
   for (const l of LINES) {
     h += `<tr class="grp" style="--c:${GROUP_COLOR[l.id] || "var(--muted)"}"><td colspan="3">${esc(l.name)}</td></tr>`;
     if (l.id === "sb") {
-      h += `<tr class="srow chainrow" data-row="sbarrens"><td><span class="nm"><span class="sdot${status && status.has("sbarrens") ? " on" : ""}"></span>Full chain (all 4)</span></td>`
-        + `<td class="pr">${esc(PRICE.chain || "1.5g")}</td><td>${INBOX_URL ? `<button class="mini" type="button" data-pick="sbarrens">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor("chain"))}">Copy</button>`}</td></tr>`;
+      h += `<tr class="srow chainrow" data-row="sbarrens"><td><span class="nm"><span class="sdot${isOn("sbarrens") ? " on" : ""}"></span>Full chain (all 4)</span></td>`
+        + `<td class="pr">${bagShut("chain") ? '<span style="color:#ff8a9a">Offline</span>' : esc(PRICE.chain || "1.5g")}</td><td>${bagShut("chain") ? `<button class="mini" type="button" disabled title="Opens at :00">:00</button>` : INBOX_URL ? `<button class="mini" type="button" data-pick="sbarrens">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor("chain"))}">Copy</button>`}</td></tr>`;
     }
     for (const [id, name] of l.stops) {
-      const on = status && status.has(id);
+      const on = isOn(id), shut = bagShut(id);
       h += `<tr class="srow${picked === id ? " sel" : ""}" data-row="${id}"><td><span class="nm"><span class="sdot${on ? " on" : ""}" title="${on ? "Warlock on duty" : ""}"></span>${esc(name)}</span></td>`
-        + `<td class="pr">${esc(PRICE[id] || BASE_PRICE)}</td><td>${INBOX_URL ? `<button class="mini" type="button" data-pick="${id}" aria-label="Book ${esc(name)}">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button>`}</td></tr>`;
+        + `<td class="pr">${shut ? '<span style="color:#ff8a9a">Offline</span>' : esc(PRICE[id] || BASE_PRICE)}</td><td>${shut ? `<button class="mini" type="button" disabled title="Opens at :00">:00</button>` : INBOX_URL ? `<button class="mini" type="button" data-pick="${id}" aria-label="Book ${esc(name)}">Book</button>` : `<button class="mini" type="button" data-copy="${esc(cmdFor(id))}" aria-label="Copy booking line for ${esc(name)}">Copy</button>`}</td></tr>`;
     }
   }
   tb.innerHTML = h;
@@ -698,6 +701,7 @@ async function loadStatus() {
     // Online/offline is your switch in the addon: online shows every stop as open.
     offline = d.service === "offline" || d.service === "standby";
     standby = d.service === "standby";
+    online = d.service === "online";
     if (d.service === "online") status = new Set(Object.keys(names).filter(id => id !== "chain"));
     else if (offline) status = new Set();
     else {
