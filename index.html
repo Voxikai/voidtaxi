@@ -294,6 +294,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
           <li>About 11,000 XP and 1.5g in quest rewards</li>
           <li>Ends with a 12-slot Cozy Sleeping Bag</li>
           <li>Level 14+ with the Westfall quest <em>“...and that note you found”</em> in your log</li>
+          <li><b>Books in the first 10 minutes of every hour</b> (:00 to :10) while we're online. <span id="bagwin"></span></li>
         </ul>
       </div>
       <div class="cta">
@@ -326,6 +327,7 @@ footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 30
     <details><summary>Nobody invited me</summary><p>If no warlock is parked at your stop, Booking whispers you back with the stops that are open. You can also whisper <code>vt</code> to Voidtaxi Booking any time for the current list.</p></details>
     <details><summary>Is there an addon?</summary><p>Yes, and it's the fastest way to ride. Install <a href="https://www.curseforge.com/wow/addons/voidtaxi" target="_blank" rel="noopener">Voidtaxi on CurseForge</a>, open your world map and click a stop pin to book in one click. Or click the Voidtaxi button (minimap or the floating one), pick a stop and press <b>Summon me</b>. Then accept the invite and the summon.</p></details>
     <details><summary>Online, Standby, Offline</summary><p><b style="color:#5dff8c">Online</b>: peak hours. We're fully open to everyone, and it's the best time to ride. <b style="color:#f2c45a">Standby</b>: off-peak. We're around but not fully open: riders at <b>Honored</b> reputation and above can book in the Voidtaxi addon, and we'll summon you if a warlock is free. Not guaranteed. <b style="color:#ff8a9a">Offline</b>: nobody's on, check back at peak hours. The badge at the top of this page always shows which one we're in.</p></details>
+    <details><summary>Sleeping Bag window</summary><p>Sleeping Bag stops (the full chain and its 4 stops) book in the <b>first 10 minutes of every hour</b> (:00 to :10) while we're online. Why: they're 4 open-world stops, and every rider takes over 90 seconds of camping to log out and in. One bag run can hold up 15 to 20 other riders waiting in the same minutes, so we run bags together in one window and keep the line moving the rest of the hour. On <b style="color:#f2c45a">Standby</b>, Honored and above can book them any time in the addon.</p></details>
     <details><summary>Ranks: frequent flyer status</summary><p>Your rank is your share of all Voidtaxi summons in the last 7 days. Ride a lot right now and you save right now: <b>Dreadlord</b> 1% of the week's summons = 25% off, <b>Felguard</b> 0.75% = 15% off, <b>Succubus</b> 0.5% = 10% off, <b>Imp</b> 0.3% = 5% off. Each summon counts for 7 days, like airline miles. Nothing is taken away; your rank shows how much you ride now. There's no limit on how many riders hold a rank. The prices in the addon already include it.</p></details>
     <details><summary>Reputation: your membership</summary><p>Reputation is your long-term account with Voidtaxi. Every summon earns +500, Hated to Exalted, and it never expires. Each standing unlocks a perk you keep: <b>Friendly</b> priority in line when it's busy · <b>Honored</b> book during Standby (served if a warlock is free) · <b>Revered</b> 5% off every summon, added to your rank discount (a Revered Dreadlord saves 30%) · <b>Exalted</b> every 10th summon free. Rank rewards riding a lot now; reputation rewards riding with us over time.</p></details>
     <details><summary>Why speed matters</summary><p>There are always more riders waiting: at peak, 20+ requests a minute, and every summon takes a warlock and two clickers. Accept the invite and the summon within 15 seconds each. Slower costs reputation; quick riders never lose a point. It's the only way we can keep the line moving for everyone.</p></details>
@@ -441,6 +443,14 @@ const POS = {
   lightshope: [3240, 485], thorium: [2857, 1289], stormwind: [2690, 1470],
 };
 const SB = new Set(["sbarrens", "stonetalon", "loch", "thoradin"]);
+// Sleeping Bag window: bag stops book only in the first 10 minutes of each hour while we're online.
+const BAG_MIN = 10;
+const bagSec = () => Math.floor(Date.now() / 1000) % 3600;
+const bagOpen = () => bagSec() < BAG_MIN * 60;
+const bagText = () => bagOpen() ? `Open now: ${Math.ceil((BAG_MIN * 60 - bagSec()) / 60)} min left.` : `Next window in ${Math.ceil((3600 - bagSec()) / 60)} min.`;
+function paintBag() { const el = document.getElementById("bagwin"); if (el) { el.textContent = bagText(); el.style.color = bagOpen() ? "#5dff8c" : "var(--muted)"; } }
+paintBag();
+setInterval(() => { paintBag(); if (typeof refreshCards === "function") refreshCards(); }, 20000);
 const markers = {};
 let map;
 
@@ -471,7 +481,7 @@ function refreshCards() { for (const [id, m] of Object.entries(markers)) if (m.i
 function cardHtml(id) {
   const [cls, st] = stateText(id);
   let h = `<div class="card"><h4>${esc(names[id])}</h4>`;
-  if (SB.has(id)) h += `<span class="tag">Sleeping Bag</span>`;
+  if (SB.has(id)) h += `<span class="tag">Sleeping Bag</span><small style="display:block;margin-top:4px;color:${bagOpen() ? "#5dff8c" : "var(--muted)"}">Books :00 to :10 each hour. ${bagText()}</small>`;
   h += `<div class="row"><span class="price">${PRICE[id] || BASE_PRICE}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
   if (INBOX_URL && bookingFor(id)) return h + bookedHtml(bookingFor(id)) + `</div>`;
   if (INBOX_URL) {
@@ -590,6 +600,7 @@ document.addEventListener("submit", async e => {
   msg.classList.remove("ok", "err");
   if (!NAME_RE.test(name)) { msg.textContent = "Type your character's name exactly as in game, like Shiny Pants."; msg.classList.add("err"); input.focus(); return; }
   if (offline) { msg.textContent = standby ? "Voidtaxi is on standby: Honored+ riders can book in the Voidtaxi addon. Fully open at peak hours." : "Voidtaxi is offline right now. Check back soon!"; msg.classList.add("err"); return; }
+  if ((SB.has(what) || what === "chain") && !bagOpen()) { msg.textContent = `Sleeping Bag stops book in the first 10 minutes of every hour (:00 to :10). ${bagText()}`; msg.classList.add("err"); return; }
   if (!signedIn()) { msg.textContent = "Sign in first, then tap Book."; msg.classList.add("err"); refreshAuth(); return; }
   f.querySelectorAll("button").forEach(b => b.disabled = true);
   try {
