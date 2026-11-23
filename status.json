@@ -2,7 +2,6 @@
  "service": "offline",
  "open": [
   "lightshope",
-  "sbarrens",
   "stonetalon"
  ],
  "prices": {
@@ -24,5 +23,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T03:44:42+00:00"
+ "updated": "2026-11-23T03:52:14+00:00"
 }
