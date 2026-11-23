@@ -2,6 +2,7 @@
  "service": "online",
  "open": [
   "diremaul",
+  "everlook",
   "feralasfp",
   "gadgetzan",
   "hyjal",
@@ -27,5 +28,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-23T01:01:07+00:00"
+ "updated": "2026-11-23T01:02:24+00:00"
 }
