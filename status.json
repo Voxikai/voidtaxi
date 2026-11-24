@@ -4,6 +4,7 @@
   "bootybay",
   "dalaran",
   "diremaul",
+  "everlook",
   "gadgetzan"
  ],
  "prices": {
@@ -25,5 +26,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-24T03:49:58+00:00"
+ "updated": "2026-11-24T04:01:41+00:00"
 }
