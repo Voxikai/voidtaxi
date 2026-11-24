@@ -8,7 +8,8 @@
   "hyjal",
   "lightshope",
   "nijel",
-  "stormwind"
+  "stormwind",
+  "thorium"
  ],
  "prices": {
   "bootybay": "1g",
@@ -29,5 +30,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-24T04:59:30+00:00"
+ "updated": "2026-11-24T05:01:38+00:00"
 }
