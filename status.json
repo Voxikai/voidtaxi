@@ -1,6 +1,8 @@
 {
  "service": "standby",
- "open": [],
+ "open": [
+  "bootybay"
+ ],
  "prices": {
   "bootybay": "1g",
   "chain": "4g",
@@ -20,5 +22,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-24T03:24:56+00:00"
+ "updated": "2026-11-24T03:41:06+00:00"
 }
