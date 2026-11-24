@@ -6,8 +6,7 @@
   "everlook",
   "gadgetzan",
   "lightshope",
-  "stormwind",
-  "thoradin"
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -28,5 +27,5 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-24T05:42:49+00:00"
+ "updated": "2026-11-24T05:44:38+00:00"
 }
