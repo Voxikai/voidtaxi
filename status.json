@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "dalaran",
   "gadgetzan",
   "stormwind"
  ],
@@ -175,5 +176,5 @@
   "ff632b4c82d9:1795582926",
   "ff632b4c82d9:1795583090"
  ],
- "updated": "2026-11-25T05:54:06+00:00"
+ "updated": "2026-11-25T05:57:10+00:00"
 }
