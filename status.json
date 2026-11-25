@@ -4,8 +4,7 @@
   "dalaran",
   "gadgetzan",
   "nijel",
-  "stormwind",
-  "thoradin"
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -178,5 +177,5 @@
   "ff632b4c82d9:1795586088",
   "ff632b4c82d9:1795586341"
  ],
- "updated": "2026-11-25T07:39:54+00:00"
+ "updated": "2026-11-25T07:41:11+00:00"
 }
