@@ -2,8 +2,7 @@
  "service": "online",
  "open": [
   "bootybay",
-  "dalaran",
-  "thorium"
+  "dalaran"
  ],
  "prices": {
   "bootybay": "1g",
@@ -176,5 +175,5 @@
   "ff632b4c82d9:1795580238",
   "ff632b4c82d9:1795581850"
  ],
- "updated": "2026-11-25T04:50:58+00:00"
+ "updated": "2026-11-25T04:52:25+00:00"
 }
