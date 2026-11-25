@@ -4,7 +4,8 @@
   "bootybay",
   "dalaran",
   "sbarrens",
-  "stonetalon"
+  "stonetalon",
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -177,5 +178,5 @@
   "ff632b4c82d9:1795580238",
   "ff632b4c82d9:1795581850"
  ],
- "updated": "2026-11-25T04:54:32+00:00"
+ "updated": "2026-11-25T04:55:37+00:00"
 }
