@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "bootybay",
   "gadgetzan",
   "loch",
   "sbarrens",
@@ -49,5 +50,5 @@
   "ed6f6a1cd619:1795573523",
   "fa8afdb6393b:1795571902"
  ],
- "updated": "2026-11-25T03:15:04+00:00"
+ "updated": "2026-11-25T03:22:25+00:00"
 }
