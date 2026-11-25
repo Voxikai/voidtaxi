@@ -6,7 +6,8 @@
   "lightshope",
   "sbarrens",
   "stonetalon",
-  "stormwind"
+  "stormwind",
+  "thoradin"
  ],
  "prices": {
   "bootybay": "1g",
@@ -28,7 +29,6 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [
-  "7ba7c66ac4cd:1795574491",
   "7ba7c66ac4cd:1795574748",
   "7ba7c66ac4cd:1795575147",
   "7ba7c66ac4cd:1795575408",
@@ -52,6 +52,7 @@
   "87267fda9fbe:1795594071",
   "87267fda9fbe:1795594157",
   "87267fda9fbe:1795594238",
+  "87267fda9fbe:1795594318",
   "87584aad8bca:1795576298",
   "8aedc352ea64:1795578815",
   "8aedc352ea64:1795586990",
@@ -179,5 +180,5 @@
   "ff632b4c82d9:1795586088",
   "ff632b4c82d9:1795586341"
  ],
- "updated": "2026-11-25T08:10:53+00:00"
+ "updated": "2026-11-25T08:12:10+00:00"
 }
