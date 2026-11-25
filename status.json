@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "lightshope",
   "loch",
   "sbarrens",
@@ -180,5 +179,5 @@
   "ff632b4c82d9:1795586088",
   "ff632b4c82d9:1795586341"
  ],
- "updated": "2026-11-25T07:11:41+00:00"
+ "updated": "2026-11-25T07:14:21+00:00"
 }
