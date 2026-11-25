@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "bootybay",
-  "everlook",
   "hyjal",
   "lightshope",
   "sbarrens",
@@ -180,5 +179,5 @@
   "ff632b4c82d9:1795586088",
   "ff632b4c82d9:1795586341"
  ],
- "updated": "2026-11-25T07:08:28+00:00"
+ "updated": "2026-11-25T07:09:31+00:00"
 }
