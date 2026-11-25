@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "diremaul",
-  "everlook",
   "gadgetzan",
   "stormwind"
  ],
@@ -177,5 +176,5 @@
   "ff632b4c82d9:1795582926",
   "ff632b4c82d9:1795583090"
  ],
- "updated": "2026-11-25T05:48:09+00:00"
+ "updated": "2026-11-25T05:51:14+00:00"
 }
