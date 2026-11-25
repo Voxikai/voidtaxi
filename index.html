@@ -489,7 +489,11 @@ function cardHtml(id) {
   h += `<div class="row"><span class="price">${PRICE[id] || BASE_PRICE}</span><span class="st ${cls}">${st || "per summon"}</span></div>`;
   if (INBOX_URL && bookingFor(id)) return h + bookedHtml(bookingFor(id)) + `</div>`;
   if (INBOX_URL) {
-    h += `<form class="bookf" data-stop="${id}" novalidate><label>Your character<input name="name" maxlength="25" placeholder="First Last" autocomplete="off" value="${esc(savedName())}"></label>`;
+    const au = loadAuth(), mine = (au && Array.isArray(au.chars)) ? au.chars : [];
+    const tc = n => n.replace(/\b\w/g, c => c.toUpperCase());
+    h += `<form class="bookf" data-stop="${id}" novalidate><label>Your character<input name="name" maxlength="25" placeholder="First Last" autocomplete="off" list="vtc-${id}" value="${esc(savedName())}"></label>`;
+    if (mine.length) h += `<datalist id="vtc-${id}">${mine.map(n => `<option value="${esc(tc(n))}">`).join("")}</datalist>`;
+    h += `<small class="bhint" style="display:block;margin:-4px 0 6px">One of your own Alliance characters on the Normal (PvE) ruleset, US.</small>`;
     h += `<div data-authbox>${authHtml()}</div>`;
     h += `<button class="copy" type="submit" value="${id}"${signedIn() ? "" : " hidden"}>Book ${esc(names[id])}</button>`;
     if (id === "sbarrens") h += `<button class="copy alt2" type="submit" value="chain"${signedIn() ? "" : " hidden"}>Book the full Sleeping Bag chain · ${esc(PRICE.chain || "1.5g")}</button>`;
@@ -614,7 +618,10 @@ document.addEventListener("submit", async e => {
       if (ans === "sign in") { saveAuth(null); refreshAuth(); throw new Error("Your sign-in ran out. Sign in again, then tap Book."); }
       if (ans === "slow down") throw new Error("That's a lot of bookings at once. Try again in a few minutes.");
       if (ans === "busy") throw new Error("We're swamped this minute. Try again shortly.");
-      if (ans === "not yours") throw new Error("That character isn't on your Battle.net account. Book with your own character's name.");
+      if (ans === "not yours" || ans === "not on account") throw new Error("We couldn't find that character on your Battle.net account. Book with one of your own WoW Forever characters (US). New characters show up at level 10, after logging out once, and can take about 30 minutes.");
+      if (ans === "not alliance") throw new Error("Voidtaxi summons Alliance characters only.");
+      if (ans === "wrong ruleset") throw new Error("Voidtaxi runs on the Normal (PvE) ruleset. We can't group with or summon characters on other rulesets.");
+      if (ans === "bnet only") { saveAuth(null); refreshAuth(); throw new Error("Bookings need a Battle.net sign-in, so we can check the character is yours. Sign in with Battle.net, then tap Book."); }
       if (ans === "blocked") throw new Error("Voidtaxi can't take bookings from this account.");
     } else await sendInbox({ kind: "book", name, stop, token });
     saveName(name);
@@ -859,7 +866,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) load
   try {
     const ans = JSON.parse(await postInbox({ kind: "auth", provider: state.split(".")[0], code }));
     if (!ans.ok) { note(ans.error === "blocked" ? "This account can't book with Voidtaxi." : "Sign-in didn't work. Try again in a moment."); return; }
-    saveAuth({ token: ans.token, name: ans.name, via: ans.via, x: Date.now() + 29 * 864e5 });
+    saveAuth({ token: ans.token, name: ans.name, via: ans.via, x: Date.now() + 29 * 864e5, chars: Array.isArray(ans.bookable) ? ans.bookable : null });
     refreshAuth();
     note(`Signed in as <b>${esc(ans.name)}</b>. Pick a stop and tap Book.`);
     if (hash) { const el = document.querySelector(hash); if (el) el.scrollIntoView(); }
