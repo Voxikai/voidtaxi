@@ -1,7 +1,21 @@
 {
- "service": "offline",
+ "service": "online",
  "open": [
-  "thoradin"
+  "bootybay",
+  "dalaran",
+  "diremaul",
+  "everlook",
+  "feralasfp",
+  "gadgetzan",
+  "hyjal",
+  "lightshope",
+  "loch",
+  "nijel",
+  "sbarrens",
+  "stonetalon",
+  "stormwind",
+  "thoradin",
+  "thorium"
  ],
  "prices": {
   "bootybay": "1g",
@@ -22,5 +36,28 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "updated": "2026-11-24T18:39:00+00:00"
+ "done": [
+  "0d05a4b63b2a:1795569695",
+  "1589cf6d3bc5:1795573405",
+  "2166ff334238:1795573183",
+  "3a56618690cc:1795571649",
+  "695e16bfc7f3:1795571124",
+  "695e16bfc7f3:1795571134",
+  "695e16bfc7f3:1795571499",
+  "695e16bfc7f3:1795571555",
+  "695e16bfc7f3:1795571582",
+  "695e16bfc7f3:1795571677",
+  "72f9307f6b94:1795571472",
+  "730c961003d2:1795571580",
+  "786338193765:1795571119",
+  "a91440d4af99:1795571001",
+  "a91440d4af99:1795571032",
+  "a91440d4af99:1795571136",
+  "b292ff9dcde4:1795571229",
+  "b292ff9dcde4:1795571769",
+  "b292ff9dcde4:1795571783",
+  "ed6f6a1cd619:1795573523",
+  "fa8afdb6393b:1795571902"
+ ],
+ "updated": "2026-11-25T02:40:37+00:00"
 }
