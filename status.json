@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "diremaul",
-  "hyjal",
   "lightshope",
   "stormwind",
   "thorium"
@@ -49,5 +48,5 @@
   "ed6f6a1cd619:1795573523",
   "fa8afdb6393b:1795571902"
  ],
- "updated": "2026-11-25T02:55:14+00:00"
+ "updated": "2026-11-25T02:56:17+00:00"
 }
