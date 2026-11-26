@@ -1,6 +1,7 @@
 {
  "service": "online",
  "open": [
+  "dalaran",
   "everlook",
   "gadgetzan",
   "hyjal",
@@ -179,5 +180,5 @@
   "fd2eb6859551:1795664862",
   "ff632b4c82d9:1795657470"
  ],
- "updated": "2026-11-26T04:57:43+00:00"
+ "updated": "2026-11-26T05:02:01+00:00"
 }
