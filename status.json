@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "diremaul",
-  "everlook",
   "feralasfp",
   "gadgetzan",
   "hyjal",
@@ -108,5 +107,5 @@
   "f98428edf8aa:1795659088",
   "ff632b4c82d9:1795657470"
  ],
- "updated": "2026-11-26T02:56:38+00:00"
+ "updated": "2026-11-26T02:57:44+00:00"
 }
