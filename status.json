@@ -3,8 +3,7 @@
  "open": [
   "gadgetzan",
   "lightshope",
-  "stormwind",
-  "thorium"
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -177,5 +176,5 @@
   "fd2eb6859551:1795664862",
   "ff632b4c82d9:1795657470"
  ],
- "updated": "2026-11-26T05:38:09+00:00"
+ "updated": "2026-11-26T05:42:47+00:00"
 }
