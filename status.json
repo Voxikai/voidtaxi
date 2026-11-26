@@ -1,8 +1,6 @@
 {
  "service": "offline",
- "open": [
-  "lightshope"
- ],
+ "open": [],
  "prices": {
   "bootybay": "1g",
   "chain": "4g",
@@ -174,5 +172,5 @@
   "fd2eb6859551:1795664862",
   "ff632b4c82d9:1795657470"
  ],
- "updated": "2026-11-26T05:45:34+00:00"
+ "updated": "2026-11-26T05:56:00+00:00"
 }
