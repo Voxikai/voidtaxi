@@ -1,5 +1,5 @@
 {
- "service": "standby",
+ "service": "offline",
  "open": [
   "dalaran",
   "gadgetzan",
@@ -178,5 +178,5 @@
   "fd2eb6859551:1795664862",
   "ff632b4c82d9:1795657470"
  ],
- "updated": "2026-11-26T05:21:52+00:00"
+ "updated": "2026-11-26T05:26:35+00:00"
 }
