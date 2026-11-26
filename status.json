@@ -1,7 +1,6 @@
 {
  "service": "online",
  "open": [
-  "bootybay",
   "dalaran",
   "everlook",
   "gadgetzan",
@@ -180,5 +179,5 @@
   "fd2eb6859551:1795664862",
   "ff632b4c82d9:1795657470"
  ],
- "updated": "2026-11-26T04:46:28+00:00"
+ "updated": "2026-11-26T04:48:01+00:00"
 }
