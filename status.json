@@ -1,7 +1,8 @@
 {
  "service": "offline",
  "open": [
-  "dalaran"
+  "dalaran",
+  "stormwind"
  ],
  "prices": {
   "bootybay": "1g",
@@ -23,7 +24,8 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [
-  "804896136161:1795802853"
+  "804896136161:1795802853",
+  "804896136161:1795804376"
  ],
- "updated": "2026-11-27T18:08:22+00:00"
+ "updated": "2026-11-27T18:33:07+00:00"
 }
