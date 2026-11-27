@@ -1,6 +1,7 @@
 {
- "service": "online",
+ "service": "offline",
  "open": [
+  "dalaran",
   "hyjal"
  ],
  "prices": {
@@ -22,6 +23,8 @@
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
- "done": [],
- "updated": "2026-11-27T02:26:35+00:00"
+ "done": [
+  "90f8e6b55ee7:1795746504"
+ ],
+ "updated": "2026-11-27T02:28:36+00:00"
 }
