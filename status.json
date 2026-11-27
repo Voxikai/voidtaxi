@@ -3,6 +3,7 @@
  "open": [
   "everlook",
   "hyjal",
+  "sbarrens",
   "stormwind"
  ],
  "prices": {
@@ -85,5 +86,5 @@
   "f0c84f8b87c8:1795746579",
   "fb8acb24ee1c:1795746870"
  ],
- "updated": "2026-11-27T05:04:00+00:00"
+ "updated": "2026-11-27T05:05:05+00:00"
 }
