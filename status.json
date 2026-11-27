@@ -1,8 +1,7 @@
 {
  "service": "offline",
  "open": [
-  "hyjal",
-  "stormwind"
+  "hyjal"
  ],
  "prices": {
   "bootybay": "1g",
@@ -24,5 +23,5 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [],
- "updated": "2026-11-27T02:21:51+00:00"
+ "updated": "2026-11-27T02:23:07+00:00"
 }
