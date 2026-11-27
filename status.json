@@ -1,8 +1,6 @@
 {
  "service": "online",
- "open": [
-  "stormwind"
- ],
+ "open": [],
  "prices": {
   "bootybay": "1g",
   "chain": "4g",
@@ -73,5 +71,5 @@
   "f0c84f8b87c8:1795746579",
   "fb8acb24ee1c:1795746870"
  ],
- "updated": "2026-11-27T03:56:37+00:00"
+ "updated": "2026-11-27T04:00:20+00:00"
 }
