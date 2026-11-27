@@ -5,9 +5,9 @@
   "dalaran",
   "diremaul",
   "feralasfp",
+  "gadgetzan",
   "hyjal",
   "lightshope",
-  "nijel",
   "stormwind"
  ],
  "prices": {
@@ -39,6 +39,7 @@
   "3e3ac0a4ee5b:1795746676",
   "495bbb0c8f8f:1795747922",
   "4b0ae4ba4fcc:1795746745",
+  "4b0ae4ba4fcc:1795749545",
   "4cd4c429a6b8:1795747221",
   "50dff843cf8c:1795749158",
   "52ac0ba5781a:1795748991",
@@ -68,5 +69,5 @@
   "f0c84f8b87c8:1795746579",
   "fb8acb24ee1c:1795746870"
  ],
- "updated": "2026-11-27T03:18:52+00:00"
+ "updated": "2026-11-27T03:19:58+00:00"
 }
