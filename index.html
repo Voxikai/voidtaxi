@@ -409,12 +409,12 @@ const LINES = [
   { id: "ek", name: "Eastern Kingdoms", c: "var(--ek)", note: "north to south",
     stops: [["lightshope", "Light's Hope Chapel"], ["dalaran", "Dalaran"], ["thorium", "Thorium Point"], ["stormwind", "Stormwind"], ["bootybay", "Booty Bay"]] },
   { id: "kal", name: "Kalimdor", c: "var(--kal)", note: "north to south",
-    stops: [["everlook", "Everlook"], ["hyjal", "Hyjal (North FP)"], ["nijel", "Nijel's Point"], ["diremaul", "Dire Maul North"], ["feralasfp", "Feralas / 1K FP"], ["gadgetzan", "Gadgetzan"]] },
+    stops: [["everlook", "Everlook"], ["hyjal", "Hyjal (North FP)"], ["nijel", "Nijel's Point"], ["diremaul", "Dire Maul North"], ["theramore", "Theramore"], ["gadgetzan", "Gadgetzan"]] },
 ];
 // Standard prices (Voidtaxi Sync only publishes prices changed in game; those replace these).
 const PRICE = { chain: "3g", everlook: "1.5g", hyjal: "2g", lightshope: "1.5g", thorium: "1.5g", diremaul: "1.5g" };
 const BASE_PRICE = "75s";
-const ALIASES = { loch: ["loch modan", "loch"], feralasfp: ["feralas fp", "feralas", "1k fp", "feralas/1k fp", "thousand needles", "thalanaar"], lightshope: ["light's hope chapel", "light's hope", "lhc"],
+const ALIASES = { loch: ["loch modan", "loch"], theramore: ["theramore", "theramore isle", "dustwallow", "dustwallow marsh"], lightshope: ["light's hope chapel", "light's hope", "lhc"],
   hyjal: ["hyjal", "hyjal north", "nordrassil", "mount hyjal"], diremaul: ["dire maul", "dm"], thorium: ["thorium point", "searing gorge"], stormwind: ["stormwind", "sw"] };
 
 const norm = s => String(s || "").toLowerCase().replace(/^\(sb\)\s*/, "").replace(/[^a-z0-9]/g, "");
@@ -439,7 +439,7 @@ const POS = {
   sbarrens: [768, 1432], stonetalon: [429, 1005], loch: [3064, 1093], thoradin: [2919, 723],
   dalaran: [2733, 674], bootybay: [2711, 1989],
   nijel: [480, 1125],
-  feralasfp: [653, 1519], gadgetzan: [917, 1748],
+  theramore: [983, 1452], gadgetzan: [917, 1748],
   everlook: [963, 492], hyjal: [835, 590], diremaul: [471, 1446],
   lightshope: [3240, 485], thorium: [2857, 1289], stormwind: [2690, 1470],
 };
