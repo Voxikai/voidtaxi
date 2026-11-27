@@ -2,7 +2,6 @@
  "service": "online",
  "open": [
   "bootybay",
-  "diremaul",
   "gadgetzan",
   "hyjal",
   "stonetalon"
@@ -96,5 +95,5 @@
   "f0c84f8b87c8:1795746579",
   "fb8acb24ee1c:1795746870"
  ],
- "updated": "2026-11-27T05:36:10+00:00"
+ "updated": "2026-11-27T05:37:27+00:00"
 }
