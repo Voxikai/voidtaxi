@@ -2,21 +2,21 @@
  "service": "offline",
  "open": [],
  "prices": {
-  "bootybay": "1g",
-  "chain": "4g",
-  "dalaran": "1g",
+  "bootybay": "2g",
+  "chain": "8g",
+  "dalaran": "2g",
   "diremaul": "2g",
   "everlook": "2g",
-  "feralasfp": "1g",
-  "gadgetzan": "1g",
+  "feralasfp": "2g",
+  "gadgetzan": "2g",
   "hyjal": "3g",
   "lightshope": "2g",
-  "loch": "1g",
-  "nijel": "1g",
-  "sbarrens": "1g",
-  "stonetalon": "1g",
-  "stormwind": "1g",
-  "thoradin": "1g",
+  "loch": "2g",
+  "nijel": "2g",
+  "sbarrens": "2g",
+  "stonetalon": "2g",
+  "stormwind": "2g",
+  "thoradin": "2g",
   "thorium": "2g"
  },
  "desk": "Voidtaxi Booking",
@@ -25,5 +25,5 @@
   "804896136161:1795802853",
   "804896136161:1795804376"
  ],
- "updated": "2026-11-27T21:30:13+00:00"
+ "updated": "2026-11-27T21:38:50+00:00"
 }
