@@ -1,8 +1,7 @@
 {
  "service": "offline",
  "open": [
-  "dalaran",
-  "gadgetzan"
+  "dalaran"
  ],
  "prices": {
   "bootybay": "1g",
@@ -112,5 +111,5 @@
   "fb8acb24ee1c:1795746870",
   "fc2f8dab0828:1795749498"
  ],
- "updated": "2026-11-27T05:47:30+00:00"
+ "updated": "2026-11-27T05:48:33+00:00"
 }
