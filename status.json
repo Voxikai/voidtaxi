@@ -3,7 +3,8 @@
  "open": [
   "dalaran",
   "everlook",
-  "hyjal"
+  "hyjal",
+  "nijel"
  ],
  "prices": {
   "bootybay": "1g",
@@ -25,8 +26,9 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [
+  "3e3ac0a4ee5b:1795746676",
   "90f8e6b55ee7:1795746504",
   "f0c84f8b87c8:1795746579"
  ],
- "updated": "2026-11-27T02:29:55+00:00"
+ "updated": "2026-11-27T02:31:30+00:00"
 }
