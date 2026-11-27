@@ -2,8 +2,7 @@
  "service": "online",
  "open": [
   "bootybay",
-  "gadgetzan",
-  "hyjal"
+  "gadgetzan"
  ],
  "prices": {
   "bootybay": "1g",
@@ -94,5 +93,5 @@
   "f0c84f8b87c8:1795746579",
   "fb8acb24ee1c:1795746870"
  ],
- "updated": "2026-11-27T05:40:56+00:00"
+ "updated": "2026-11-27T05:41:59+00:00"
 }
