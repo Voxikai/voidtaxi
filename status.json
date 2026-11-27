@@ -1,6 +1,8 @@
 {
  "service": "offline",
- "open": [],
+ "open": [
+  "dalaran"
+ ],
  "prices": {
   "bootybay": "1g",
   "chain": "4g",
@@ -21,5 +23,5 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [],
- "updated": "2026-11-27T13:40:53+00:00"
+ "updated": "2026-11-27T17:35:25+00:00"
 }
