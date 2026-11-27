@@ -2,7 +2,6 @@
  "service": "offline",
  "open": [
   "dalaran",
-  "lightshope",
   "thorium"
  ],
  "prices": {
@@ -128,5 +127,5 @@
   "fb8acb24ee1c:1795746870",
   "fc2f8dab0828:1795749498"
  ],
- "updated": "2026-11-27T08:07:33+00:00"
+ "updated": "2026-11-27T08:08:35+00:00"
 }
