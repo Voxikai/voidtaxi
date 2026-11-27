@@ -1,7 +1,8 @@
 {
- "service": "offline",
+ "service": "online",
  "open": [
   "dalaran",
+  "everlook",
   "hyjal"
  ],
  "prices": {
@@ -24,7 +25,8 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [
-  "90f8e6b55ee7:1795746504"
+  "90f8e6b55ee7:1795746504",
+  "f0c84f8b87c8:1795746579"
  ],
- "updated": "2026-11-27T02:28:36+00:00"
+ "updated": "2026-11-27T02:29:55+00:00"
 }
