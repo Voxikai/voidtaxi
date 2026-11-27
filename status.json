@@ -1,8 +1,6 @@
 {
  "service": "offline",
- "open": [
-  "dalaran"
- ],
+ "open": [],
  "prices": {
   "bootybay": "1g",
   "chain": "4g",
@@ -113,5 +111,5 @@
   "fb8acb24ee1c:1795746870",
   "fc2f8dab0828:1795749498"
  ],
- "updated": "2026-11-27T05:49:37+00:00"
+ "updated": "2026-11-27T06:17:27+00:00"
 }
