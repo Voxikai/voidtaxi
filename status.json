@@ -1,7 +1,6 @@
 {
  "service": "offline",
  "open": [
-  "bootybay",
   "dalaran",
   "everlook",
   "feralasfp",
@@ -134,5 +133,5 @@
   "fb8acb24ee1c:1795746870",
   "fc2f8dab0828:1795749498"
  ],
- "updated": "2026-11-27T07:52:26+00:00"
+ "updated": "2026-11-27T08:01:48+00:00"
 }
