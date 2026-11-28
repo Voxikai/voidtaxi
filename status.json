@@ -1,6 +1,8 @@
 {
  "service": "offline",
- "open": [],
+ "open": [
+  "gadgetzan"
+ ],
  "prices": {
   "bootybay": "2g",
   "chain": "8g",
@@ -21,5 +23,5 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [],
- "updated": "2026-11-28T03:03:49+00:00"
+ "updated": "2026-11-28T05:35:32+00:00"
 }
