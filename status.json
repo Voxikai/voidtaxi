@@ -1,6 +1,7 @@
 {
  "service": "offline",
  "open": [
+  "diremaul",
   "gadgetzan",
   "lightshope"
  ],
@@ -24,5 +25,5 @@
  },
  "desk": "Voidtaxi Booking",
  "done": [],
- "updated": "2026-11-28T06:12:39+00:00"
+ "updated": "2026-11-28T06:24:03+00:00"
 }
