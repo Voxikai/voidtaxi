@@ -1,8 +1,6 @@
 {
  "service": "offline",
- "open": [
-  "gadgetzan"
- ],
+ "open": [],
  "prices": {
   "bootybay": "2g",
   "chain": "6g",
@@ -25,5 +23,5 @@
  "done": [
   "87584aad8bca:1795847052"
  ],
- "updated": "2026-11-28T06:53:23+00:00"
+ "updated": "2026-11-28T07:10:03+00:00"
 }
